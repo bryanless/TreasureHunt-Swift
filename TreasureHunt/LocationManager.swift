@@ -26,10 +26,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last, let firstLocation = locations.first else { return }
-        if initialLocation == nil {
-            initialLocation = firstLocation
-        }
+        guard let location = locations.last, let firstLocation = locations.first, initialLocation == nil else { return }
+        initialLocation = firstLocation
         self.location = location
     }
 }
