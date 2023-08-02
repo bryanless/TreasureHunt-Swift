@@ -13,6 +13,8 @@
 		931EBD9C2A79E3F300C7F88D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931EBD9B2A79E3F300C7F88D /* Assets.xcassets */; };
 		931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */; };
 		931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */; };
+		93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EC2A7A082400A008A1 /* LocationManager.swift */; };
+		93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		931EBD9B2A79E3F300C7F88D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
+		93C2C7EC2A7A082400A008A1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				931EBD992A79E3F200C7F88D /* Experience.rcproject */,
 				931EBD9B2A79E3F300C7F88D /* Assets.xcassets */,
 				931EBD9D2A79E3F300C7F88D /* Preview Content */,
+				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
+				93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -152,8 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */,
 				931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */,
 				931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */,
+				93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,9 +291,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
+				DEVELOPMENT_TEAM = DQPBPU9766;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app is requesting for your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "The app is requesting for your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app is requesting for your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -313,9 +325,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
+				DEVELOPMENT_TEAM = DQPBPU9766;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app is requesting for your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "The app is requesting for your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app is requesting for your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
