@@ -30,6 +30,17 @@ class LocationViewModel: ObservableObject {
                 self?.messageText = self?.checkLocationWithinCircularRegion(coordinate: self?.initialLocation) ?? "None"
             }
             .store(in: &cancellables)
+
+        locationManager.$initialLocation
+            .receive(on: RunLoop.main)
+            .sink { [weak self] initialLoc in
+                guard let initialLoc else { return }
+
+                // Generate random treasure locations
+                let gameArea = self?.getGameArea(coordinate: initialLoc.coordinate)
+                let _ = self?.generateRandomLocationWithinRegion(region: gameArea!, locationAmount: 5)
+            }
+            .store(in: &cancellables)
     }
     
     private func getGameArea(coordinate: CLLocationCoordinate2D) -> CLCircularRegion? {
@@ -44,6 +55,47 @@ class LocationViewModel: ObservableObject {
         } else {
             return "Location is not within radius"
         }
+    }
+
+    private func checkCoordinateWithinCircularRegion(coordinate: CLLocationCoordinate2D, region: CLCircularRegion) -> Bool {
+        if region.contains(coordinate) {
+            return true
+        }
+
+        return false
+    }
+
+    private func randomCoordinateWithinRegion(_ region: CLCircularRegion) -> CLLocationCoordinate2D {
+        // Generate random latitude within the region
+//        let minLat = region.center.latitude - region.radius / 111000.0
+//        let maxLat = region.center.latitude + region.radius / 111000.0
+//        let randomLat = CLLocationDegrees.random(in: minLat...maxLat)
+
+        // Generate random longitude within the region
+        let randomLong = region.center.longitude + (Double.random(in: 0...1) * 2 - 1) * region.radius / (111000.0 * cos(region.center.latitude.toRadians()))
+
+        return CLLocationCoordinate2D(latitude: region.center.latitude, longitude: randomLong)
+    }
+
+    private func generateRandomLocationWithinRegion(
+        region: CLCircularRegion,
+        locationAmount: Int) -> [CLLocationCoordinate2D] {
+        var randomLocations: [CLLocationCoordinate2D] = []
+
+        for _ in 0..<locationAmount {
+            let randomLocation =  randomCoordinateWithinRegion(region)
+
+            let isWithinRegion = checkCoordinateWithinCircularRegion(
+                coordinate: randomLocation,
+                region: region)
+
+            debugPrint(isWithinRegion)
+
+            randomLocations.append(randomLocation)
+
+        }
+
+        return randomLocations
     }
     
 }
