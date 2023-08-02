@@ -12,6 +12,7 @@
 		931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD992A79E3F200C7F88D /* Experience.rcproject */; };
 		931EBD9C2A79E3F300C7F88D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931EBD9B2A79E3F300C7F88D /* Assets.xcassets */; };
 		931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */; };
+		931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		931EBD992A79E3F200C7F88D /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		931EBD9B2A79E3F300C7F88D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 			isa = PBXGroup;
 			children = (
 				931EBD942A79E3F200C7F88D /* TreasureHunt */,
+				931EBDA52A79E49600C7F88D /* Configuration */,
 				931EBD932A79E3F200C7F88D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +71,14 @@
 				931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		931EBDA52A79E49600C7F88D /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */,
+				931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */,
 				931EBD9C2A79E3F300C7F88D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
