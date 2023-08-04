@@ -15,7 +15,7 @@ struct ContentView : View {
             //ARViewContainer().edgesIgnoringSafeArea(.all)
             if let location = locationVM.currentLocation {
                 VStack {
-                    Text("Location Latitude: \(location.latitude)")
+                    Text("Location Latitude: \(location.coordinate.latitude)")
                     Text(locationVM.messageText)
                 }
                 .padding()

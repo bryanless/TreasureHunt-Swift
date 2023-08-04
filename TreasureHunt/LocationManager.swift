@@ -12,7 +12,7 @@ import CoreLocation
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
     static let instance = LocationManager()
-    @Published var location: CLLocation? = nil
+    @Published var location: CLLocation?
     private let locationManager = CLLocationManager()
     @Published var initialLocation: CLLocation?
     
