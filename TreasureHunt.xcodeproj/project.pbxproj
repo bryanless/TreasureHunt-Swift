@@ -18,6 +18,8 @@
 		931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */; };
 		93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EC2A7A082400A008A1 /* LocationManager.swift */; };
 		93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */; };
+		93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8032A7C8EF900A008A1 /* ARModel.swift */; };
+		93C2C8062A7C8F1F00A008A1 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDegreesExt.swift; sourceTree = "<group>"; };
 		93C2C7EC2A7A082400A008A1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		93C2C8032A7C8EF900A008A1 /* ARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModel.swift; sourceTree = "<group>"; };
+		93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
 				93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */,
 				931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */,
+				93C2C8032A7C8EF900A008A1 /* ARModel.swift */,
+				93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -180,8 +186,10 @@
 				93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */,
 				931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */,
 				931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */,
+				93C2C8062A7C8F1F00A008A1 /* ARViewModel.swift in Sources */,
 				93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
+				93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
