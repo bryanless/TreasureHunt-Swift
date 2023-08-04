@@ -10,9 +10,10 @@ import RealityKit
 
 struct ContentView : View {
     @StateObject var locationVM = LocationViewModel()
+    @StateObject var arVM = ARViewModel()
     var body: some View {
         ZStack(alignment: .bottom) {
-            //ARViewContainer().edgesIgnoringSafeArea(.all)
+            ARViewContainer(arVM: arVM).edgesIgnoringSafeArea(.all)
             if let location = locationVM.currentLocation {
                 VStack {
                     Text("Location Latitude: \(location.coordinate.latitude)")
@@ -26,18 +27,10 @@ struct ContentView : View {
 
 struct ARViewContainer: UIViewRepresentable {
     
+    var arVM: ARViewModel
     func makeUIView(context: Context) -> ARView {
-        
-        let arView = ARView(frame: .zero)
-        
-        // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
-        
-        return arView
-        
+        arVM.spawnMetalDetector()
+        return arVM.arView
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {}

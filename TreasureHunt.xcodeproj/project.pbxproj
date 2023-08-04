@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */; };
+		7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */; };
 		931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD952A79E3F200C7F88D /* AppDelegate.swift */; };
 		931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD972A79E3F200C7F88D /* ContentView.swift */; };
 		931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD992A79E3F200C7F88D /* Experience.rcproject */; };
@@ -16,9 +18,13 @@
 		931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */; };
 		93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EC2A7A082400A008A1 /* LocationManager.swift */; };
 		93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */; };
+		93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8032A7C8EF900A008A1 /* ARModel.swift */; };
+		93C2C8062A7C8F1F00A008A1 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_drummer_idle.usdz; sourceTree = "<group>"; };
+		7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = metal_detector.usdz; sourceTree = "<group>"; };
 		931EBD922A79E3F200C7F88D /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		931EBD952A79E3F200C7F88D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		931EBD972A79E3F200C7F88D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,6 +35,8 @@
 		931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDegreesExt.swift; sourceTree = "<group>"; };
 		93C2C7EC2A7A082400A008A1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		93C2C8032A7C8EF900A008A1 /* ARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModel.swift; sourceTree = "<group>"; };
+		93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +50,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7DAC07172A7A009E00D9EF5D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */,
+				7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		931EBD892A79E3F200C7F88D = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +79,7 @@
 		931EBD942A79E3F200C7F88D /* TreasureHunt */ = {
 			isa = PBXGroup;
 			children = (
+				7DAC07172A7A009E00D9EF5D /* Models */,
 				931EBD952A79E3F200C7F88D /* AppDelegate.swift */,
 				931EBD972A79E3F200C7F88D /* ContentView.swift */,
 				931EBD992A79E3F200C7F88D /* Experience.rcproject */,
@@ -70,6 +88,8 @@
 				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
 				93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */,
 				931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */,
+				93C2C8032A7C8EF900A008A1 /* ARModel.swift */,
+				93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -150,8 +170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */,
+				7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */,
 				931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */,
 				931EBD9C2A79E3F300C7F88D /* Assets.xcassets in Resources */,
+				7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,8 +209,10 @@
 				93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */,
 				931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */,
 				931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */,
+				93C2C8062A7C8F1F00A008A1 /* ARViewModel.swift in Sources */,
 				93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
+				93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
