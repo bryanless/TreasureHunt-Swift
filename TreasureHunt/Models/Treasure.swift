@@ -11,8 +11,12 @@ struct Treasure: Identifiable {
     let id: String
     let location: CLLocation
     var distance: CLLocationDistance
+    var hasSpawned: Bool = false
 
-    func updateDistance(distance: CLLocationDistance) -> Treasure {
-        return Treasure(id: self.id, location: self.location, distance: distance)
+    func updateState(
+        distance: CLLocationDistance? = nil,
+        hasSpawned: Bool? = nil
+    ) -> Treasure {
+        return Treasure(id: self.id, location: self.location, distance: distance ?? self.distance, hasSpawned: hasSpawned ?? self.hasSpawned)
     }
 }

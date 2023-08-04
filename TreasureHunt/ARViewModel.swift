@@ -10,6 +10,23 @@ import RealityKit
 import CoreLocation
 import Combine
 
+enum MetalDetectorState {
+    case notDetected, far, near, close
+
+    // TODO: Implement metal detector sound
+    func playSound() {
+        switch self {
+        case .notDetected:
+            break
+        case .far:
+            break
+        case .near:
+            break
+        case .close:
+            break
+        }
+    }
+}
 class ARViewModel: ObservableObject {
     @Published private var model: ARModel = ARModel()
     private let locationManager = LocationManager.instance
@@ -18,6 +35,7 @@ class ARViewModel: ObservableObject {
     @Published var initialLocation: CLLocation?
     @Published var treasures: [Treasure] = []
     @Published var messageText: String = ""
+
     init() {
         addSubscribers()
     }
@@ -122,9 +140,13 @@ class ARViewModel: ObservableObject {
         for (index, treasure) in treasures.enumerated() {
             let distance = currentLocation.distance(from: treasure.location)
 
-            let updatedTreasure = treasure.updateDistance(distance: distance)
+            let updatedTreasure = treasure.updateState(distance: distance)
 
             self.treasures[index] = updatedTreasure
+
+            if distance < 1 {
+                // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
+            }
         }
     }
 
