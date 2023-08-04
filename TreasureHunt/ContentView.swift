@@ -57,7 +57,7 @@ struct ARViewContainer: UIViewRepresentable {
     
     func updateUIView(_ uiView: ARView, context: Context) {
         if(uiView.scene.anchors[0].children[0].transform.rotation.real < 0.6268) || (uiView.scene.anchors[0].children[0].transform.rotation.real > 0.62758){
-            uiView.scene.anchors[0].children[0].transform.rotation *= simd_quatf(angle: Float(motion.x * 0.000000000125), axis: SIMD3<Float>(1,0,0))
+            uiView.scene.anchors[0].children[0].transform.rotation *= simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1,0,0))
         }
         else{
             uiView.scene.anchors[0].children[0].transform.rotation *= simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1,0,0))
