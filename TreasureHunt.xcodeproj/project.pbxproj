@@ -16,8 +16,10 @@
 		931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */; };
 		931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */; };
 		931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */; };
+		93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */; };
 		93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EC2A7A082400A008A1 /* LocationManager.swift */; };
-		93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */; };
+		93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8032A7C8EF900A008A1 /* ARModel.swift */; };
+		93C2C8062A7C8F1F00A008A1 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +33,10 @@
 		931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 		931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDegreesExt.swift; sourceTree = "<group>"; };
+		93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
 		93C2C7EC2A7A082400A008A1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		93C2C8032A7C8EF900A008A1 /* ARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModel.swift; sourceTree = "<group>"; };
+		93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,13 +50,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7DAC07172A7A009E00D9EF5D /* Models */ = {
+		7DAC07172A7A009E00D9EF5D /* ARModels */ = {
 			isa = PBXGroup;
 			children = (
 				7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */,
 				7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */,
 			);
-			path = Models;
+			path = ARModels;
 			sourceTree = "<group>";
 		};
 		931EBD892A79E3F200C7F88D = {
@@ -75,15 +79,17 @@
 		931EBD942A79E3F200C7F88D /* TreasureHunt */ = {
 			isa = PBXGroup;
 			children = (
-				7DAC07172A7A009E00D9EF5D /* Models */,
+				93A9F7BB2A7C9E2D00823CF5 /* Models */,
+				7DAC07172A7A009E00D9EF5D /* ARModels */,
 				931EBD952A79E3F200C7F88D /* AppDelegate.swift */,
 				931EBD972A79E3F200C7F88D /* ContentView.swift */,
 				931EBD992A79E3F200C7F88D /* Experience.rcproject */,
 				931EBD9B2A79E3F300C7F88D /* Assets.xcassets */,
 				931EBD9D2A79E3F300C7F88D /* Preview Content */,
 				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
-				93C2C7EE2A7A084C00A008A1 /* LocationViewModel.swift */,
 				931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */,
+				93C2C8032A7C8EF900A008A1 /* ARModel.swift */,
+				93C2C8052A7C8F1F00A008A1 /* ARViewModel.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -104,6 +110,14 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		93A9F7BB2A7C9E2D00823CF5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,6 +128,7 @@
 				931EBD8E2A79E3F200C7F88D /* Sources */,
 				931EBD8F2A79E3F200C7F88D /* Frameworks */,
 				931EBD902A79E3F200C7F88D /* Resources */,
+				93A9F7BA2A7C940F00823CF5 /* Run SwiftLint Script */,
 			);
 			buildRules = (
 			);
@@ -172,6 +187,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		93A9F7BA2A7C940F00823CF5 /* Run SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		931EBD8E2A79E3F200C7F88D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -180,8 +217,10 @@
 				93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */,
 				931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */,
 				931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */,
-				93C2C7EF2A7A084C00A008A1 /* LocationViewModel.swift in Sources */,
+				93C2C8062A7C8F1F00A008A1 /* ARViewModel.swift in Sources */,
+				93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
+				93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
