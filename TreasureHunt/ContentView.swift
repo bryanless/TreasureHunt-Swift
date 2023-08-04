@@ -8,16 +8,15 @@
 import SwiftUI
 import RealityKit
 
-struct ContentView : View {
-    @StateObject var locationVM = LocationViewModel()
+struct ContentView: View {
     @StateObject var arVM = ARViewModel()
     var body: some View {
         ZStack(alignment: .bottom) {
             ARViewContainer(arVM: arVM).edgesIgnoringSafeArea(.all)
-            if let location = locationVM.currentLocation {
+            if let location = arVM.currentLocation {
                 VStack {
                     Text("Location Latitude: \(location.coordinate.latitude)")
-                    Text(locationVM.messageText)
+                    Text(arVM.messageText)
                 }
                 .padding()
             }
