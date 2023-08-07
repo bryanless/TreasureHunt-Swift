@@ -10,23 +10,6 @@ import RealityKit
 import CoreLocation
 import Combine
 
-enum MetalDetectorState {
-    case notDetected, far, near, close
-
-    // TODO: Implement metal detector sound
-    func playSound() {
-        switch self {
-        case .notDetected:
-            break
-        case .far:
-            break
-        case .near:
-            break
-        case .close:
-            break
-        }
-    }
-}
 class LocationViewModel: ObservableObject {
     private let locationManager = LocationManager.instance
     private var cancellables = Set<AnyCancellable>()
@@ -100,7 +83,7 @@ class LocationViewModel: ObservableObject {
 
         return CLLocation(latitude: randomLatitude, longitude: region.center.longitude)
     }
-    //TODO: Update Logic for Generating Treasure Locations to not be close to each other
+
     private func generateTreasureLocationWithinRegion(
         initialLocation: CLLocation,
         region: CLCircularRegion,
@@ -166,7 +149,7 @@ class LocationViewModel: ObservableObject {
             initialLocation: initialLocation,
             region: gameArea,
             treasureAmount: 5,
-            distanceFromInitial: 1,
+            distanceFromInitial: 5,
             distanceBetweenTreasures: 3)
         return treasures
     }
