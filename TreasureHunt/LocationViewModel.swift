@@ -51,25 +51,15 @@ class LocationViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        $initialLocation
+        locationManager.$initialLocation
             .removeDuplicates()
-            .receive(on: RunLoop.main)
-            .sink { [weak self] initialLoc in
-                guard let initialLoc,
-                      let gameArea = self?.getGameArea(coordinate: initialLoc.coordinate) else { return }
-                // Generate random treasure locations
-                guard let treasures =
-                        self?.generateTreasureLocationWithinRegion(
-                            initialLocation: initialLoc,
-                            region: gameArea,
-                            treasureAmount: 5) else { return }
-
-                self?.treasures = treasures
+            .map(mapToTreasures)
+            .sink { [weak self] returnedTreasures in
+                self?.treasures = returnedTreasures
             }
             .store(in: &cancellables)
     }
 
-    // MARK: Location Functions
     private func getGameArea(coordinate: CLLocationCoordinate2D) -> CLCircularRegion {
         return CLCircularRegion(center: coordinate, radius: 50, identifier: "RegionMap")
     }
@@ -103,29 +93,40 @@ class LocationViewModel: ObservableObject {
 
         return CLLocation(latitude: region.center.latitude, longitude: randomLong)
     }
-
+    //TODO: Update Logic for Generating Treasure Locations to not be close to each other
     private func generateTreasureLocationWithinRegion(
         initialLocation: CLLocation,
         region: CLCircularRegion,
-        treasureAmount: Int
+        treasureAmount: Int,
+        distanceFromInitial: CLLocationDistance,
+        distanceBetweenTreasures: CLLocationDistance
     ) -> [Treasure] {
         var treasures: [Treasure] = []
 
-        for index in 0..<treasureAmount {
-            let randomLocation =  randomCoordinateWithinRegion(region)
-
+        while treasures.count <= treasureAmount {
+            let randomLocation = randomCoordinateWithinRegion(region)
             let isWithinRegion = checkCoordinateWithinCircularRegion(
                 coordinate: randomLocation.coordinate,
                 region: region)
+            let distanceFromInitialLocation = randomLocation.distance(from: initialLocation)
 
-            let distance = initialLocation.distance(from: randomLocation)
-
-            let treasure = Treasure(id: "treasure_\(index)", location: randomLocation, distance: distance)
-
-            treasures.append(treasure)
-
+            if isWithinRegion && distanceFromInitialLocation >= distanceFromInitial {
+                let isValidLocation = treasures.allSatisfy { $0.location.distance(from: randomLocation) >= distanceBetweenTreasures }
+                if isValidLocation {
+                    let distance = initialLocation.distance(from: randomLocation)
+                    let treasure = Treasure(
+                        id: "treasure_\(treasures.count - 1)",
+                        location: randomLocation,
+                        distance: distance)
+                    treasures.append(treasure)
+                }
+            }
         }
-
+        debugPrint(treasures[0].location.coordinate)
+        debugPrint(treasures[1].location.coordinate)
+        debugPrint(treasures[2].location.coordinate)
+        debugPrint(treasures[3].location.coordinate)
+        debugPrint(treasures[4].location.coordinate)
         return treasures
     }
 
@@ -147,4 +148,16 @@ class LocationViewModel: ObservableObject {
         }
     }
 
+    private func mapToTreasures(initialLocation: CLLocation?) -> [Treasure] {
+        guard let initialLocation else { return [] }
+        let gameArea = getGameArea(coordinate: initialLocation.coordinate)
+        // Generate random treasure locations
+        let treasures = generateTreasureLocationWithinRegion(
+            initialLocation: initialLocation,
+            region: gameArea,
+            treasureAmount: 5,
+            distanceFromInitial: 1,
+            distanceBetweenTreasures: 1)
+        return treasures
+    }
 }
