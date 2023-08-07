@@ -86,12 +86,19 @@ class LocationViewModel: ObservableObject {
         return false
     }
 
-    private func randomCoordinateWithinRegion(_ region: CLCircularRegion) -> CLLocation {
-        // Generate random longitude within the region
-        let randomLong = region.center.longitude +
-        ((Double.random(in: 0...1) * 2 - 1) * region.radius / (111000.0 * cos(region.center.latitude.toRadians())))
+    private func randomCoordinateWithinRegion(
+        _ region: CLCircularRegion,
+        distanceBetweenCoordinate: CLLocationDistance
+    ) -> CLLocation {
+        let latitudeRange = region.radius / 111000.0 // Approximately 111000 meters in one degree latitude
+        let centerLatitude = region.center.latitude
 
-        return CLLocation(latitude: region.center.latitude, longitude: randomLong)
+        let maxLatitude = centerLatitude + (latitudeRange / 2.0)
+        let minLatitude = centerLatitude - (latitudeRange / 2.0)
+
+        let randomLatitude = CLLocationDegrees.random(in: minLatitude...maxLatitude)
+
+        return CLLocation(latitude: randomLatitude, longitude: region.center.longitude)
     }
     //TODO: Update Logic for Generating Treasure Locations to not be close to each other
     private func generateTreasureLocationWithinRegion(
@@ -104,14 +111,17 @@ class LocationViewModel: ObservableObject {
         var treasures: [Treasure] = []
 
         while treasures.count <= treasureAmount {
-            let randomLocation = randomCoordinateWithinRegion(region)
+            let randomLocation = randomCoordinateWithinRegion(
+                region,
+                distanceBetweenCoordinate: distanceBetweenTreasures)
             let isWithinRegion = checkCoordinateWithinCircularRegion(
                 coordinate: randomLocation.coordinate,
                 region: region)
             let distanceFromInitialLocation = randomLocation.distance(from: initialLocation)
 
             if isWithinRegion && distanceFromInitialLocation >= distanceFromInitial {
-                let isValidLocation = treasures.allSatisfy { $0.location.distance(from: randomLocation) >= distanceBetweenTreasures }
+                let isValidLocation = treasures.allSatisfy {
+                    $0.location.distance(from: randomLocation) >= distanceBetweenTreasures }
                 if isValidLocation {
                     let distance = initialLocation.distance(from: randomLocation)
                     let treasure = Treasure(
@@ -157,7 +167,7 @@ class LocationViewModel: ObservableObject {
             region: gameArea,
             treasureAmount: 5,
             distanceFromInitial: 1,
-            distanceBetweenTreasures: 1)
+            distanceBetweenTreasures: 3)
         return treasures
     }
 }
