@@ -11,6 +11,9 @@
 		7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */; };
 		9302993D2A80844900EF5662 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302993C2A80844900EF5662 /* SoundManager.swift */; };
 		9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */; };
+		930299442A808FEB00EF5662 /* far.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299412A808FEB00EF5662 /* far.mp3 */; };
+		930299452A808FEB00EF5662 /* near.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299422A808FEB00EF5662 /* near.mp3 */; };
+		930299462A808FEB00EF5662 /* close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299432A808FEB00EF5662 /* close.mp3 */; };
 		931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD952A79E3F200C7F88D /* AppDelegate.swift */; };
 		931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD972A79E3F200C7F88D /* ContentView.swift */; };
 		931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD992A79E3F200C7F88D /* Experience.rcproject */; };
@@ -30,6 +33,9 @@
 		7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = metal_detector.usdz; sourceTree = "<group>"; };
 		9302993C2A80844900EF5662 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalDetectorStateEnum.swift; sourceTree = "<group>"; };
+		930299412A808FEB00EF5662 /* far.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = far.mp3; sourceTree = "<group>"; };
+		930299422A808FEB00EF5662 /* near.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = near.mp3; sourceTree = "<group>"; };
+		930299432A808FEB00EF5662 /* close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = close.mp3; sourceTree = "<group>"; };
 		931EBD922A79E3F200C7F88D /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		931EBD952A79E3F200C7F88D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		931EBD972A79E3F200C7F88D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,6 +71,16 @@
 			path = ARModels;
 			sourceTree = "<group>";
 		};
+		930299402A808FDA00EF5662 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				930299412A808FEB00EF5662 /* far.mp3 */,
+				930299422A808FEB00EF5662 /* near.mp3 */,
+				930299432A808FEB00EF5662 /* close.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		931EBD892A79E3F200C7F88D = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +101,7 @@
 		931EBD942A79E3F200C7F88D /* TreasureHunt */ = {
 			isa = PBXGroup;
 			children = (
+				930299402A808FDA00EF5662 /* Sounds */,
 				93A9F7BB2A7C9E2D00823CF5 /* Models */,
 				7DAC07172A7A009E00D9EF5D /* ARModels */,
 				931EBD952A79E3F200C7F88D /* AppDelegate.swift */,
@@ -187,6 +204,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */,
+				930299462A808FEB00EF5662 /* close.mp3 in Resources */,
+				930299442A808FEB00EF5662 /* far.mp3 in Resources */,
+				930299452A808FEB00EF5662 /* near.mp3 in Resources */,
 				7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */,
 				931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */,
 				931EBD9C2A79E3F300C7F88D /* Assets.xcassets in Resources */,
