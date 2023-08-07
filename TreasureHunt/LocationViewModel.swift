@@ -16,6 +16,7 @@ class LocationViewModel: ObservableObject {
     @Published var currentLocation: CLLocation?
     @Published var initialLocation: CLLocation?
     @Published var treasures: [Treasure] = []
+    @Published var shouldSpawnTreasure: Bool = false
     @Published var messageText: String = ""
 
     init() {
@@ -135,8 +136,9 @@ class LocationViewModel: ObservableObject {
 
             self.treasures[index] = updatedTreasure
 
-            if distance < 1 {
+            if distance < 1 && !updatedTreasure.hasSpawned {
                 // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
+                shouldSpawnTreasure = true
             }
         }
     }
