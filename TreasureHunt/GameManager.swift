@@ -8,7 +8,7 @@
 import Foundation
 
 enum GameState {
-    case notStart, start, end
+    case notStart, start
 }
 
 class GameManager {
@@ -18,16 +18,14 @@ class GameManager {
     let treasureAmount = 5
 
     func startGame() {
+        gameState = .start
+        treasuresFound = 0
         //TODO: ADD FUNCTIONALITY TO START THE GAME
     }
 
     func endGame() {
+        gameState = .notStart
         //TODO: ADD FUNCTIONALITY TO END GAME
-        resetGame()
-    }
-
-    private func resetGame() {
-        //TODO: ADD FUNCTIONALITY TO RESET GAME
     }
 }
 

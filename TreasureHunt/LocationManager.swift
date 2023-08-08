@@ -32,7 +32,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
 
-        if location.distance(from: lastLocation) >= lastLocation.horizontalAccuracy * 0.60 {
+        if location.distance(from: lastLocation) >= location.horizontalAccuracy * 2 {
             self.location = location
         }
     }

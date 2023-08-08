@@ -15,6 +15,8 @@
 		930299452A808FEB00EF5662 /* near.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299422A808FEB00EF5662 /* near.mp3 */; };
 		930299462A808FEB00EF5662 /* close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299432A808FEB00EF5662 /* close.mp3 */; };
 		930299482A80EEF400EF5662 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930299472A80EEF400EF5662 /* GameManager.swift */; };
+		9302994A2A82011F00EF5662 /* GameViewModel+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930299492A82011F00EF5662 /* GameViewModel+Location.swift */; };
+		9302994C2A82015D00EF5662 /* GameViewModel+Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */; };
 		931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD952A79E3F200C7F88D /* AppDelegate.swift */; };
 		931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD972A79E3F200C7F88D /* ContentView.swift */; };
 		931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD992A79E3F200C7F88D /* Experience.rcproject */; };
@@ -37,6 +39,8 @@
 		930299422A808FEB00EF5662 /* near.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = near.mp3; sourceTree = "<group>"; };
 		930299432A808FEB00EF5662 /* close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = close.mp3; sourceTree = "<group>"; };
 		930299472A80EEF400EF5662 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		930299492A82011F00EF5662 /* GameViewModel+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Location.swift"; sourceTree = "<group>"; };
+		9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Game.swift"; sourceTree = "<group>"; };
 		931EBD922A79E3F200C7F88D /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		931EBD952A79E3F200C7F88D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		931EBD972A79E3F200C7F88D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				9302993C2A80844900EF5662 /* SoundManager.swift */,
 				9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */,
 				930299472A80EEF400EF5662 /* GameManager.swift */,
+				930299492A82011F00EF5662 /* GameViewModel+Location.swift */,
+				9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -244,6 +250,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */,
+				9302994C2A82015D00EF5662 /* GameViewModel+Game.swift in Sources */,
+				9302994A2A82011F00EF5662 /* GameViewModel+Location.swift in Sources */,
 				930299482A80EEF400EF5662 /* GameManager.swift in Sources */,
 				931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */,
 				931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */,
