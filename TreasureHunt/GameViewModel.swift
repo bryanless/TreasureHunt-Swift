@@ -22,7 +22,6 @@ class GameViewModel: ObservableObject {
     @Published var treasuresFound: Int = 0
     @Published var gameState: GameState?
     @Published var currentLocation: CLLocation?
-    @Published var initialLocation: CLLocation?
     @Published var treasureDistance: CLLocationDistance?
     @Published var treasures: [Treasure] = []
     @Published var shouldSpawnTreasure: Bool = false
@@ -39,7 +38,6 @@ class GameViewModel: ObservableObject {
             .sink { [weak self] currentLoc, initialLoc in
                 guard let self, let currentLoc, let initialLoc else { return }
                 self.currentLocation = currentLoc
-                self.initialLocation = initialLoc
                 self.messageText = self.checkLocationWithinCircularRegion(coordinate: initialLoc.coordinate) ?? "None"
                 self.calculateDistances(currentLocation: currentLoc, treasures: self.treasures)
             }
