@@ -30,13 +30,13 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
             }
         }
-        .environmentObject(locationVM)
+        .environmentObject(gameVM)
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
-    
-    @EnvironmentObject var locationViewModel: LocationViewModel
+
+    @EnvironmentObject var gameViewModel: GameViewModel
     @StateObject var motion = MotionManager()
     @State var count: Int = 1
     // Anchor from Camera
@@ -67,18 +67,18 @@ struct ARViewContainer: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: ARView, context: Context) {
-        print(locationViewModel.shouldSpawnTreasure)
-        if((locationViewModel.shouldSpawnTreasure) && (count == 1)){
-            var anchor = AnchorEntity(plane: .horizontal)
+        debugPrint(gameViewModel.shouldSpawnTreasure)
+        if (gameViewModel.shouldSpawnTreasure) && (count == 1) {
+            let anchor = AnchorEntity(plane: .horizontal)
             // Add Metal Detector from Models in Bundle
-            var treasureAssetPath = Bundle.main.path(forResource: "toy_drummer_idle", ofType: "usdz")!
+            let treasureAssetPath = Bundle.main.path(forResource: "toy_drummer_idle", ofType: "usdz")!
             // Add URL Path from Bundle
-            var treasureUrl = URL(fileURLWithPath: treasureAssetPath)
+            let treasureUrl = URL(fileURLWithPath: treasureAssetPath)
             let treasure = try? Entity.load(contentsOf: treasureUrl)
             treasure?.transform.scale *= 3
             anchor.addChild(treasure!)
             uiView.scene.addAnchor(anchor)
-            locationViewModel.shouldSpawnTreasure = false
+            gameViewModel.shouldSpawnTreasure = false
             count = 0
         }
         if uiView.scene.anchors[0].children[0].transform.rotation.real < 0.6268
