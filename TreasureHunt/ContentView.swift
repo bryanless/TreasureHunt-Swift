@@ -68,7 +68,7 @@ struct ARViewContainer: UIViewRepresentable {
 
     func updateUIView(_ uiView: ARView, context: Context) {
         debugPrint(gameViewModel.shouldSpawnTreasure)
-        if (gameViewModel.shouldSpawnTreasure) && (count == 1) {
+        if gameViewModel.shouldSpawnTreasure {
             let anchor = AnchorEntity(plane: .horizontal)
             // Add Metal Detector from Models in Bundle
             let treasureAssetPath = Bundle.main.path(forResource: "toy_drummer_idle", ofType: "usdz")!
@@ -79,7 +79,6 @@ struct ARViewContainer: UIViewRepresentable {
             anchor.addChild(treasure!)
             uiView.scene.addAnchor(anchor)
             gameViewModel.shouldSpawnTreasure = false
-            count = 0
         }
         if uiView.scene.anchors[0].children[0].transform.rotation.real < 0.6268
             || uiView.scene.anchors[0].children[0].transform.rotation.real > 0.62758 {

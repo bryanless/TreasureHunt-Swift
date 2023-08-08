@@ -173,12 +173,14 @@ class GameViewModel: ObservableObject {
             let distance = currentLocation.distance(from: treasure.location)
             let updatedTreasure = treasure.updateState(distance: distance)
 
-            self.treasures[index] = updatedTreasure
             playSoundBasedOnDistance()
             if distance < 1 && !updatedTreasure.hasSpawned {
                 // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
                 shouldSpawnTreasure = true
+                updatedTreasure.updateState(hasSpawned: true)
             }
+
+            self.treasures[index] = updatedTreasure
         }
         treasureDistance = treasures.first?.distance
         //debugPrint(currentLocation.coordinate.latitude)
