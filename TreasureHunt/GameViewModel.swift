@@ -171,13 +171,13 @@ class GameViewModel: ObservableObject {
 
         for (index, treasure) in treasures.enumerated() {
             let distance = currentLocation.distance(from: treasure.location)
-            let updatedTreasure = treasure.updateState(distance: distance)
+            var updatedTreasure = treasure.updateState(distance: distance)
 
             playSoundBasedOnDistance()
-            if distance < 1 && !updatedTreasure.hasSpawned {
+            if distance < 10 && !updatedTreasure.hasSpawned {
                 // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
                 shouldSpawnTreasure = true
-                updatedTreasure.updateState(hasSpawned: true)
+                updatedTreasure.hasSpawned = true
             }
 
             self.treasures[index] = updatedTreasure
