@@ -21,12 +21,19 @@ class GameManager {
         //TODO: ADD FUNCTIONALITY TO START THE GAME
     }
 
+    func endGame() {
+        //TODO: ADD FUNCTIONALITY TO END GAME
+        resetGame()
+    }
+
+    private func resetGame() {
+        //TODO: ADD FUNCTIONALITY TO RESET GAME
+    }
+}
+
+extension GameManager {
     func increaseFound() {
         //TODO: ADD FUNCTIONALITY TO INCREASE SCORE WHEN USER FINDS TREASURE
         treasuresFound += 1
-    }
-
-    func resetGame() {
-        //TODO: ADD FUNCTIONALITY TO RESET GAME
     }
 }

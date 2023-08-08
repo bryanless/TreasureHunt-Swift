@@ -27,7 +27,6 @@
 		93B72C312A81E0C40063DBCE /* clock_tick_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93B72C2F2A81E0C40063DBCE /* clock_tick_sfx.mp3 */; };
 		93B72C322A81E0C40063DBCE /* treasure_discovery_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */; };
 		93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EC2A7A082400A008A1 /* LocationManager.swift */; };
-		93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8032A7C8EF900A008A1 /* ARModel.swift */; };
 		93C2C8062A7C8F1F00A008A1 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +52,6 @@
 		93B72C2F2A81E0C40063DBCE /* clock_tick_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clock_tick_sfx.mp3; sourceTree = "<group>"; };
 		93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = treasure_discovery_sfx.mp3; sourceTree = "<group>"; };
 		93C2C7EC2A7A082400A008A1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		93C2C8032A7C8EF900A008A1 /* ARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModel.swift; sourceTree = "<group>"; };
 		93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,7 +118,6 @@
 				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
 				932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */,
 				931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */,
-				93C2C8032A7C8EF900A008A1 /* ARModel.swift */,
 				93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */,
 				9302993C2A80844900EF5662 /* SoundManager.swift */,
 				9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */,
@@ -263,7 +260,6 @@
 				93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */,
 				9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
-				93C2C8042A7C8EF900A008A1 /* ARModel.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 				9302993D2A80844900EF5662 /* SoundManager.swift in Sources */,
 			);
