@@ -13,18 +13,19 @@ enum GameState {
 
 class GameManager {
     static let instance = GameManager()
-    @Published var treasuresFound: Int = 0
-    @Published var gameState: GameState = .notStart
-    let treasureAmount = 5
+    @Published var gameData: GameData
+
+    init() {
+        gameData = GameData.gameDataInstance()
+    }
 
     func startGame() {
-        gameState = .start
-        treasuresFound = 0
+        gameData.gameState = .start
         //TODO: ADD FUNCTIONALITY TO START THE GAME
     }
 
     func endGame() {
-        gameState = .notStart
+        gameData.gameState = .notStart
         //TODO: ADD FUNCTIONALITY TO END GAME
     }
 }
@@ -32,6 +33,6 @@ class GameManager {
 extension GameManager {
     func increaseFound() {
         //TODO: ADD FUNCTIONALITY TO INCREASE SCORE WHEN USER FINDS TREASURE
-        treasuresFound += 1
+        gameData.treasuresFound += 1
     }
 }

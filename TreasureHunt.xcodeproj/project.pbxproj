@@ -17,6 +17,7 @@
 		930299482A80EEF400EF5662 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930299472A80EEF400EF5662 /* GameManager.swift */; };
 		9302994A2A82011F00EF5662 /* GameViewModel+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930299492A82011F00EF5662 /* GameViewModel+Location.swift */; };
 		9302994C2A82015D00EF5662 /* GameViewModel+Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */; };
+		9302994E2A82666B00EF5662 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302994D2A82666B00EF5662 /* GameData.swift */; };
 		931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD952A79E3F200C7F88D /* AppDelegate.swift */; };
 		931EBD982A79E3F200C7F88D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD972A79E3F200C7F88D /* ContentView.swift */; };
 		931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 931EBD992A79E3F200C7F88D /* Experience.rcproject */; };
@@ -41,6 +42,7 @@
 		930299472A80EEF400EF5662 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		930299492A82011F00EF5662 /* GameViewModel+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Location.swift"; sourceTree = "<group>"; };
 		9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Game.swift"; sourceTree = "<group>"; };
+		9302994D2A82666B00EF5662 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		931EBD922A79E3F200C7F88D /* TreasureHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		931EBD952A79E3F200C7F88D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		931EBD972A79E3F200C7F88D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */,
+				9302994D2A82666B00EF5662 /* GameData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */,
 				9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
+				9302994E2A82666B00EF5662 /* GameData.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 				9302993D2A80844900EF5662 /* SoundManager.swift in Sources */,
 			);

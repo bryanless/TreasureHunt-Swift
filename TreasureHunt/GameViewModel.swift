@@ -60,15 +60,10 @@ class GameViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        gameManager.$gameState
-            .sink { [weak self] gameState in
-                self?.gameState = gameState
-            }
-            .store(in: &cancellables)
-
-        gameManager.$treasuresFound
-            .sink { [weak self] foundTreasures in
-                self?.treasuresFound = foundTreasures
+        gameManager.$gameData
+            .sink { [weak self] gameData in
+                self?.gameState = gameData.gameState
+                self?.treasuresFound = gameData.treasuresFound
             }
             .store(in: &cancellables)
 
