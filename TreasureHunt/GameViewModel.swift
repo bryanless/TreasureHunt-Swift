@@ -78,7 +78,7 @@ class GameViewModel: ObservableObject {
                 case .start:
                     self?.gameManager.startGame()
                 case .end:
-                    self?.gameManager.resetGame()
+                    self?.gameManager.endGame()
                 }
             }
             .store(in: &cancellables)
