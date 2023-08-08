@@ -10,14 +10,21 @@ import RealityKit
 import CoreLocation
 import Combine
 
-class LocationViewModel: ObservableObject {
+class GameViewModel: ObservableObject {
     private let locationManager = LocationManager.instance
+    private let gameManager = GameManager.instance
     private var cancellables = Set<AnyCancellable>()
+    private var timer: Timer.TimerPublisher = Timer.publish(every: 1, on: .main, in: .common)
+    @Published var count: Int = 0
+    @Published var treasuresFound: Int = 0
+    @Published var gameState: GameState? = nil
     @Published var currentLocation: CLLocation?
     @Published var initialLocation: CLLocation?
+    @Published var treasureDistance: CLLocationDistance?
     @Published var treasures: [Treasure] = []
     @Published var shouldSpawnTreasure: Bool = false
     @Published var messageText: String = ""
+    @Published var metalDetectorState: MetalDetectorState = .notDetected
 
     init() {
         addSubscribers()
@@ -42,10 +49,43 @@ class LocationViewModel: ObservableObject {
                 self?.treasures = returnedTreasures
             }
             .store(in: &cancellables)
+
+        $metalDetectorState
+            .removeDuplicates()
+            .sink { returnedState in
+                returnedState.playSound()
+            }
+            .store(in: &cancellables)
+
+        gameManager.$gameState
+            .sink { [weak self] gameState in
+                self?.gameState = gameState
+            }
+            .store(in: &cancellables)
+
+        gameManager.$treasuresFound
+            .sink { [weak self] foundTreasures in
+                self?.treasuresFound = foundTreasures
+            }
+            .store(in: &cancellables)
+
+        $gameState
+            .sink { [weak self] gameState in
+                guard let gameState else { return }
+                switch gameState {
+                case .notStart:
+                    return
+                case .start:
+                    self?.gameManager.startGame()
+                case .end:
+                    self?.gameManager.resetGame()
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func getGameArea(coordinate: CLLocationCoordinate2D) -> CLCircularRegion {
-        return CLCircularRegion(center: coordinate, radius: 50, identifier: "RegionMap")
+        return CLCircularRegion(center: coordinate, radius: 100, identifier: "RegionMap")
     }
 
     private func checkLocationWithinCircularRegion(coordinate: CLLocationCoordinate2D) -> String? {
@@ -116,11 +156,11 @@ class LocationViewModel: ObservableObject {
                 }
             }
         }
-        debugPrint(treasures[0].location.coordinate)
-        debugPrint(treasures[1].location.coordinate)
-        debugPrint(treasures[2].location.coordinate)
-        debugPrint(treasures[3].location.coordinate)
-        debugPrint(treasures[4].location.coordinate)
+        //        debugPrint(treasures[0].location.coordinate)
+        //        debugPrint(treasures[1].location.coordinate)
+        //        debugPrint(treasures[2].location.coordinate)
+        //        debugPrint(treasures[3].location.coordinate)
+        //        debugPrint(treasures[4].location.coordinate)
         return treasures
     }
 
@@ -131,16 +171,18 @@ class LocationViewModel: ObservableObject {
 
         for (index, treasure) in treasures.enumerated() {
             let distance = currentLocation.distance(from: treasure.location)
-
             let updatedTreasure = treasure.updateState(distance: distance)
 
             self.treasures[index] = updatedTreasure
-
+            playSoundBasedOnDistance()
             if distance < 1 && !updatedTreasure.hasSpawned {
                 // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
                 shouldSpawnTreasure = true
             }
         }
+        treasureDistance = treasures.first?.distance
+        //debugPrint(currentLocation.coordinate.latitude)
+        //debugPrint(self.treasures[0].location.coordinate.latitude)
     }
 
     private func mapToTreasures(initialLocation: CLLocation?) -> [Treasure] {
@@ -150,9 +192,26 @@ class LocationViewModel: ObservableObject {
         let treasures = generateTreasureLocationWithinRegion(
             initialLocation: initialLocation,
             region: gameArea,
-            treasureAmount: 5,
-            distanceFromInitial: 5,
-            distanceBetweenTreasures: 3)
+            treasureAmount: 1,
+            distanceFromInitial: 10,
+            distanceBetweenTreasures: 20)
         return treasures
     }
+
+    private func playSoundBasedOnDistance() {
+        if treasures.contains(where: { $0.distance < 20 }) {
+            debugPrint("close")
+            metalDetectorState = .close
+        } else if treasures.contains(where: { $0.distance < 40 }) {
+            debugPrint("far")
+            metalDetectorState = .far
+        } else {
+            metalDetectorState = .notDetected
+        }
+    }
+
+    private func increaseFoundTreasure() {
+        gameManager.increaseFound()
+    }
+
 }

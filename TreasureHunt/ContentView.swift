@@ -9,15 +9,21 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
-    @StateObject var locationVM = LocationViewModel()
+    @StateObject var gameVM = GameViewModel()
 
     var body: some View {
         ZStack(alignment: .bottom) {
             ARViewContainer().edgesIgnoringSafeArea(.all)
-            if let location = locationVM.currentLocation {
+            if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance {
                 VStack {
                     Text("Location Latitude: \(location.coordinate.latitude)")
-                    Text(locationVM.messageText)
+                    Text(gameVM.metalDetectorState.rawValue)
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                    Text("Treasure Distance: \(treasureDistance.description)")
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+                    Text(gameVM.messageText)
                 }
                 .padding()
                 .frame(height: 100)

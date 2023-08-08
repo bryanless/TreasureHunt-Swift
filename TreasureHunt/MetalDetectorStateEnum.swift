@@ -8,7 +8,7 @@
 import Foundation
 
 enum MetalDetectorState: String {
-    case notDetected, far, near, close
+    case notDetected, far, close
 
     var soundManager: SoundManager {
         return SoundManager.instance
@@ -18,15 +18,13 @@ enum MetalDetectorState: String {
     func playSound() {
         switch self {
         case .notDetected:
+            soundManager.stopSound()
             break
         case .far:
-            soundManager.playSound(sound: .far)
-            break
-        case .near:
-            soundManager.playSound(sound: .near)
+            soundManager.playSound(sound: .far, numberOfLoops: -1)
             break
         case .close:
-            soundManager.playSound(sound: .close)
+            soundManager.playSound(sound: .close, numberOfLoops: -1)
             break
         }
     }
