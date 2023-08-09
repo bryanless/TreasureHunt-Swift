@@ -14,21 +14,7 @@ struct ContentView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             ARViewContainer().edgesIgnoringSafeArea(.all)
-            if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance {
-                VStack {
-                    Text("Location Latitude: \(location.coordinate.latitude)")
-                    Text(gameVM.metalDetectorState.rawValue)
-                        .fontWeight(.bold)
-                        .foregroundColor(.red)
-                    Text("Treasure Distance: \(treasureDistance.description)")
-                        .fontWeight(.bold)
-                        .foregroundColor(.blue)
-                    Text(gameVM.messageText)
-                }
-                .padding()
-                .frame(height: 100)
-                .frame(maxWidth: .infinity)
-            }
+            gameOverlay
         }
         .environmentObject(gameVM)
     }
@@ -67,7 +53,6 @@ struct ARViewContainer: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: ARView, context: Context) {
-        debugPrint(gameViewModel.shouldSpawnTreasure)
         if gameViewModel.shouldSpawnTreasure {
             let anchor = AnchorEntity(plane: .horizontal)
             // Add Metal Detector from Models in Bundle
@@ -78,7 +63,9 @@ struct ARViewContainer: UIViewRepresentable {
             treasure?.transform.scale *= 3
             anchor.addChild(treasure!)
             uiView.scene.addAnchor(anchor)
-            gameViewModel.shouldSpawnTreasure = false
+            DispatchQueue.main.async {
+                gameViewModel.shouldSpawnTreasure = false
+            }
         }
         if uiView.scene.anchors[0].children[0].transform.rotation.real < 0.6268
             || uiView.scene.anchors[0].children[0].transform.rotation.real > 0.62758 {
@@ -100,3 +87,27 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 #endif
+
+extension ContentView {
+    private var gameOverlay: some View {
+        VStack {
+            if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance, let time = gameVM.timeRemaining {
+                Text("Location Latitude: \(location.coordinate.latitude)")
+                Text(gameVM.metalDetectorState.rawValue)
+                    .fontWeight(.bold)
+                    .foregroundColor(.red)
+                Text("Treasure Distance: \(treasureDistance.description)")
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
+                Text(gameVM.messageText)
+                Text(time)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
+            }
+        }
+        .padding()
+        .frame(height: 100)
+        .frame(maxWidth: .infinity)
+    }
+}
