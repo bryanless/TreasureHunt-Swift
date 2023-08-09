@@ -8,7 +8,7 @@
 import Foundation
 
 extension GameViewModel {
-    private func increaseFoundTreasure() {
+    func increaseFoundTreasure() {
         gameManager.increaseFound()
     }
 
@@ -27,11 +27,9 @@ extension GameViewModel {
     private func updateTimer() {
         guard let futureDate else { return }
         let remaining = Calendar.current.dateComponents([.hour, .minute, .second], from: .now, to: futureDate)
-        let minute = remaining.minute ?? 0
-        let second = remaining.second ?? 0
-        let formattedMinute = String(format: "%02d", minute)
-        let formattedSecond = String(format: "%02d", second)
-        timeRemaining = "\(formattedMinute):\(formattedSecond)"
+        let minute = String(format: "%02d", remaining.minute ?? 0)
+        let second = String(format: "%02d", remaining.second ?? 0)
+        timeRemaining = "\(minute):\(second)"
     }
 
     private func startTimer() {

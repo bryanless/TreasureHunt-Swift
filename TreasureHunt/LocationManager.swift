@@ -14,7 +14,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     @Published var location: CLLocation?
     private let locationManager = CLLocationManager()
     @Published var initialLocation: CLLocation?
-    override init() {
+    
+    override private init() {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -31,7 +32,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             self.location = initialLocation
             return
         }
-
+        
         if location.distance(from: lastLocation) >= location.horizontalAccuracy * 2 {
             self.location = location
         }

@@ -18,8 +18,7 @@ class GameViewModel: ObservableObject {
     var timer: Timer.TimerPublisher = Timer.publish(every: 1, on: .main, in: .common)
     var futureDate: Date?
     @Published var timeRemaining: String?
-    @Published var count: Int = 0
-    @Published var treasuresFound: Int = 0
+    @Published var treasuresFound: Int?
     @Published var gameState: GameState?
     @Published var currentLocation: CLLocation?
     @Published var treasureDistance: CLLocationDistance?

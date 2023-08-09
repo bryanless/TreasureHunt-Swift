@@ -14,16 +14,16 @@ enum GameState {
 class GameManager {
     static let instance = GameManager()
     @Published var gameData: GameData
-
+    
     init() {
         gameData = GameData.gameDataInstance()
     }
-
+    
     func startGame() {
         gameData.gameState = .start
         //TODO: ADD FUNCTIONALITY TO START THE GAME
     }
-
+    
     func endGame() {
         gameData.gameState = .notStart
         //TODO: ADD FUNCTIONALITY TO END GAME
