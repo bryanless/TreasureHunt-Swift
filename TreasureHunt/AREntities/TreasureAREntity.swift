@@ -27,7 +27,6 @@ class TreasureAREntity: Entity, HasCollision {
         myAnchor.name = "treasure"
 
         myAnchor.addChild(treasure!)
-        debugPrint(myAnchor.name)
     }
 
     func getAnchor() -> AnchorEntity {

@@ -11,13 +11,12 @@ import SwiftUI
 struct ARViewContainer: UIViewRepresentable {
     @EnvironmentObject var gameViewModel: GameViewModel
     @StateObject var motion = MotionManager()
-    @State var count: Int = 1
     // Anchor from Camera
     let cameraAnchor = AnchorEntity(.camera)
 
     func makeUIView(context: Context) -> GameARView {
         // Add ARView to call
-        let arView = GameARView()
+        let arView = GameARView(onTreasureTap: gameViewModel.increaseFoundTreasure)
         // Add Metal Detector from Models in Bundle
         let path = Bundle.main.path(forResource: "metal_detector", ofType: "usdz")!
         // Add URL Path from Bundle
@@ -45,12 +44,11 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: GameARView, context: Context) {
 //        debugPrint(gameViewModel.shouldSpawnTreasure)
 //                if gameViewModel.shouldSpawnTreasure {
-        if !gameViewModel.shouldSpawnTreasure && count == 1 {
+        if gameViewModel.shouldSpawnTreasure {
             let treasureAnchor = TreasureAREntity().getAnchor()
             uiView.scene.addAnchor(treasureAnchor)
-            //            gameViewModel.shouldSpawnTreasure = false
             DispatchQueue.main.async {
-                count = 0
+                gameViewModel.shouldSpawnTreasure = false
             }
         }
         if uiView.scene.anchors[0].children[0].transform.rotation.real < 0.6268

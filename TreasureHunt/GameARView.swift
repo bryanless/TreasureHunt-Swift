@@ -9,6 +9,8 @@ import ARKit
 import RealityKit
 
 class GameARView: ARView, ARSessionDelegate {
+    var onTreasureTap: () -> Void = {}
+
     required init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
     }
@@ -17,8 +19,9 @@ class GameARView: ARView, ARSessionDelegate {
         fatalError("init(coder: ) has not been implemented")
     }
 
-    convenience init() {
+    convenience init(onTreasureTap: @escaping () -> Void) {
         self.init(frame: UIScreen.main.bounds)
+        self.onTreasureTap = onTreasureTap
         self.setupGestures()
     }
 }

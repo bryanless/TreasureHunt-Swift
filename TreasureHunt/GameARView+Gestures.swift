@@ -11,12 +11,15 @@ import UIKit
 
 extension GameARView {
     func setupGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeObject(_:)))
-        self.addGestureRecognizer(tapGesture)
+        let treasureTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(onTreasureTap(_:)))
+        self.addGestureRecognizer(treasureTapGesture)
     }
 
-    @objc func removeObject(_ gesture: UITapGestureRecognizer) {
+    @objc func onTreasureTap(_ gesture: UITapGestureRecognizer) {
         let touchLocation = gesture.location(in: self)
+
         guard let hitEntity = self.entity(at: touchLocation) else {
             return
         }
@@ -25,5 +28,7 @@ extension GameARView {
         guard hitEntity.anchor?.findEntity(named: "treasure")?.name == "treasure" else { return }
 
         self.scene.removeAnchor(hitEntity.anchor!)
+
+        self.onTreasureTap()
     }
 }
