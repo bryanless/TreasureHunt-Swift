@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealityKit
 
 extension GameViewModel {
     func increaseFoundTreasure() {
@@ -15,7 +16,6 @@ extension GameViewModel {
     func startGame() {
         futureDate = Calendar.current.date(byAdding: .second, value: 4, to: .now) ?? .now
         startTimer()
-        gameManager.startGame()
         locationManager.startUpdatingLocation()
     }
 
@@ -31,7 +31,10 @@ extension GameViewModel {
 
     private func updateTimer() {
         guard let futureDate else { return }
-        let remaining = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: .now, to: futureDate)
+        let remaining = Calendar.current.dateComponents(
+            [.hour, .minute, .second, .nanosecond],
+            from: .now,
+            to: futureDate)
         timeRemaining = remaining
     }
 
@@ -50,5 +53,28 @@ extension GameViewModel {
         timeRemaining = nil
         timerSubscription?.cancel()
         timerSubscription = nil
+    }
+
+    func loadEntityAsync (
+        fileName: String,
+        fileExtension: String,
+        completion: @escaping (Result<Entity, Error>) -> Void
+    ) {
+        guard let path = Bundle.main.path(forResource: fileName, ofType: fileExtension) else { return }
+
+        // Add URL Path from Bundle
+        let url = URL(filePath: path)
+
+        let loadRequest = Entity.loadAsync(contentsOf: url)
+
+        loadRequest
+            .sink(receiveCompletion: { loadCompletion in
+                if case let .failure(error) = loadCompletion {
+                    completion(.failure(error))
+                }
+            }, receiveValue: { entity in
+                completion(.success(entity))
+            })
+            .store(in: &cancellables)
     }
 }

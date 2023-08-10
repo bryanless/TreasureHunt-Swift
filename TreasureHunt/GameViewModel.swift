@@ -13,7 +13,7 @@ import Combine
 class GameViewModel: ObservableObject {
     let locationManager = LocationManager.instance
     let gameManager = GameManager.instance
-    private var cancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
     var timerSubscription: AnyCancellable?
 //    var timer: Timer.TimerPublisher = Timer.publish(every: 1, on: .main, in: .common)
     var futureDate: Date?
