@@ -21,7 +21,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = 2
-        locationManager.startUpdatingLocation()
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last, let firstLocation = locations.first else { return }
@@ -36,5 +35,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         if location.distance(from: lastLocation) >= location.horizontalAccuracy * 2 {
             self.location = location
         }
+    }
+
+    func stopLocation() {
+        locationManager.stopUpdatingLocation()
+    }
+
+    func startUpdatingLocation() {
+        locationManager.startUpdatingLocation()
     }
 }

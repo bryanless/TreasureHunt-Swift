@@ -13,27 +13,31 @@ extension GameViewModel {
     }
 
     func startGame() {
-        futureDate = Calendar.current.date(byAdding: .second, value: 11, to: .now) ?? .now
-        gameManager.startGame()
+        futureDate = Calendar.current.date(byAdding: .second, value: 4, to: .now) ?? .now
         startTimer()
+        gameManager.startGame()
+        locationManager.startUpdatingLocation()
     }
 
     func endGame() {
         gameManager.endGame()
         stopTimer()
-        startGame()
+        locationManager.stopLocation()
+    }
+
+    func resetGame() {
+        gameManager.resetGame()
     }
 
     private func updateTimer() {
         guard let futureDate else { return }
-        let remaining = Calendar.current.dateComponents([.hour, .minute, .second], from: .now, to: futureDate)
-        let minute = String(format: "%02d", remaining.minute ?? 0)
-        let second = String(format: "%02d", remaining.second ?? 0)
-        timeRemaining = "\(minute):\(second)"
+        let remaining = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: .now, to: futureDate)
+        timeRemaining = remaining
     }
 
     private func startTimer() {
-        timerSubscription = timer
+        self.updateTimer()
+        timerSubscription = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 self?.updateTimer()
@@ -41,6 +45,7 @@ extension GameViewModel {
     }
 
     private func stopTimer() {
+        timeRemaining = nil
         timerSubscription?.cancel()
         timerSubscription = nil
     }

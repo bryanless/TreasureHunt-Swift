@@ -8,7 +8,7 @@
 import Foundation
 
 enum GameState {
-    case notStart, start
+    case notStart, start, end
 }
 
 class GameManager {
@@ -25,9 +25,14 @@ class GameManager {
     }
     
     func endGame() {
-        gameData.gameState = .notStart
+        gameData.gameState = .end
         //TODO: ADD FUNCTIONALITY TO END GAME
     }
+
+    func resetGame() {
+        gameData.gameState = .notStart
+    }
+
 }
 
 extension GameManager {
