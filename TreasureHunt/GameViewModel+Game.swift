@@ -33,6 +33,7 @@ extension GameViewModel {
     }
 
     private func startTimer() {
+        SoundManager.instance.playTimerSound()
         timerSubscription = timer
             .autoconnect()
             .sink { [weak self] _ in
@@ -41,6 +42,7 @@ extension GameViewModel {
     }
 
     private func stopTimer() {
+        SoundManager.instance.stopTimerSound()
         timerSubscription?.cancel()
         timerSubscription = nil
     }
