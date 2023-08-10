@@ -12,10 +12,19 @@ struct ContentView: View {
     @StateObject var gameVM = GameViewModel()
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            ARViewContainer().edgesIgnoringSafeArea(.all)
-            gameOverlay
+        VStack {
+            switch gameVM.gameState {
+            case .start:
+                startGame
+            case .notStart:
+                MainMenuView()
+            case .end:
+                EndGameView()
+            case .none:
+                EmptyView()
+            }
         }
+        .animation(.easeInOut, value: gameVM.gameState)
         .environmentObject(gameVM)
     }
 }
@@ -29,6 +38,13 @@ struct ContentView_Previews: PreviewProvider {
 #endif
 
 extension ContentView {
+
+    private var startGame: some View {
+        ZStack(alignment: .bottom) {
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            gameOverlay
+        }
+    }
     private var gameOverlay: some View {
         VStack {
             if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance, let time = gameVM.timeRemaining {
@@ -40,7 +56,7 @@ extension ContentView {
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
                 Text(gameVM.messageText)
-                Text(time)
+                Text(time.shortTimer)
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.green)

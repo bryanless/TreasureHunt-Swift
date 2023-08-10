@@ -11,13 +11,13 @@ import CoreLocation
 import Combine
 
 class GameViewModel: ObservableObject {
-    private let locationManager = LocationManager.instance
+    let locationManager = LocationManager.instance
     let gameManager = GameManager.instance
     private var cancellables = Set<AnyCancellable>()
     var timerSubscription: AnyCancellable?
-    var timer: Timer.TimerPublisher = Timer.publish(every: 1, on: .main, in: .common)
+//    var timer: Timer.TimerPublisher = Timer.publish(every: 1, on: .main, in: .common)
     var futureDate: Date?
-    @Published var timeRemaining: String?
+    @Published var timeRemaining: DateComponents?
     @Published var treasuresFound: Int?
     @Published var gameState: GameState?
     @Published var currentLocation: CLLocation?
@@ -66,10 +66,10 @@ class GameViewModel: ObservableObject {
 
         $gameState
             .combineLatest($timeRemaining)
-            .sink { [weak self] state, remainingTime in
-                if state == .notStart {
-                    self?.startGame()
-                } else if state == .start && remainingTime == "00:00" {
+            .sink { [weak self] state, time in
+                guard let second = time?.second, let nano = time?.nanosecond else { return }
+                print("\(second) \(nano)")
+                if state == .start && second == 0 && nano < 0 {
                     self?.endGame()
                 }
             }
