@@ -29,6 +29,7 @@
 		93A94DA62A847D1D0022A882 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA52A847D1D0022A882 /* MainMenuView.swift */; };
 		93A94DA82A8480310022A882 /* EndGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA72A8480310022A882 /* EndGameView.swift */; };
 		93A94DAA2A8490D70022A882 /* DateComponentsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA92A8490D70022A882 /* DateComponentsExt.swift */; };
+		93A94DAC2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */; };
 		93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */; };
 		93B72C312A81E0C40063DBCE /* clock_tick_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93B72C2F2A81E0C40063DBCE /* clock_tick_sfx.mp3 */; };
 		93B72C322A81E0C40063DBCE /* treasure_discovery_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */; };
@@ -64,6 +65,7 @@
 		93A94DA52A847D1D0022A882 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		93A94DA72A8480310022A882 /* EndGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameView.swift; sourceTree = "<group>"; };
 		93A94DA92A8490D70022A882 /* DateComponentsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentsExt.swift; sourceTree = "<group>"; };
+		93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+ARMultipeer.swift"; sourceTree = "<group>"; };
 		93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
 		93B72C2F2A81E0C40063DBCE /* clock_tick_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clock_tick_sfx.mp3; sourceTree = "<group>"; };
 		93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = treasure_discovery_sfx.mp3; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		930299402A808FDA00EF5662 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				93B72C2F2A81E0C40063DBCE /* clock_tick_sfx.mp3 */,
+				7DEE19532A84818400E804B1 /* far.mp3 */,
 				93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */,
 				930299412A808FEB00EF5662 /* far.mp3 */,
 				930299422A808FEB00EF5662 /* near.mp3 */,
@@ -151,6 +153,7 @@
 				93A94DA52A847D1D0022A882 /* MainMenuView.swift */,
 				93A94DA72A8480310022A882 /* EndGameView.swift */,
 				93A94DA92A8490D70022A882 /* DateComponentsExt.swift */,
+				93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				9302994C2A82015D00EF5662 /* GameViewModel+Game.swift in Sources */,
 				93A94DAA2A8490D70022A882 /* DateComponentsExt.swift in Sources */,
 				9302994A2A82011F00EF5662 /* GameViewModel+Location.swift in Sources */,
+				93A94DAC2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift in Sources */,
 				93A94DA82A8480310022A882 /* EndGameView.swift in Sources */,
 				93B72C3D2A8323250063DBCE /* TreasureAREntity.swift in Sources */,
 				930299482A80EEF400EF5662 /* GameManager.swift in Sources */,

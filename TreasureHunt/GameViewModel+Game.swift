@@ -9,7 +9,7 @@ import Foundation
 
 extension GameViewModel {
     func increaseFoundTreasure() {
-        gameManager.increaseFound()
+        gameManager?.increaseFound()
     }
 
     func startGame() {
@@ -20,13 +20,13 @@ extension GameViewModel {
     }
 
     func endGame() {
-        gameManager.endGame()
+        gameManager?.endGame()
         stopTimer()
         locationManager.stopLocation()
     }
 
     func resetGame() {
-        gameManager.resetGame()
+        gameManager?.resetGame()
     }
 
     private func updateTimer() {

@@ -14,7 +14,7 @@ struct MainMenuView: View {
             VStack {
                 Text("Play Game")
                     .onTapGesture {
-                        gameVM.startGame()
+                        gameVM.gameManager?.startGame()
                     }
             }
         }
