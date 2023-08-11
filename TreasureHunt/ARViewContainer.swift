@@ -16,17 +16,11 @@ struct ARViewContainer: UIViewRepresentable {
     let cameraAnchor = AnchorEntity(.camera)
 
     func makeUIView(context: Context) -> GameARView {
-        //
-        //        gameViewModel.sessionIDObservation = arView.session.observe(\.identifier, options: [.new]) { object, change in
-        //            print("SessionID changed to: \(change.newValue!)")
-        //            // Tell all other peers about your ARSession's changed ID, so
-        //            // that they can keep track of which ARAnchors are yours.
-        //            guard let multipeerSession = self.gameViewModel.gameManager else { return }
-        //            gameViewModel.sendARSessionIDTo(peers: gameViewModel.gameManager!.connectedPeers, arView: arView)
-        //        }
+        // Add ARView to call
+        //let arView = GameARView(onTreasureTap: gameViewModel.increaseFoundTreasure)
 
-        guard let gameAR = gameViewModel.arView else { return GameARView(onTreasureTap: {})}
         // Load Entity to Metal Detector
+        guard let gameAR = gameViewModel.arView else { return GameARView(onTreasureTap: {})}
         gameViewModel.loadEntityAsync(
             fileName: "metal_detector",
             fileExtension: "usdz"
@@ -45,15 +39,16 @@ struct ARViewContainer: UIViewRepresentable {
                 // Rotation downwards in z for 50 degrees
                 metalDetector.transform.rotation *= simd_quatf(angle: 0.959931, axis: SIMD3<Float>(0, 0, 1))
 
-        // Setup interaction gestures
-//        arView.setupGestures()
+                gameViewModel.startGame()
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
 
         return gameAR
     }
 
     func updateUIView(_ uiView: GameARView, context: Context) {
-//        debugPrint(gameViewModel.shouldSpawnTreasure)
-//                if gameViewModel.shouldSpawnTreasure {
         if gameViewModel.shouldSpawnTreasure {
             let treasureAnchor = TreasureAREntity().getAnchor()
             uiView.scene.addAnchor(treasureAnchor)
@@ -61,14 +56,17 @@ struct ARViewContainer: UIViewRepresentable {
                 gameViewModel.shouldSpawnTreasure = false
             }
         }
-        if uiView.scene.anchors[0].children[0].transform.rotation.real < 0.6268
-            || uiView.scene.anchors[0].children[0].transform.rotation.real > 0.62758 {
+
+        guard let metalDetector = uiView.scene.anchors.first?.children.first else { return }
+
+        if metalDetector.transform.rotation.real < 0.6268
+            || metalDetector.transform.rotation.real > 0.62758 {
             uiView.scene.anchors[0].children[0].transform.rotation *=
             simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1, 0, 0))
         } else {
-            uiView.scene.anchors[0].children[0].transform.rotation *=
+            metalDetector.transform.rotation *=
             simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1, 0, 0))
-            uiView.scene.anchors[0].children[0].transform.translation += [Float(motion.x * 0.0005), 0, 0]
+            metalDetector.transform.translation += [Float(motion.x * 0.0005), 0, 0]
         }
     }
 

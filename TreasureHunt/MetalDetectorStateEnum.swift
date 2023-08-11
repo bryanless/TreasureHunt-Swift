@@ -18,7 +18,7 @@ enum MetalDetectorState: String {
     func playSound() {
         switch self {
         case .notDetected:
-            soundManager.stopSound()
+            soundManager.playSound(sound: .far, numberOfLoops: -1 )
             break
         case .far:
             soundManager.playSound(sound: .far, numberOfLoops: -1)

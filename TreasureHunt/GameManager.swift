@@ -95,12 +95,12 @@ class GameManager: NSObject {
         gameData.treasuresFound += 1
         //sendToPeersGameData(data: gameData)
     }
-    
+
     func startGame() {
         gameData.gameState = .start
         //sendToPeersGameData(data: gameData)
     }
-    
+
     func endGame() {
         gameData.gameState = .end
         //sendToPeersGameData(data: gameData)
