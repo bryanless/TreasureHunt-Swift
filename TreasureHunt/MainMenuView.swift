@@ -28,7 +28,6 @@ struct MainMenuView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 480)
-                    Text("Play Game")
                         .onTapGesture {
                             GameManager.instance.startGame()
                         }
