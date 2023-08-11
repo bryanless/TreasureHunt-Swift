@@ -14,7 +14,7 @@ class TreasureAREntity: Entity, HasCollision {
     required init() {
         super.init()
         // Add Metal Detector from Models in Bundle
-        let treasureAssetPath = Bundle.main.path(forResource: "toy_drummer_idle", ofType: "usdz")!
+        let treasureAssetPath = Bundle.main.path(forResource: "treasure", ofType: "usdz")!
         // Add URL Path from Bundle
         let treasureUrl = URL(fileURLWithPath: treasureAssetPath)
         let treasure = try? Entity.load(contentsOf: treasureUrl)
