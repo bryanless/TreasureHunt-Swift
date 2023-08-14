@@ -9,8 +9,12 @@ import Foundation
 import RealityKit
 
 class TreasureAREntity: Entity, HasCollision {
+    #if !targetEnvironment(simulator)
     let myAnchor = AnchorEntity(plane: .horizontal)
-
+    #else
+    let myAnchor = AnchorEntity()
+    #endif
+    
     required init() {
         super.init()
         // Add Metal Detector from Models in Bundle
