@@ -14,7 +14,7 @@ class TreasureAREntity: Entity, HasCollision {
     #else
     let myAnchor = AnchorEntity()
     #endif
-    
+
     required init() {
         super.init()
         // Add Metal Detector from Models in Bundle
@@ -23,7 +23,7 @@ class TreasureAREntity: Entity, HasCollision {
         let treasureUrl = URL(fileURLWithPath: treasureAssetPath)
         let treasure = try? Entity.load(contentsOf: treasureUrl)
 
-        treasure?.transform.scale *= 3
+        treasure?.transform.scale *= 0.05
 
         treasure?.generateCollisionShapes(recursive: true)
 
