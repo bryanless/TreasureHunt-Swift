@@ -14,7 +14,7 @@ extension GameViewModel {
     }
 
     func startGame() {
-        futureDate = Calendar.current.date(byAdding: .second, value: 4, to: .now) ?? .now
+        futureDate = Calendar.current.date(byAdding: .minute, value: 3, to: .now) ?? .now
         startTimer()
         locationManager.startUpdatingLocation()
     }
