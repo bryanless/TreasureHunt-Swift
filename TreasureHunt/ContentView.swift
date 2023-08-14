@@ -48,7 +48,12 @@ extension ContentView {
     private var gameOverlay: some View {
         VStack {
             if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance, let time = gameVM.timeRemaining {
+                Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")" )
+                    .foregroundColor(.white)
                 Text("Location Latitude: \(location.coordinate.latitude)")
+                    .foregroundColor(.white)
+                Text(LocationManager.instance.horizontalAccuracy?.description ?? "0")
+                    .foregroundColor(.white)
                 Text(gameVM.metalDetectorState.rawValue)
                     .fontWeight(.bold)
                     .foregroundColor(.red)
@@ -60,10 +65,12 @@ extension ContentView {
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.green)
+            } else {
+                Text("Current location accuracy is \(LocationManager.instance.horizontalAccuracy ?? 0), which is higher than 20, please wait")
+                    .multilineTextAlignment(.center)
             }
         }
         .padding()
-        .frame(height: 100)
-        .frame(maxWidth: .infinity)
+        .foregroundColor(.white)
     }
 }

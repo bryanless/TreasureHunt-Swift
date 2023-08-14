@@ -98,16 +98,17 @@ extension GameViewModel {
             let distance = currentLocation.distance(from: treasure.location)
             var updatedTreasure = treasure.updateState(distance: distance)
             
-            playSoundBasedOnDistance()
             if distance < 10 && !updatedTreasure.hasSpawned {
                 // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
-                shouldSpawnTreasure = true
                 updatedTreasure.hasSpawned = true
+                shouldSpawnTreasure = true
             }
-            
+
             self.treasures[index] = updatedTreasure
         }
-        treasureDistance = treasures.first?.distance
+
+        treasureDistance = treasures.filter { !$0.hasSpawned }.min(by: { $0.distance < $1.distance })?.distance
+        playSoundBasedOnDistance(distance: treasureDistance)
         //debugPrint(currentLocation.coordinate.latitude)
         //debugPrint(self.treasures[0].location.coordinate.latitude)
     }
@@ -120,15 +121,17 @@ extension GameViewModel {
             initialLocation: initialLocation,
             region: gameArea,
             treasureAmount: 1,
-            distanceFromInitial: 10,
+            distanceFromInitial: 15,
             distanceBetweenTreasures: 20)
         return treasures
     }
     
-    private func playSoundBasedOnDistance() {
-        if treasures.contains(where: { $0.distance < 20 }) {
+    private func playSoundBasedOnDistance(distance: CLLocationDistance?) {
+        guard let distance = distance else { return }
+
+        if distance < 20 {
             metalDetectorState = .close
-        } else if treasures.contains(where: { $0.distance < 40 }) {
+        } else if distance < 40 {
             metalDetectorState = .far
         } else {
             metalDetectorState = .notDetected
