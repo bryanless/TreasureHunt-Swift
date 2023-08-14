@@ -5,7 +5,6 @@
 //  Created by Kevin Sander Utomo on 02/08/23.
 //
 
-
 import Foundation
 import CoreLocation
 
@@ -14,7 +13,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     @Published var location: CLLocation?
     private let locationManager = CLLocationManager()
     @Published var initialLocation: CLLocation?
-    
+    @Published var horizontalAccuracy: CLLocationAccuracy?
+    @Published var lastLocation: CLLocation?
+
     override private init() {
         super.init()
         locationManager.delegate = self
@@ -23,17 +24,27 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.distanceFilter = 2
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last, let firstLocation = locations.first else { return }
-        if initialLocation == nil {
-            initialLocation = firstLocation
+        guard let currentLocation = locations.last else { return }
+
+        if initialLocation == nil && currentLocation.horizontalAccuracy < 20 {
+            initialLocation = currentLocation
+            location = initialLocation
+            lastLocation = initialLocation
         }
+
         guard let lastLocation = self.location else {
-            self.location = initialLocation
+            self.location = currentLocation
             return
         }
-        
-        if location.distance(from: lastLocation) >= location.horizontalAccuracy * 2 {
-            self.location = location
+
+        // Ignore invalid longitude and latitude
+        guard currentLocation.horizontalAccuracy > 0 else { return }
+
+        self.lastLocation = lastLocation
+        horizontalAccuracy = currentLocation.horizontalAccuracy
+
+        if currentLocation.distance(from: lastLocation) >= currentLocation.horizontalAccuracy * 0.5 {
+            self.location = currentLocation
         }
     }
 

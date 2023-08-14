@@ -68,7 +68,6 @@ class GameViewModel: ObservableObject {
             .combineLatest($timeRemaining)
             .sink { [weak self] state, time in
                 guard let second = time?.second, let nano = time?.nanosecond else { return }
-                print("\(second) \(nano)")
                 if state == .start && second == 0 && nano < 0 {
                     self?.endGame()
                 }
