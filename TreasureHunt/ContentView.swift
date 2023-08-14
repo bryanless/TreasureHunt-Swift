@@ -46,24 +46,31 @@ extension ContentView {
         }
     }
     private var gameOverlay: some View {
-        VStack {
+        ZStack {
             if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance, let time = gameVM.timeRemaining {
-                Text("Location Latitude: \(location.coordinate.latitude)")
-                Text(gameVM.metalDetectorState.rawValue)
-                    .fontWeight(.bold)
-                    .foregroundColor(.red)
-                Text("Treasure Distance: \(treasureDistance.description)")
-                    .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                Text(gameVM.messageText)
-                Text(time.shortTimer)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.green)
+                Image("board-game")
+                    .resizable()
+                    .offset(y: -24)
+                VStack{
+                    Text("Location Latitude: \(location.coordinate.latitude)")
+                    Text(gameVM.metalDetectorState.rawValue)
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
+                    Text("Treasure Distance: \(treasureDistance.description)")
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
+                    Text(gameVM.messageText)
+                    Text(time.shortTimer)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.green)
+                    Spacer()
+                }.padding(.top, 32)
+                
             }
         }
-        .padding()
-        .frame(height: 100)
-        .frame(maxWidth: .infinity)
+//        .padding()
+//        .frame(height: 100)
+//        .frame(maxWidth: .infinity)
     }
 }
