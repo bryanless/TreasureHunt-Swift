@@ -46,18 +46,17 @@ extension ContentView {
         }
     }
     private var gameOverlay: some View {
-        ZStack {
-            if let location = gameVM.currentLocation, let treasureDistance = gameVM.treasureDistance, let time = gameVM.timeRemaining {
+        ZStack(alignment: .top) {
+            if let location = gameVM.currentLocation,
+               let treasureDistance = gameVM.treasureDistance,
+               let time = gameVM.timeRemaining {
                 Image("board-game")
                     .resizable()
-                    .offset(y: -24)
-                VStack{
-                    Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")" )
-                        .foregroundColor(.white)
+                    .scaledToFit()
+                VStack {
+                    Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")")
                     Text("Location Latitude: \(location.coordinate.latitude)")
-                        .foregroundColor(.white)
                     Text(LocationManager.instance.horizontalAccuracy?.description ?? "0")
-                        .foregroundColor(.white)
                     Text(gameVM.metalDetectorState.rawValue)
                         .fontWeight(.bold)
                         .foregroundColor(.red)
@@ -69,12 +68,15 @@ extension ContentView {
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
+                    Spacer()
                 }
-                Spacer()
+                .padding(.top, 88)
             } else {
                 Text("Current location accuracy is \(LocationManager.instance.horizontalAccuracy ?? 0), which is higher than 20, please wait")
                     .multilineTextAlignment(.center)
             }
-        }.padding(.top, 32)
+        }
+        .foregroundColor(.white)
+        .ignoresSafeArea(edges: .top)
     }
 }
