@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // Disable screen from sleeping
+        application.isIdleTimerDisabled = true
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
