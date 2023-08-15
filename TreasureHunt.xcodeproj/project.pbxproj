@@ -28,6 +28,7 @@
 		931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */; };
 		932DF1A52A7CB5EB0063AE0F /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */; };
 		93786FCD2A89CF2C00603DAC /* treasure.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 93786FCC2A89CF2C00603DAC /* treasure.usdz */; };
+		937C95162A8B12CA00A04098 /* Entity+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937C95152A8B12CA00A04098 /* Entity+Ext.swift */; };
 		93A94DA62A847D1D0022A882 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA52A847D1D0022A882 /* MainMenuView.swift */; };
 		93A94DA82A8480310022A882 /* EndGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA72A8480310022A882 /* EndGameView.swift */; };
 		93A94DAA2A8490D70022A882 /* DateComponentsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA92A8490D70022A882 /* DateComponentsExt.swift */; };
@@ -64,6 +65,7 @@
 		931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDegreesExt.swift; sourceTree = "<group>"; };
 		932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionManager.swift; path = TreasureHunt/MotionManager.swift; sourceTree = SOURCE_ROOT; };
 		93786FCC2A89CF2C00603DAC /* treasure.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = treasure.usdz; sourceTree = "<group>"; };
+		937C95152A8B12CA00A04098 /* Entity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Ext.swift"; sourceTree = "<group>"; };
 		93A94DA52A847D1D0022A882 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		93A94DA72A8480310022A882 /* EndGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameView.swift; sourceTree = "<group>"; };
 		93A94DA92A8490D70022A882 /* DateComponentsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentsExt.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				93A94DA52A847D1D0022A882 /* MainMenuView.swift */,
 				93A94DA72A8480310022A882 /* EndGameView.swift */,
 				93A94DA92A8490D70022A882 /* DateComponentsExt.swift */,
+				937C95152A8B12CA00A04098 /* Entity+Ext.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				93B72C382A81ED510063DBCE /* GameARView.swift in Sources */,
 				9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
+				937C95162A8B12CA00A04098 /* Entity+Ext.swift in Sources */,
 				9302994E2A82666B00EF5662 /* GameData.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 				9302993D2A80844900EF5662 /* SoundManager.swift in Sources */,

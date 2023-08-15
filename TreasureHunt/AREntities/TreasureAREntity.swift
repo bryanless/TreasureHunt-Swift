@@ -17,20 +17,22 @@ class TreasureAREntity: Entity, HasCollision {
 
     required init() {
         super.init()
-        // Add Metal Detector from Models in Bundle
-        let treasureAssetPath = Bundle.main.path(forResource: "treasure", ofType: "usdz")!
-        // Add URL Path from Bundle
-        let treasureUrl = URL(fileURLWithPath: treasureAssetPath)
-        let treasure = try? Entity.load(contentsOf: treasureUrl)
+        Entity().loadEntityAsync(
+            fileName: "treasure",
+            fileExtension: "usdz",
+            completion: { result in
+                switch result {
+                case .success(let treasure):
+                    treasure.transform.scale *= 0.05
+                    treasure.generateCollisionShapes(recursive: true)
 
-        treasure?.transform.scale *= 0.05
-
-        treasure?.generateCollisionShapes(recursive: true)
-
-        // ARView gestures detect which gesture that can be triggered by certain entity by using its name
-        myAnchor.name = "treasure"
-
-        myAnchor.addChild(treasure!)
+                    // ARView gestures detect which gesture that can be triggered by certain entity by using its name
+                    self.myAnchor.name = "treasure"
+                    self.myAnchor.addChild(treasure)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                }
+            })
     }
 
     func getAnchor() -> AnchorEntity {
