@@ -10,7 +10,7 @@ import Foundation
 import RealityKit
 
 extension Entity {
-    func loadEntityAsync (
+    static func loadEntityAsync (
         fileName: String,
         fileExtension: String,
         completion: @escaping (Result<Entity, Error>) -> Void

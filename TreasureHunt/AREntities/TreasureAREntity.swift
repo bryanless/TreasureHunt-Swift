@@ -17,7 +17,7 @@ class TreasureAREntity: Entity, HasCollision {
 
     required init() {
         super.init()
-        Entity().loadEntityAsync(
+        Entity.loadEntityAsync(
             fileName: "treasure",
             fileExtension: "usdz",
             completion: { result in
