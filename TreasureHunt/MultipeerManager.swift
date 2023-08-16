@@ -58,7 +58,7 @@ class GameManager: NSObject {
     func increaseFound() {
         //TODO: ADD FUNCTIONALITY TO INCREASE SCORE WHEN USER FINDS TREASURE
         gameData.treasuresFound += 1
-        //sendToPeersGameData(data: gameData)
+        sendToPeersGameData(data: gameData)
     }
     
     func startGame() {

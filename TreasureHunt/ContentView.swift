@@ -68,6 +68,7 @@ extension ContentView {
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
+                    Text(gameVM.gameData?.treasuresFound.description ?? "0")
                     Spacer()
                 }
                 .padding(.top, 88)

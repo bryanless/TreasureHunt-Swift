@@ -20,11 +20,13 @@ struct ARViewContainer: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: GameARView, context: Context) {
-        if gameViewModel.shouldSpawnTreasure {
+        // TODO: Remove !
+        if !gameViewModel.shouldSpawnTreasure {
             let treasureAnchor = TreasureAREntity().getAnchor()
             uiView.scene.addAnchor(treasureAnchor)
             DispatchQueue.main.async {
-                gameViewModel.shouldSpawnTreasure = false
+                // TODO: Change true to false
+                gameViewModel.shouldSpawnTreasure = true
             }
         }
 
