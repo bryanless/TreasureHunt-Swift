@@ -6,12 +6,18 @@
 //
 
 import Foundation
+import MultipeerConnectivity
 
-struct GameData: Codable, Identifiable {
-    var id: UUID = UUID()
+struct GameData: Codable, Identifiable, Equatable {
+    static func == (lhs: GameData, rhs: GameData) -> Bool {
+        return lhs.treasuresFound == rhs.treasuresFound && lhs.gameState == rhs.gameState && lhs.treasureAmount == rhs.treasureAmount && lhs.joinedPlayers == rhs.joinedPlayers
+    }
+
+    var id = UUID()
     var treasuresFound: Int
     var gameState: GameState
     let treasureAmount: Int
+    var joinedPlayers: [Player] = []
 
     init(treasuresFound: Int, gameState: GameState, treasureAmount: Int) {
         self.treasuresFound = treasuresFound
@@ -20,10 +26,10 @@ struct GameData: Codable, Identifiable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, treasuresFound, gameState, treasureAmount
+        case id, treasuresFound, gameState, treasureAmount, joinedPlayers
     }
 
-    static func gameDataInstance() -> GameData {
+    static func dataInstance() -> GameData {
         return GameData(treasuresFound: 0, gameState: .notStart, treasureAmount: 5)
     }
 }

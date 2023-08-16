@@ -31,6 +31,12 @@
 		93A94DAA2A8490D70022A882 /* DateComponentsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DA92A8490D70022A882 /* DateComponentsExt.swift */; };
 		93A94DAC2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */; };
 		93A94DAE2A85F5670022A882 /* clock_tick_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93A94DAD2A85F5670022A882 /* clock_tick_sfx.mp3 */; };
+		93A94DB42A88990E0022A882 /* LobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DB32A88990E0022A882 /* LobbyView.swift */; };
+		93A94DB62A88B2590022A882 /* RoomCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DB52A88B2590022A882 /* RoomCreatedView.swift */; };
+		93A94DBA2A89C73B0022A882 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DB92A89C73B0022A882 /* Peer.swift */; };
+		93A94DD82A8A26220022A882 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DD72A8A26220022A882 /* MultipeerManager.swift */; };
+		93A94DDA2A8B38AB0022A882 /* Tes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DD92A8B38AB0022A882 /* Tes.swift */; };
+		93A94DDD2A8B6BC60022A882 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A94DDC2A8B6BC60022A882 /* Player.swift */; };
 		93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */; };
 		93B72C322A81E0C40063DBCE /* treasure_discovery_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */; };
 		93B72C342A81E7540063DBCE /* GameARView+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B72C332A81E7540063DBCE /* GameARView+Gestures.swift */; };
@@ -67,6 +73,13 @@
 		93A94DA92A8490D70022A882 /* DateComponentsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentsExt.swift; sourceTree = "<group>"; };
 		93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+ARMultipeer.swift"; sourceTree = "<group>"; };
 		93A94DAD2A85F5670022A882 /* clock_tick_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clock_tick_sfx.mp3; sourceTree = "<group>"; };
+		93A94DAF2A8634B50022A882 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		93A94DB32A88990E0022A882 /* LobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyView.swift; sourceTree = "<group>"; };
+		93A94DB52A88B2590022A882 /* RoomCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreatedView.swift; sourceTree = "<group>"; };
+		93A94DB92A89C73B0022A882 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
+		93A94DD72A8A26220022A882 /* MultipeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerManager.swift; sourceTree = "<group>"; };
+		93A94DD92A8B38AB0022A882 /* Tes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tes.swift; sourceTree = "<group>"; };
+		93A94DDC2A8B6BC60022A882 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
 		93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = treasure_discovery_sfx.mp3; sourceTree = "<group>"; };
 		93B72C332A81E7540063DBCE /* GameARView+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameARView+Gestures.swift"; sourceTree = "<group>"; };
@@ -129,6 +142,7 @@
 		931EBD942A79E3F200C7F88D /* TreasureHunt */ = {
 			isa = PBXGroup;
 			children = (
+				93A94DAF2A8634B50022A882 /* Info.plist */,
 				930299402A808FDA00EF5662 /* Sounds */,
 				93A9F7BB2A7C9E2D00823CF5 /* Models */,
 				7DAC07172A7A009E00D9EF5D /* ARModels */,
@@ -154,6 +168,9 @@
 				93A94DA72A8480310022A882 /* EndGameView.swift */,
 				93A94DA92A8490D70022A882 /* DateComponentsExt.swift */,
 				93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */,
+				93A94DB32A88990E0022A882 /* LobbyView.swift */,
+				93A94DB52A88B2590022A882 /* RoomCreatedView.swift */,
+				93A94DD72A8A26220022A882 /* MultipeerManager.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -179,6 +196,9 @@
 			children = (
 				93A9F7BC2A7C9E4A00823CF5 /* Treasure.swift */,
 				9302994D2A82666B00EF5662 /* GameData.swift */,
+				93A94DB92A89C73B0022A882 /* Peer.swift */,
+				93A94DD92A8B38AB0022A882 /* Tes.swift */,
+				93A94DDC2A8B6BC60022A882 /* Player.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,13 +313,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				93A94DA62A847D1D0022A882 /* MainMenuView.swift in Sources */,
+				93A94DD82A8A26220022A882 /* MultipeerManager.swift in Sources */,
 				93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */,
 				9302994C2A82015D00EF5662 /* GameViewModel+Game.swift in Sources */,
+				93A94DDD2A8B6BC60022A882 /* Player.swift in Sources */,
 				93A94DAA2A8490D70022A882 /* DateComponentsExt.swift in Sources */,
 				9302994A2A82011F00EF5662 /* GameViewModel+Location.swift in Sources */,
 				93A94DAC2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift in Sources */,
 				93A94DA82A8480310022A882 /* EndGameView.swift in Sources */,
 				93B72C3D2A8323250063DBCE /* TreasureAREntity.swift in Sources */,
+				93A94DB42A88990E0022A882 /* LobbyView.swift in Sources */,
 				930299482A80EEF400EF5662 /* GameManager.swift in Sources */,
 				93B72C362A81ECED0063DBCE /* ARViewContainer.swift in Sources */,
 				93B72C342A81E7540063DBCE /* GameARView+Gestures.swift in Sources */,
@@ -307,13 +330,16 @@
 				931EBD962A79E3F200C7F88D /* AppDelegate.swift in Sources */,
 				93C2C8062A7C8F1F00A008A1 /* GameViewModel.swift in Sources */,
 				932DF1A52A7CB5EB0063AE0F /* MotionManager.swift in Sources */,
+				93A94DB62A88B2590022A882 /* RoomCreatedView.swift in Sources */,
 				93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */,
 				93B72C382A81ED510063DBCE /* GameARView.swift in Sources */,
 				9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
 				9302994E2A82666B00EF5662 /* GameData.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
+				93A94DDA2A8B38AB0022A882 /* Tes.swift in Sources */,
 				9302993D2A80844900EF5662 /* SoundManager.swift in Sources */,
+				93A94DBA2A89C73B0022A882 /* Peer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +471,9 @@
 				DEVELOPMENT_TEAM = DQPBPU9766;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TreasureHunt/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Play Treasure Hunt?";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app is requesting for your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "The app is requesting for your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app is requesting for your location";
@@ -479,7 +507,9 @@
 				DEVELOPMENT_TEAM = DQPBPU9766;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TreasureHunt/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Play Treasure Hunt?";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app is requesting for your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "The app is requesting for your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app is requesting for your location";
