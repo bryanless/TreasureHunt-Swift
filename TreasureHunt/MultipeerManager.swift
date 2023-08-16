@@ -138,7 +138,8 @@ extension GameManager: MCSessionDelegate {
             stopBrowsing()
         } else if state == .notConnected {
             //peerLeftHandler(peerID)
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
                 for (index, player) in self.gameData.joinedPlayers.enumerated() {
                     if player.displayName == peerID.displayName {
                         self.gameData.joinedPlayers.remove(at: index)
@@ -156,10 +157,10 @@ extension GameManager: MCSessionDelegate {
         //receivedDataHandler(data, peerID)
         //Data handler for GameData
         print("Received Data from \(peerID.displayName)")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             do {
-                self.gameData = try JSONDecoder().decode(GameData.self, from: data)
-                print("Decoded Data: \(self.gameData)")
+                self?.gameData = try JSONDecoder().decode(GameData.self, from: data)
+                print("Decoded Data: \(self?.gameData)")
             } catch let error {
                 print("Error decoding: \(error)")
             }
@@ -187,7 +188,8 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             for peer in self.availablePeers {
                 if peer.peerId == peerID {
                     return
@@ -209,8 +211,8 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        DispatchQueue.main.async {
-            self.availablePeers.removeAll { peer in
+        DispatchQueue.main.async { [weak self] in
+            self?.availablePeers.removeAll { peer in
                 return peer.peerId == peerID
             }
         }
@@ -228,8 +230,8 @@ extension GameManager: MCNearbyServiceAdvertiserDelegate {
         //        self.recvdInvite = true
         //        recvdInviteFrom = peerID
         //        self.invitationHandler = invitationHandler
-        DispatchQueue.main.async {
-            invitationHandler(true, self.session)
+        DispatchQueue.main.async { [weak self] in
+            invitationHandler(true, self?.session)
         }
     }
 }
