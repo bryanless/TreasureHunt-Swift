@@ -10,9 +10,9 @@ import ARKit
 import SwiftUI
 
 struct ARViewContainer: UIViewRepresentable {
+    
     @EnvironmentObject var gameViewModel: GameViewModel
     @StateObject var motion = MotionManager()
-    // Anchor from Camera
 
     func makeUIView(context: Context) -> GameARView {
         // Add ARView to call
@@ -20,6 +20,7 @@ struct ARViewContainer: UIViewRepresentable {
 
         // Load Entity to Metal Detector
         gameViewModel.arView?.session.delegate = context.coordinator
+        debugPrint("arview: \(gameViewModel.arView)")
 
         return gameViewModel.arView ?? GameARView(onTreasureTap: {})
     }
@@ -53,54 +54,58 @@ extension ARViewContainer {
         var parent: ARViewContainer
         let gameViewModel: GameViewModel
         let cameraAnchor = AnchorEntity(.camera)
+        var count = 0
 
         init(parent: ARViewContainer, gameViewModel: GameViewModel) {
             self.parent = parent
             self.gameViewModel = gameViewModel
         }
 
-//        func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-//            for anchor in anchors {
-//                if let participantAnchor = anchor as? ARParticipantAnchor {
-//                    print("Established joint experience with peer")
-//                    gameViewModel.loadEntityAsync(
-//                        fileName: "metal_detector",
-//                        fileExtension: "usdz"
-//                    ) { result in
-//                        switch result {
-//                        case .success(let metalDetector):
-//                            metalDetector.name = "metalDetector"
-//                            // Add Metal Detector Right On Camera
-//                            self.cameraAnchor.addChild(metalDetector)
-//                            // Add Camera Anchor to the Scene after adding child
-//                            self.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
-//                            // Move Metal Detector Downwards and Front
-//                            metalDetector.transform.translation = [0, -1.75, -3.15]
-//                            // Rotation downwards in X for 90 degrees
-//                            metalDetector.transform.rotation *= simd_quatf(angle: 1.5708, axis: SIMD3<Float>(0, 1, 0))
-//                            // Rotation downwards in z for 50 degrees
-//                            metalDetector.transform.rotation *= simd_quatf(angle: 0.959931, axis: SIMD3<Float>(0, 0, 1))
-//
-//                            self.gameViewModel.startGame()
-//                        case .failure(let error):
-//                            debugPrint(error.localizedDescription)
-//                        }
+        func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+            for anchor in anchors {
+                if let participantAnchor = anchor as? ARParticipantAnchor {
+//            if count == 0 {
+//                count = 1
+                    print("Established joint experience with peer")
+                    gameViewModel.loadEntityAsync(
+                        fileName: "metal_detector",
+                        fileExtension: "usdz"
+                    ) { result in
+                        switch result {
+                        case .success(let metalDetector):
+                            metalDetector.name = "metalDetector"
+                            // Add Metal Detector Right On Camera
+                            self.cameraAnchor.addChild(metalDetector)
+                            // Add Camera Anchor to the Scene after adding child
+                            self.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
+                            // Move Metal Detector Downwards and Front
+                            metalDetector.transform.translation = [0, -1.75, -3.15]
+                            // Rotation downwards in X for 90 degrees
+                            metalDetector.transform.rotation *= simd_quatf(angle: 1.5708, axis: SIMD3<Float>(0, 1, 0))
+                            // Rotation downwards in z for 50 degrees
+                            metalDetector.transform.rotation *= simd_quatf(angle: 0.959931, axis: SIMD3<Float>(0, 0, 1))
+
+                            self.gameViewModel.startGame()
+                        case .failure(let error):
+                            debugPrint(error.localizedDescription)
+                        }
 //                    }
-//                }
-//            }
-//        }
-//
-//        func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
-//            guard let multipeerSession = self.parent.gameViewModel.gameManager else { return }
-//            if !multipeerSession.connectedPeers.isEmpty {
-//                guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
-//                else { fatalError("Unexpectedly failed to encode collaboration data.") }
-//                // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
-//                multipeerSession.sendToPeersARData(data: encodedData)
-//            } else {
-//                print("Deferred sending collaboration to later because there are no peers.")
-//            }
-//        }
+                    }
+                }
+            }
+        }
+
+        func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
+            guard let multipeerSession = self.parent.gameViewModel.gameManager else { return }
+            if !multipeerSession.session.connectedPeers.isEmpty {
+                guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+                else { fatalError("Unexpectedly failed to encode collaboration data.") }
+                // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
+                multipeerSession.sendToPeersARData(data: encodedData)
+            } else {
+                print("Deferred sending collaboration to later because there are no peers.")
+            }
+        }
     }
 
     func makeCoordinator() -> Coordinator {
