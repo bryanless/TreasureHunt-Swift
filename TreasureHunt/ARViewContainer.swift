@@ -63,9 +63,6 @@ extension ARViewContainer {
 
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
             for anchor in anchors {
-                if let participantAnchor = anchor as? ARParticipantAnchor {
-//            if count == 0 {
-//                count = 1
                     print("Established joint experience with peer")
                     gameViewModel.loadEntityAsync(
                         fileName: "metal_detector",
@@ -89,9 +86,7 @@ extension ARViewContainer {
                         case .failure(let error):
                             debugPrint(error.localizedDescription)
                         }
-//                    }
                     }
-                }
             }
         }
 

@@ -72,8 +72,10 @@ extension ContentView {
                 }
                 .padding(.top, 88)
             } else {
-                Text("Current location accuracy is \(LocationManager.instance.horizontalAccuracy ?? 0), which is higher than 20, please wait")
-                    .multilineTextAlignment(.center)
+                //TODO: LoadingView()
+//                LoadingView()
+//                Text("Current location accuracy is \(LocationManager.instance.horizontalAccuracy ?? 0), which is higher than 20, please wait")
+//                    .multilineTextAlignment(.center)
             }
         }
         .foregroundColor(.white)

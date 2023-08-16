@@ -26,7 +26,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
 
-        if initialLocation == nil && currentLocation.horizontalAccuracy < 20 {
+        if initialLocation == nil && currentLocation.horizontalAccuracy < 40 {
             initialLocation = currentLocation
             location = initialLocation
             lastLocation = initialLocation
