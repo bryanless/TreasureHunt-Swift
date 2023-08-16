@@ -129,15 +129,14 @@ extension GameManager: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         
         if state == .connected {
-            //peerJoinedHandler(peerID)
             if isHost {
                 self.gameData.joinedPlayers.append(Player(id: UUID(), peerName: peerID.displayName, displayName: peerID.displayName))
                 print("From Manager: \(gameData.joinedPlayers)")
                 sendToPeersGameData(data: self.gameData)
             }
             stopBrowsing()
+            peerJoinedHandler(peerID)
         } else if state == .notConnected {
-            //peerLeftHandler(peerID)
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 for (index, player) in self.gameData.joinedPlayers.enumerated() {
@@ -148,13 +147,14 @@ extension GameManager: MCSessionDelegate {
                     }
                 }
             }
+            peerLeftHandler(peerID)
             startBrowsing()
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         //Data handler for AR
-        //receivedDataHandler(data, peerID)
+        receivedDataHandler(data, peerID)
         //Data handler for GameData
         print("Received Data from \(peerID.displayName)")
         DispatchQueue.main.async { [weak self] in
@@ -227,9 +227,6 @@ extension GameManager: MCNearbyServiceAdvertiserDelegate {
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         print("didReceiveInvitationFromPeer \(peerID)")
-        //        self.recvdInvite = true
-        //        recvdInviteFrom = peerID
-        //        self.invitationHandler = invitationHandler
         DispatchQueue.main.async { [weak self] in
             invitationHandler(true, self?.session)
         }
