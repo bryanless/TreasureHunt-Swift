@@ -10,17 +10,11 @@ import ARKit
 import SwiftUI
 
 struct ARViewContainer: UIViewRepresentable {
-    
     @EnvironmentObject var gameViewModel: GameViewModel
     @StateObject var motion = MotionManager()
 
     func makeUIView(context: Context) -> GameARView {
-        // Add ARView to call
-        //let arView = GameARView(onTreasureTap: gameViewModel.increaseFoundTreasure)
-
-        // Load Entity to Metal Detector
         gameViewModel.arView?.session.delegate = context.coordinator
-        debugPrint("arview: \(gameViewModel.arView)")
 
         return gameViewModel.arView ?? GameARView(onTreasureTap: {})
     }
@@ -62,10 +56,11 @@ extension ARViewContainer {
         }
 
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-            for anchor in anchors {
-                if let participantAnchor = anchor as? ARParticipantAnchor {
-//            if count == 0 {
-//                count = 1
+            // TODO: Remove count, use participantAnchor instead
+//            for anchor in anchors {
+//                if let participantAnchor = anchor as? ARParticipantAnchor {
+            if count == 0 {
+                count = 1
                     print("Established joint experience with peer")
                     gameViewModel.loadEntityAsync(
                         fileName: "metal_detector",
@@ -89,9 +84,9 @@ extension ARViewContainer {
                         case .failure(let error):
                             debugPrint(error.localizedDescription)
                         }
-//                    }
                     }
-                }
+//                    }
+//                }
             }
         }
 
