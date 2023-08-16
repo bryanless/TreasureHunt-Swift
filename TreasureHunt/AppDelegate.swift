@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isIdleTimerDisabled = true
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = LobbyView()
+        let contentView = ContentView()
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)

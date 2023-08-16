@@ -9,14 +9,13 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
-    @EnvironmentObject var gameVM: GameViewModel
+    @StateObject var gameVM: GameViewModel = GameViewModel()
 
     var body: some View {
         VStack {
             switch gameVM.gameState {
             case .start:
                 startGame
-                EmptyView()
             case .notStart:
                 MainMenuView()
             case .end:

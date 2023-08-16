@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct LobbyView: View {
-    @StateObject var gameVM = GameViewModel()
+//    gameVM.gameManager?.startGame()
+
+    @EnvironmentObject var gameVM: GameViewModel
     @State private var navigateToRoom = false
     var body: some View {
         NavigationStack {
@@ -34,7 +36,7 @@ struct LobbyView: View {
                     }
             }
             .background(
-                NavigationLink(destination: RoomCreatedView(gameVM: gameVM), isActive: $navigateToRoom, label: {
+                NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
                     EmptyView()
                 })
             )

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RoomCreatedView: View {
-    @ObservedObject var gameVM: GameViewModel
+    @EnvironmentObject var gameVM: GameViewModel
     var body: some View {
         
         VStack {
@@ -32,6 +32,9 @@ struct RoomCreatedView: View {
                             }
                         }
                     }
+                }
+                Button("Start Game") {
+                    gameVM.gameManager?.startGame()
                 }
             }
 //            .onChange(of: gameVM.gameManager?.gameData) { _ in

@@ -19,14 +19,14 @@ class GameViewModel: ObservableObject {
     var futureDate: Date?
     var peerSessionIDs = [MCPeerID: String]()
     var treasures: [Treasure] = []
-    
+
     @Published var arView: GameARView?
     @Published var timeRemaining: DateComponents?
     @Published var gameManager: GameManager?
-    
-    
+
     //    @Published var treasuresFound: Int?
     @Published var gameState: GameState?
+    // TODO: Reset Data
     @Published var gameData: GameData?
     @Published var currentLocation: CLLocation?
     @Published var treasureDistance: CLLocationDistance?
@@ -34,12 +34,20 @@ class GameViewModel: ObservableObject {
     @Published var messageText: String = ""
     @Published var sessionIDObservation: NSKeyValueObservation?
     @Published var metalDetectorState: MetalDetectorState = .notDetected
+
     @Published var currentPeer: Player?
     @Published var isHost: Bool = false
     @Published var availablePeers: [Peer] = []
     @Published var invitationHandler: ((Bool, MCSession?) -> Void)?
-    
+
     init() {
+        setupARConfiguration()
+        gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
+        addSubscribers()
+        multiPeerSubscribers()
+    }
+
+    func reset() {
         setupARConfiguration()
         gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
         addSubscribers()
