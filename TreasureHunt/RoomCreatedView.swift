@@ -10,7 +10,6 @@ import SwiftUI
 struct RoomCreatedView: View {
     @EnvironmentObject var gameVM: GameViewModel
     var body: some View {
-        
         VStack {
             VStack {
                 Text("Current Players")
@@ -18,7 +17,6 @@ struct RoomCreatedView: View {
                     ForEach(gameVM.gameData!.joinedPlayers, id: \.self) { player in
                         HStack {
                             Text(player.displayName)
-                            //.opacity((gameVM.currentPeer?.isHost ?? false) ? 1 : 0)
                         }
                     }
                 }
@@ -37,25 +35,9 @@ struct RoomCreatedView: View {
                     gameVM.startGame()
                 }
             }
-//            .onChange(of: gameVM.gameManager?.gameData) { _ in
-//                print("Hello")
-//                guard let gameData = gameVM.gameData else { return }
-//                if gameData.joinedPlayers.count > 0 {
-//                    print("Enter joined here")
-//                    var notInLobby = false
-//                    for player in gameData.joinedPlayers {
-//                        if player.displayName == gameVM.currentPeer?.displayName {
-//                            notInLobby = true
-//                            break
-//                        }
-//                    }
-//                    if !notInLobby {
-//                        guard let currentPeer = gameVM.currentPeer else { return }
-//                        gameVM.gameData?.joinedPlayers.append(currentPeer)
-//                        gameVM.gameManager?.sendToPeersGameData(data: gameData)
-//                    }
-//                }
-//            }
+        }
+        .onDisappear {
+            revokeRoomSession()
         }
     }
 }
@@ -65,3 +47,16 @@ struct RoomCreatedView: View {
 //        RoomCreatedView(gameVM: GameViewModel(), multipeer: MultipeerManager())
 //    }
 //}
+
+extension RoomCreatedView {
+    private func revokeRoomSession() {
+        if ((gameVM.gameManager?.isHost) == true) {
+            print("Here")
+            gameVM.gameManager?.stopAdvertising()
+            gameVM.gameManager?.isHost = false
+        }
+        gameVM.gameManager?.gameData = GameData.dataInstance()
+        gameVM.gameManager?.session.disconnect()
+        gameVM.gameManager?.startBrowsing()
+    }
+}
