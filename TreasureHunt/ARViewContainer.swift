@@ -78,8 +78,6 @@ extension ARViewContainer {
                             metalDetector.transform.rotation *= simd_quatf(angle: 1.5708, axis: SIMD3<Float>(0, 1, 0))
                             // Rotation downwards in z for 50 degrees
                             metalDetector.transform.rotation *= simd_quatf(angle: 0.959931, axis: SIMD3<Float>(0, 0, 1))
-
-                            self.gameViewModel.startGame()
                         case .failure(let error):
                             debugPrint(error.localizedDescription)
                         }

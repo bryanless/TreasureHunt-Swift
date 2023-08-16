@@ -34,7 +34,7 @@ struct RoomCreatedView: View {
                     }
                 }
                 Button("Start Game") {
-                    gameVM.gameManager?.startGame()
+                    gameVM.startGame()
                 }
             }
 //            .onChange(of: gameVM.gameManager?.gameData) { _ in
