@@ -92,17 +92,13 @@ class GameViewModel: ObservableObject {
         gameManager?.$gameData
             .combineLatest(gameManager!.$currentPeer)
             .sink { [weak self] gameData, currentPeer in
-                print("Received gameData: \(gameData.id)")
                 self?.gameData = gameData
                 self?.gameState = gameData.gameState
                 self?.currentPeer = currentPeer
                 self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
             }
             .store(in: &cancellables)
-        
-        
-        
-        
+
         $gameState
             .combineLatest($timeRemaining)
             .sink { [weak self] state, time in
