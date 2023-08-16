@@ -20,6 +20,7 @@ extension GameViewModel {
     }
 
     func endGame() {
+        // TODO: End Multipeer Session
         gameManager?.endGame()
         stopTimer()
         locationManager.stopLocation()
