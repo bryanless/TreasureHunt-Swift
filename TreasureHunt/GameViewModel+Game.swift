@@ -56,27 +56,4 @@ extension GameViewModel {
         timerSubscription?.cancel()
         timerSubscription = nil
     }
-
-    func loadEntityAsync (
-        fileName: String,
-        fileExtension: String,
-        completion: @escaping (Result<Entity, Error>) -> Void
-    ) {
-        guard let path = Bundle.main.path(forResource: fileName, ofType: fileExtension) else { return }
-
-        // Add URL Path from Bundle
-        let url = URL(filePath: path)
-
-        let loadRequest = Entity.loadAsync(contentsOf: url)
-
-        loadRequest
-            .sink(receiveCompletion: { loadCompletion in
-                if case let .failure(error) = loadCompletion {
-                    completion(.failure(error))
-                }
-            }, receiveValue: { entity in
-                completion(.success(entity))
-            })
-            .store(in: &cancellables)
-    }
 }
