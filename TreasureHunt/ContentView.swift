@@ -9,13 +9,14 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
-    @StateObject var gameVM = GameViewModel()
+    @EnvironmentObject var gameVM: GameViewModel
 
     var body: some View {
         VStack {
             switch gameVM.gameState {
             case .start:
-                startGame
+                //startGame
+                EmptyView()
             case .notStart:
                 MainMenuView()
             case .end:
@@ -39,12 +40,12 @@ struct ContentView_Previews: PreviewProvider {
 
 extension ContentView {
 
-    private var startGame: some View {
-        ZStack(alignment: .bottom) {
-            ARViewContainer().edgesIgnoringSafeArea(.all)
-            gameOverlay
-        }
-    }
+//    private var startGame: some View {
+//        ZStack(alignment: .bottom) {
+//            ARViewContainer().edgesIgnoringSafeArea(.all)
+//            gameOverlay
+//        }
+//    }
     private var gameOverlay: some View {
         ZStack(alignment: .top) {
             if let location = gameVM.currentLocation,

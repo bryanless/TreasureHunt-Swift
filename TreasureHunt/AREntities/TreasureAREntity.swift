@@ -1,8 +1,15 @@
+////
+////  TreasureAREntity.swift
+////  TreasureHunt
+////
+////  Created by Bryan on 09/08/23.
+////
 //
-//  TreasureAREntity.swift
-//  TreasureHunt
+//import Foundation
+//import RealityKit
 //
-//  Created by Bryan on 09/08/23.
+//class TreasureAREntity: Entity, HasCollision {
+//    let myAnchor = AnchorEntity(plane: .horizontal)
 //
 
 import Foundation

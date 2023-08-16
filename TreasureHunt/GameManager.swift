@@ -1,43 +1,41 @@
+////
+////  GameManager.swift
+////  TreasureHunt
+////
+////  Created by Kevin Sander Utomo on 07/08/23.
+////
 //
-//  GameManager.swift
-//  TreasureHunt
+//import Foundation
 //
-//  Created by Kevin Sander Utomo on 07/08/23.
+//enum GameState: Codable {
+//    case notStart, start, end
+//}
 //
-
-import Foundation
-
-enum GameState {
-    case notStart, start, end
-}
-
-class GameManager {
-    static let instance = GameManager()
-    @Published var gameData: GameData
-
-    init() {
-        gameData = GameData.gameDataInstance()
-    }
-
-    func startGame() {
-        gameData.gameState = .start
-        // TODO: ADD FUNCTIONALITY TO START THE GAME
-    }
-
-    func endGame() {
-        gameData.gameState = .end
-        // TODO: ADD FUNCTIONALITY TO END GAME
-    }
-
-    func resetGame() {
-        gameData.gameState = .notStart
-    }
-
-}
-
-extension GameManager {
-    func increaseFound() {
-        // TODO: ADD FUNCTIONALITY TO INCREASE SCORE WHEN USER FINDS TREASURE
-        gameData.treasuresFound += 1
-    }
-}
+//class GameManager: NSObject {
+//    static let instance = GameManager()
+//    @Published var gameData: GameData
+//    
+//    init() {
+//        gameData = GameData.gameDataInstance()
+//    }
+//    func increaseFound() {
+//        //TODO: ADD FUNCTIONALITY TO INCREASE SCORE WHEN USER FINDS TREASURE
+//        gameData.treasuresFound += 1
+//        //sendToPeersGameData(data: gameData)
+//    }
+//    
+//    func startGame() {
+//        gameData.gameState = .start
+//        //sendToPeersGameData(data: gameData)
+//    }
+//    
+//    func endGame() {
+//        gameData.gameState = .end
+//        //sendToPeersGameData(data: gameData)
+//    }
+//    
+//    func resetGame() {
+//        gameData.gameState = .notStart
+//        //sendToPeersGameData(data: gameData)
+//    }
+//}
