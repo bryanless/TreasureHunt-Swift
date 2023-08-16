@@ -63,17 +63,17 @@ class GameManager: NSObject {
     
     func startGame() {
         gameData.gameState = .start
-        //sendToPeersGameData(data: gameData)
+        sendToPeersGameData(data: gameData)
     }
     
     func endGame() {
         gameData.gameState = .end
-        //sendToPeersGameData(data: gameData)
+        sendToPeersGameData(data: gameData)
     }
     
     func resetGame() {
         gameData.gameState = .notStart
-        //sendToPeersGameData(data: gameData)
+        sendToPeersGameData(data: gameData)
     }
     
     func startAdvertising() {
