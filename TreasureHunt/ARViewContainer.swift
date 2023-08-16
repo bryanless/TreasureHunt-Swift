@@ -1,64 +1,64 @@
-////
-////  ARViewRepresentable.swift
-////  TreasureHunt
-////
-////  Created by Bryan on 08/08/23.
-////
 //
-//import RealityKit
-//import ARKit
-//import SwiftUI
+//  ARViewRepresentable.swift
+//  TreasureHunt
 //
-//struct ARViewContainer: UIViewRepresentable {
-//    @EnvironmentObject var gameViewModel: GameViewModel
-//    @StateObject var motion = MotionManager()
-//    // Anchor from Camera
+//  Created by Bryan on 08/08/23.
 //
-//    func makeUIView(context: Context) -> GameARView {
-//        // Add ARView to call
-//        //let arView = GameARView(onTreasureTap: gameViewModel.increaseFoundTreasure)
-//
-//        // Load Entity to Metal Detector
-//        gameViewModel.arView?.session.delegate = context.coordinator
-//
-//        return gameViewModel.arView ?? GameARView(onTreasureTap: {})
-//    }
-//
-//    func updateUIView(_ uiView: GameARView, context: Context) {
-//        if gameViewModel.shouldSpawnTreasure {
-//            let treasureAnchor = TreasureAREntity().getAnchor()
-//            uiView.scene.addAnchor(treasureAnchor)
-//            DispatchQueue.main.async {
-//                gameViewModel.shouldSpawnTreasure = false
-//            }
-//        }
-//
-//        guard let metalDetector = uiView.scene.anchors.first?.children.first else { return }
-//
-//        if metalDetector.transform.rotation.real < 0.6268
-//            || metalDetector.transform.rotation.real > 0.62758 {
-//            uiView.scene.anchors[0].children[0].transform.rotation *=
-//            simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1, 0, 0))
-//        } else {
-//            metalDetector.transform.rotation *=
-//            simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1, 0, 0))
-//            metalDetector.transform.translation += [Float(motion.x * 0.0005), 0, 0]
-//        }
-//    }
-//
-//}
-//
-//extension ARViewContainer {
-//    class Coordinator: NSObject, ARSessionDelegate {
-//        var parent: ARViewContainer
-//        let gameViewModel: GameViewModel
-//        let cameraAnchor = AnchorEntity(.camera)
-//
-//        init(parent: ARViewContainer, gameViewModel: GameViewModel) {
-//            self.parent = parent
-//            self.gameViewModel = gameViewModel
-//        }
-//
+
+import RealityKit
+import ARKit
+import SwiftUI
+
+struct ARViewContainer: UIViewRepresentable {
+    @EnvironmentObject var gameViewModel: GameViewModel
+    @StateObject var motion = MotionManager()
+    // Anchor from Camera
+
+    func makeUIView(context: Context) -> GameARView {
+        // Add ARView to call
+        //let arView = GameARView(onTreasureTap: gameViewModel.increaseFoundTreasure)
+
+        // Load Entity to Metal Detector
+        gameViewModel.arView?.session.delegate = context.coordinator
+
+        return gameViewModel.arView ?? GameARView(onTreasureTap: {})
+    }
+
+    func updateUIView(_ uiView: GameARView, context: Context) {
+        if gameViewModel.shouldSpawnTreasure {
+            let treasureAnchor = TreasureAREntity().getAnchor()
+            uiView.scene.addAnchor(treasureAnchor)
+            DispatchQueue.main.async {
+                gameViewModel.shouldSpawnTreasure = false
+            }
+        }
+
+        guard let metalDetector = uiView.scene.anchors.first?.children.first else { return }
+
+        if metalDetector.transform.rotation.real < 0.6268
+            || metalDetector.transform.rotation.real > 0.62758 {
+            uiView.scene.anchors[0].children[0].transform.rotation *=
+            simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1, 0, 0))
+        } else {
+            metalDetector.transform.rotation *=
+            simd_quatf(angle: Float(motion.x * 0.00002125), axis: SIMD3<Float>(1, 0, 0))
+            metalDetector.transform.translation += [Float(motion.x * 0.0005), 0, 0]
+        }
+    }
+
+}
+
+extension ARViewContainer {
+    class Coordinator: NSObject, ARSessionDelegate {
+        var parent: ARViewContainer
+        let gameViewModel: GameViewModel
+        let cameraAnchor = AnchorEntity(.camera)
+
+        init(parent: ARViewContainer, gameViewModel: GameViewModel) {
+            self.parent = parent
+            self.gameViewModel = gameViewModel
+        }
+
 //        func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
 //            for anchor in anchors {
 //                if let participantAnchor = anchor as? ARParticipantAnchor {
@@ -101,9 +101,9 @@
 //                print("Deferred sending collaboration to later because there are no peers.")
 //            }
 //        }
-//    }
-//
-//    func makeCoordinator() -> Coordinator {
-//        return Coordinator(parent: self, gameViewModel: self.gameViewModel)
-//    }
-//}
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self, gameViewModel: self.gameViewModel)
+    }
+}
