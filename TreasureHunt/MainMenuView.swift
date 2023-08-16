@@ -29,7 +29,7 @@ struct MainMenuView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 480)
                         .onTapGesture {
-                            GameManager.instance.startGame()
+                            gameVM.gameManager?.startGame()
                         }
                 }
         }

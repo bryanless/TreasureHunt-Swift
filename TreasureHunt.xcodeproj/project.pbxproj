@@ -10,7 +10,6 @@
 		7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */; };
 		7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */; };
 		7DEE19542A84818400E804B1 /* far.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE19532A84818400E804B1 /* far.mp3 */; };
-		7DEE195C2A85CB7E00E804B1 /* clock_tick_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE195B2A85CB7E00E804B1 /* clock_tick_sfx.mp3 */; };
 		9302993D2A80844900EF5662 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302993C2A80844900EF5662 /* SoundManager.swift */; };
 		9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */; };
 		930299452A808FEB00EF5662 /* near.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299422A808FEB00EF5662 /* near.mp3 */; };
@@ -54,7 +53,6 @@
 		7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_drummer_idle.usdz; sourceTree = "<group>"; };
 		7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = metal_detector.usdz; sourceTree = "<group>"; };
 		7DEE19532A84818400E804B1 /* far.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = far.mp3; sourceTree = "<group>"; };
-		7DEE195B2A85CB7E00E804B1 /* clock_tick_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clock_tick_sfx.mp3; sourceTree = "<group>"; };
 		9302993C2A80844900EF5662 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalDetectorStateEnum.swift; sourceTree = "<group>"; };
 		930299422A808FEB00EF5662 /* near.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = near.mp3; sourceTree = "<group>"; };
