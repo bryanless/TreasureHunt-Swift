@@ -26,7 +26,7 @@ extension GameARView {
 
         // Only entity named "treasure" can be removed
         guard hitEntity.anchor?.findEntity(named: "treasure")?.name == "treasure" else { return }
-
+        //TODO: Animation
         self.scene.removeAnchor(hitEntity.anchor!)
 
         self.onTreasureTap()
