@@ -40,6 +40,10 @@ class GameViewModel: ObservableObject {
     @Published var availablePeers: [Peer] = []
     @Published var invitationHandler: ((Bool, MCSession?) -> Void)?
 
+    @Published var allPlayerReady: Bool = false
+    @Published var countdownStart: Bool = false
+    @Published var readyCountdown: Int = 5
+
     init() {
         setupARConfiguration()
         gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
@@ -108,7 +112,7 @@ class GameViewModel: ObservableObject {
                 self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
             }
             .store(in: &cancellables)
-        
+
         $gameState
             .combineLatest($timeRemaining)
             .sink { [weak self] state, time in

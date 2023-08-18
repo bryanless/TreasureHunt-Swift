@@ -7,9 +7,10 @@
 
 import Foundation
 
-
-struct Player: Codable, Equatable, Hashable {
-    var id: UUID
+struct Player: Codable, Equatable, Hashable, Identifiable {
+    let id: UUID
+    let displayName: String
     var peerName: String = ""
-    var displayName: String
+    var isReady: Bool = false
+    var isHost: Bool = false
 }

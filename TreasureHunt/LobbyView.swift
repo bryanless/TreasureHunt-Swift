@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LobbyView: View {
-//    gameVM.gameManager?.startGame()
+    //    gameVM.gameManager?.startGame()
 
     @EnvironmentObject var gameVM: GameViewModel
     @State private var navigateToRoom = false
@@ -52,14 +52,16 @@ struct LobbyView_Previews: PreviewProvider {
 
 extension LobbyView {
     private func createRoom() {
-        guard let currentPlayer = gameVM.gameManager?.currentPeer else { return }
-        gameVM.gameManager?.gameData = GameData.dataInstance()
-        gameVM.gameManager?.gameData.joinedPlayers.append(currentPlayer)
-        gameVM.gameManager?.startAdvertising()
+        guard let gameManager = gameVM.gameManager else { return }
+        gameManager.gameData = GameData.dataInstance()
+        gameManager.currentPeer.isHost = true
+        gameManager.gameData.joinedPlayers.append(gameManager.currentPeer)
+        gameManager.startAdvertising()
         navigateToRoom = true
     }
 
     private func selectRoom(currentPeer: Peer) {
+        //TODO: Handle isStarted game joining here
         gameVM.gameManager?.gameData.id = currentPeer.partyId
         gameVM.gameManager?.stopBrowsing()
         gameVM.gameManager?.startBrowsing()

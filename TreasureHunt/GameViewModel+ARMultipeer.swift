@@ -85,7 +85,7 @@ extension GameViewModel {
         if gameData.joinedPlayers.count > 0 {
             var notInLobby = false
             for player in gameData.joinedPlayers {
-                if player.displayName == currentPeer.displayName {
+                if player.id == currentPeer.id {
                     notInLobby = true
                     break
                 }
@@ -93,6 +93,19 @@ extension GameViewModel {
             if !notInLobby {
                 gameManager?.gameData.joinedPlayers.append(currentPeer)
                 gameManager?.sendToPeersGameData(data: gameData)
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                self?.allPlayerReady = gameData.joinedPlayers.allSatisfy { player in
+                    return player.isReady
+                }
+
+                if self?.allPlayerReady == true {
+                    self?.countdownStart = true
+                } else {
+                    self?.countdownStart = false
+                    self?.readyCountdown = 5
+                }
             }
         }
     }

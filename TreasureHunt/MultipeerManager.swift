@@ -36,7 +36,7 @@ class GameManager: NSObject {
         gameData = GameData.dataInstance()
         let peerID = MCPeerID(displayName: "\(UIDevice.current.name)")
         currentPeerID = peerID
-        currentPeer = Player(id: UUID(), peerName: peerID.displayName, displayName: peerID.displayName)
+        currentPeer = Player(id: UUID(), displayName: peerID.displayName, peerName: peerID.displayName)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
@@ -130,12 +130,12 @@ extension GameManager: MCSessionDelegate {
         
         if state == .connected {
             if isHost {
-                self.gameData.joinedPlayers.append(Player(id: UUID(), peerName: peerID.displayName, displayName: peerID.displayName))
+                self.gameData.joinedPlayers.append(Player(id: UUID(), displayName: peerID.displayName, peerName: peerID.displayName))
                 print("From Manager: \(gameData.joinedPlayers)")
                 sendToPeersGameData(data: self.gameData)
             }
             stopBrowsing()
-            peerJoinedHandler(peerID)
+            //            peerJoinedHandler(peerID)
         } else if state == .notConnected {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }

@@ -9,36 +9,59 @@ import SwiftUI
 
 struct RoomCreatedView: View {
     @EnvironmentObject var gameVM: GameViewModel
+    @Environment(\.dismiss) var dismiss
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack {
+            Button(action: {
+                revokeRoomSession()
+                dismiss.callAsFunction()
+            }, label: {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    Text("Back")
+                }
+                .padding(.leading, 15)
+            })
+            .frame(maxWidth: .infinity, alignment: .leading)
             VStack {
                 Text("Current Players")
                 List {
                     ForEach(gameVM.gameData!.joinedPlayers, id: \.self) { player in
                         HStack {
                             Text(player.displayName)
+                            Spacer()
+                            Image(systemName: "crown")
+                                .opacity(player.isHost ? 1 : 0)
+                            Image(systemName: player.isReady ? "checkmark" : "xmark")
+                                .foregroundColor(player.isReady ? .green : .red)
                         }
                     }
                 }
-                
-                Text("Connected Browsers")
-                if let session = gameVM.gameManager?.session {
-                    List {
-                        ForEach((session.connectedPeers), id: \.self) { player in
-                            HStack {
-                                Text(player.displayName)
-                            }
-                        }
-                    }
+                readyButton
+            }
+            if gameVM.countdownStart {
+                VStack {
+                    Text("Countdown in \(gameVM.readyCountdown)")
                 }
-                Button("Start Game") {
-                    gameVM.startGame()
+            } else {
+                VStack {
+                    Text("Waiting for all players to ready up!")
                 }
             }
         }
-        .onDisappear {
-            revokeRoomSession()
-        }
+        .navigationBarBackButtonHidden()
+        .onReceive(timer, perform: { _ in
+            if gameVM.countdownStart {
+                gameVM.readyCountdown -= 1
+            }
+            
+            if gameVM.readyCountdown == 0 {
+                gameVM.startGame()
+            }
+        })
     }
 }
 
@@ -49,9 +72,26 @@ struct RoomCreatedView: View {
 //}
 
 extension RoomCreatedView {
+    private var readyButton: some View {
+        Button {
+            guard let gameManager = gameVM.gameManager else { return }
+            for (index, player) in gameVM.gameData!.joinedPlayers.enumerated() {
+                if player.displayName == gameVM.currentPeer?.displayName {
+                    gameVM.gameManager?.gameData.joinedPlayers[index].isReady.toggle()
+                    gameManager.sendToPeersGameData(data: gameManager.gameData)
+                }
+            }
+        } label: {
+            ForEach(gameVM.gameData!.joinedPlayers) { player in
+                if player.displayName == gameVM.currentPeer?.displayName {
+                    Text(player.isReady ? "Cancel" : "Ready")
+                        .animation(nil, value: player.isReady)
+                }
+            }
+        }
+    }
     private func revokeRoomSession() {
         if ((gameVM.gameManager?.isHost) == true) {
-            print("Here")
             gameVM.gameManager?.stopAdvertising()
             gameVM.gameManager?.isHost = false
         }
