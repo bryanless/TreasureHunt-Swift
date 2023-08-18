@@ -48,13 +48,11 @@ struct ARViewContainer: UIViewRepresentable {
 extension ARViewContainer {
     class Coordinator: NSObject, ARSessionDelegate {
         var parent: ARViewContainer
-        let gameViewModel: GameViewModel
         let cameraAnchor = AnchorEntity(.camera)
         var count = 0
 
-        init(parent: ARViewContainer, gameViewModel: GameViewModel) {
+        init(parent: ARViewContainer) {
             self.parent = parent
-            self.gameViewModel = gameViewModel
         }
 
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
@@ -75,7 +73,7 @@ extension ARViewContainer {
                                 // Add Metal Detector Right On Camera
                                 self.cameraAnchor.addChild(metalDetector)
                                 // Add Camera Anchor to the Scene after adding child
-                                self.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
+                                self.parent.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
                                 // Move Metal Detector Downwards and Front
                                 metalDetector.transform.translation = [0, -1.75, -3.15]
                                 // Rotation downwards in X for 90 degrees
@@ -105,6 +103,6 @@ extension ARViewContainer {
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self, gameViewModel: self.gameViewModel)
+        return Coordinator(parent: self)
     }
 }
