@@ -58,7 +58,6 @@ extension ARViewContainer {
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
             // TODO: Remove count, use participantAnchor instead
             for anchor in anchors {
-                debugPrint("anchor in anchors: \(anchor.name)")
                 if let participantAnchor = anchor as? ARParticipantAnchor {
                     print("Established joint experience with peer")
                 } else {
@@ -85,6 +84,20 @@ extension ARViewContainer {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+            for anchor in anchors {
+                debugPrint("anchor in anchors: \(anchor)")
+                if let participantAnchor = anchor as? ARParticipantAnchor {
+                    print("Established joint experience with peer")
+                } else {
+//                    guard anchor.
+//                    if anchor.name == "treasure" {
+//                        parent.gameViewModel.arView?.scene.removeAnchor(anchor)
+//                    }
                 }
             }
         }
