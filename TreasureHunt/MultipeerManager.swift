@@ -34,13 +34,13 @@ class GameManager: NSObject {
         self.peerLeftHandler = peerLeftHandler
         self.peerDiscoveredHandler = peerDiscoveredHandler
         gameData = GameData.dataInstance()
-        let peerID = MCPeerID(displayName: "\(UIDevice.current.name)")
+        let peerID = MCPeerID(displayName: "\(UIDevice.current.name)-\(UUID().uuidString)")
         currentPeerID = peerID
         currentPeer = Player(id: UUID(), displayName: peerID.displayName, peerName: peerID.displayName)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
-        super.init()
+        super.init()    
         advertiser.delegate = self
         browser.delegate = self
         session.delegate = self
