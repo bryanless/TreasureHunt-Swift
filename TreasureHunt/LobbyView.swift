@@ -17,7 +17,7 @@ struct LobbyView: View {
         NavigationStack {
                 VStack {
                     if gameVM.currentPeer?.peerName == "" {
-                        ZStack{
+                        ZStack {
                             Image("background-main-menu")
                                 .resizable()
                                 .scaledToFill()
@@ -25,49 +25,72 @@ struct LobbyView: View {
                             Image("username-board")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 450)
+                                .frame(width: 720)
                                 .edgesIgnoringSafeArea(.all)
-                                .offset(y:16)
-                            VStack {
+                                .offset(y: -4)
+                            Button {
+                                //                            gameVM.gameManager?.setName = setName
+                                gameVM.gameManager?.currentPeer.peerName = setName
+                            } label: {
+                                Image("username-enter")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 360)
+                            }
+//                            VStack {
+                                
+//                                Spacer()
                                 TextField("Enter Name here!", text: $setName)
                                     .frame(width: 360)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
+//                                Spacer()
                                 
-                                Button {
-                                    //                            gameVM.gameManager?.setName = setName
-                                    gameVM.gameManager?.currentPeer.peerName = setName
-                                } label: {
-                                    Text("Submit")
-                                }
                                 
-                            }
+//                            }
                         }
                     } else {
-                        VStack {
-                            List {
+                        ZStack {
+                            Image("background-main-menu")
+                                .resizable()
+                                .scaledToFill()
+                                .edgesIgnoringSafeArea(.all)
+//                            List {
+                            Image("lobby-title")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 480)
+                                .edgesIgnoringSafeArea(.all)
+                            ScrollView {
                                 ForEach(gameVM.availablePeers, id: \.self) { peer in
-                                    HStack {
+                                    ZStack {
+                                        Image("board")
+                                            .resizable()
+                                            .scaledToFit()
                                         Text(peer.name)
                                             .fontWeight(.bold)
-                                            .foregroundColor(.red)
+                                            .offset(y: -2)
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .contentShape(Rectangle())
                                     .onTapGesture {
                                         selectRoom(currentPeer: peer)
                                     }
-                                }
-                            }
+                                    .frame(width: 352, alignment: .leading)
 
-                            Text("Create Room")
-                                .font(.headline)
-                                .onTapGesture {
-                                    createRoom()
                                 }
+                                VStack {
+                                    Button {
+                                        createRoom()
+                                    } label: {
+                                        Image("create-room-board")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 360)
+                                    }
+                                }
+                            }.offset(y: 64)
+                            
                         }
-                        Text("Pick Room")
+                        
                     }
-                    
                 }
                 .background(
                     NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
