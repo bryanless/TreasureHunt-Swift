@@ -65,12 +65,6 @@ struct RoomCreatedView: View {
     }
 }
 
-//struct RoomCreatedView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RoomCreatedView(gameVM: GameViewModel(), multipeer: MultipeerManager())
-//    }
-//}
-
 extension RoomCreatedView {
     private var readyButton: some View {
         Button {
