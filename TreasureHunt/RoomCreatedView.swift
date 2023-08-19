@@ -29,9 +29,9 @@ struct RoomCreatedView: View {
             VStack {
                 Text("Current Players")
                 List {
-                    ForEach(gameVM.gameData!.joinedPlayers, id: \.self) { player in
+                    ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
                         HStack {
-                            Text(player.displayName)
+                            Text(player.peerName)
                             Spacer()
                             Image(systemName: "crown")
                                 .opacity(player.isHost ? 1 : 0)

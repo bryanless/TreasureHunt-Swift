@@ -19,7 +19,7 @@ class GameViewModel: ObservableObject {
     var futureDate: Date?
     var peerSessionIDs = [MCPeerID: String]()
     var treasures: [Treasure] = []
-
+    
     @Published var arView: GameARView?
     @Published var timeRemaining: DateComponents?
     @Published var gameManager: GameManager?
@@ -38,8 +38,6 @@ class GameViewModel: ObservableObject {
     @Published var currentPeer: Player?
     @Published var isHost: Bool = false
     @Published var availablePeers: [Peer] = []
-    @Published var invitationHandler: ((Bool, MCSession?) -> Void)?
-
     @Published var allPlayerReady: Bool = false
     @Published var countdownStart: Bool = false
     @Published var readyCountdown: Int = 5
@@ -102,17 +100,31 @@ class GameViewModel: ObservableObject {
             .store(in: &cancellables)
         
         gameManager?.$gameData
-            .combineLatest(gameManager!.$currentPeer)
-            .sink { [weak self] gameData, currentPeer in
+            .sink { [weak self] gameData in
+                //                self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
                 DispatchQueue.main.async {
                     self?.gameData = gameData
                     self?.gameState = gameData.gameState
-                    self?.currentPeer = currentPeer
                 }
-                self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
+
+                print("GAMEDATATEST: \(gameData.joinedPlayers)")
             }
             .store(in: &cancellables)
 
+        gameManager?.$currentPeer
+            .sink { [weak self] currentPeer in
+                self?.currentPeer = currentPeer
+            }
+            .store(in: &cancellables)
+
+        $gameData
+            .combineLatest($currentPeer)
+            .sink { [weak self] gameData, currentPeer in
+                guard let gameData, let currentPeer else { return }
+                self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
+            }
+            .store(in: &cancellables)
+        
         $gameState
             .combineLatest($timeRemaining)
             .sink { [weak self] state, time in
@@ -130,18 +142,5 @@ class GameViewModel: ObservableObject {
                 self?.availablePeers = peers
             })
             .store(in: &cancellables)
-        
-        gameManager?.$isHost
-            .sink(receiveValue: { [weak self] host in
-                self?.isHost = host
-            })
-            .store(in: &cancellables)
-        
-        gameManager?.$invitationHandler
-            .sink(receiveValue: { [weak self] handler in
-                self?.invitationHandler = handler
-            })
-            .store(in: &cancellables)
-        
     }
 }

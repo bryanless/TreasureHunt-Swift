@@ -18,12 +18,12 @@ class GameManager: NSObject {
     private let peerLeftHandler: (MCPeerID) -> Void
     private let peerDiscoveredHandler: (MCPeerID) -> Bool
     
+    @Published var setName: String = ""
     @Published var gameData: GameData
     @Published var currentPeer: Player
     @Published var isHost: Bool = false
-    @Published var availablePlayers: [Player] = []
     @Published var availablePeers: [Peer] = []
-    @Published var invitationHandler: ((Bool, MCSession?) -> Void)?
+    var invitationHandler: ((Bool, MCSession?) -> Void)?
     
     init(receivedDataHandler: @escaping (Data, MCPeerID) -> Void,
          peerJoinedHandler: @escaping (MCPeerID) -> Void,
@@ -36,11 +36,11 @@ class GameManager: NSObject {
         gameData = GameData.dataInstance()
         let peerID = MCPeerID(displayName: "\(UIDevice.current.name)-\(UUID().uuidString)")
         currentPeerID = peerID
-        currentPeer = Player(id: UUID(), displayName: peerID.displayName, peerName: peerID.displayName)
+        currentPeer = Player(id: UUID(), displayName: peerID.displayName, peerName: "")
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
-        super.init()    
+        super.init()
         advertiser.delegate = self
         browser.delegate = self
         session.delegate = self
@@ -63,6 +63,8 @@ class GameManager: NSObject {
     
     func startGame() {
         gameData.gameState = .start
+        gameData.isGameStarted = true
+        print("From start game", gameData.isGameStarted)
         sendToPeersGameData(data: gameData)
     }
     
@@ -76,9 +78,15 @@ class GameManager: NSObject {
         sendToPeersGameData(data: gameData)
     }
     
+    func testStartGame() {
+        gameData.isGameStarted = true
+        sendToPeersGameData(data: gameData)
+    }
+    
     func startAdvertising() {
         advertiser = MCNearbyServiceAdvertiser(peer: currentPeerID,
-                                               discoveryInfo: ["partyID": "\(gameData.id)", "name": currentPeerID.displayName  ], serviceType: serviceType)
+                                               discoveryInfo: ["partyID": "\(gameData.id)",
+                                                               "name": currentPeer.peerName], serviceType: serviceType)
         advertiser.delegate = self
         advertiser.startAdvertisingPeer()
         isHost = true
@@ -101,8 +109,6 @@ class GameManager: NSObject {
             do {
                 let game = try JSONEncoder().encode(data)
                 if session.connectedPeers.count > 0 {
-                    print("gameData sent")
-                    print(data.joinedPlayers.count)
                     try session.send(game, toPeers: session.connectedPeers, with: .reliable)
                 }
             } catch let error {
@@ -113,7 +119,6 @@ class GameManager: NSObject {
     
     func sendToPeersARData(data: Data) {
         if !session.connectedPeers.isEmpty {
-            debugPrint("sendData: \(String(describing: data)) to \(self.session.connectedPeers[0].displayName)")
             do {
                 try session.send(data, toPeers: session.connectedPeers, with: .reliable)
             } catch let error {
@@ -130,19 +135,16 @@ extension GameManager: MCSessionDelegate {
         
         if state == .connected {
             if isHost {
-                self.gameData.joinedPlayers.append(Player(id: UUID(), displayName: peerID.displayName, peerName: peerID.displayName))
-                print("From Manager: \(gameData.joinedPlayers)")
                 sendToPeersGameData(data: self.gameData)
             }
             stopBrowsing()
-            //            peerJoinedHandler(peerID)
+            peerJoinedHandler(peerID)
         } else if state == .notConnected {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 for (index, player) in self.gameData.joinedPlayers.enumerated() {
                     if player.displayName == peerID.displayName {
                         self.gameData.joinedPlayers.remove(at: index)
-                        //                        self.sendToPeersGameData(data: self.gameData)
                         break
                     }
                 }
@@ -195,17 +197,13 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
                     return
                 }
             }
-            
             guard let info else { return }
-            self.availablePeers.append(Peer(partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
+            self.availablePeers.append(Peer(name: info["name"]!, partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
         }
         
         guard let info else { return }
-        print("PartyID: \(gameData.id)")
-        print("UUID: \(UUID(uuidString: info["partyID"] ?? "")!)")
         
         if gameData.id == UUID(uuidString: info["partyID"] ?? "")! {
-            print("PartyIW: \(gameData.id)")
             browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
         }
     }

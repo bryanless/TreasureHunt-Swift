@@ -82,30 +82,63 @@ extension GameViewModel {
     }
     
     func handlePartyState(gameData: GameData, currentPeer: Player) {
-        if gameData.joinedPlayers.count > 0 {
+        //        print("CurrentPeerParameter: \(currentPeer.peerName)")
+        //        if gameData.joinedPlayers.count > 0 {
+        //            var notInLobby = false
+        //            for player in gameData.joinedPlayers {
+        //                print("PlayerID: \(player.id)")
+        //                print("CurrentPeer: \(currentPeer.id)")
+        //                if player.id == currentPeer.id {
+        //                    print("I have you here")
+        //                    notInLobby = true
+        //                    break
+        //                }
+        //            }
+        //            if !notInLobby {
+        //                guard let gameManager else { return }
+        //                print("CurrentPeerParameter2: \(gameManager.currentPeer)")
+        //                gameManager.gameData.joinedPlayers.append(currentPeer)
+        //                print("GameManagerGameData: \(gameManager.gameData)")
+        //                gameManager.sendToPeersGameData(data: gameManager.gameData)
+        //            }
+        //
+        //            DispatchQueue.main.async { [weak self] in
+        //                self?.allPlayerReady = gameData.joinedPlayers.allSatisfy { player in
+        //                    return player.isReady
+        //                }
+        //
+        //                if self?.allPlayerReady == true {
+        //                    self?.countdownStart = true
+        //                } else {
+        //                    self?.countdownStart = false
+        //                    self?.readyCountdown = 5
+        //                }
+        //            }
+        //        }
+        
+        if (gameData.joinedPlayers.count) > 0 {
             var notInLobby = false
             for player in gameData.joinedPlayers {
-                if player.id == currentPeer.id {
+                if player.peerName == currentPeer.peerName {
                     notInLobby = true
                     break
                 }
             }
             if !notInLobby {
-                gameManager?.gameData.joinedPlayers.append(currentPeer)
-                gameManager?.sendToPeersGameData(data: gameData)
+                guard let gameManager else { return }
+                gameManager.gameData.joinedPlayers.append(currentPeer)
+                gameManager.sendToPeersGameData(data: gameManager.gameData)
             }
-
-            DispatchQueue.main.async { [weak self] in
-                self?.allPlayerReady = gameData.joinedPlayers.allSatisfy { player in
-                    return player.isReady
-                }
-
-                if self?.allPlayerReady == true {
-                    self?.countdownStart = true
-                } else {
-                    self?.countdownStart = false
-                    self?.readyCountdown = 5
-                }
+            
+            allPlayerReady = gameData.joinedPlayers.allSatisfy({ player in
+                player.isReady == true
+            })
+            
+            if allPlayerReady == true {
+                countdownStart = true
+            } else {
+                countdownStart = false
+                readyCountdown = 5
             }
         }
     }

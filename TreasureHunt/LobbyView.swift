@@ -9,31 +9,49 @@ import SwiftUI
 
 struct LobbyView: View {
     //    gameVM.gameManager?.startGame()
-
+    
     @EnvironmentObject var gameVM: GameViewModel
+    @State private var setName: String = ""
     @State private var navigateToRoom = false
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Pick Room")
-                List {
-                    ForEach(gameVM.availablePeers, id: \.self) { peer in
-                        Text(peer.peerId?.displayName ?? "None")
-                            .fontWeight(.bold)
-                            .foregroundColor(.red)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
+                if gameVM.currentPeer?.peerName == "" {
+                    VStack {
+                        TextField("Enter Name here!", text: $setName)
+                        Button {
+//                            gameVM.gameManager?.setName = setName
+                            gameVM.gameManager?.currentPeer.peerName = setName
+                        } label: {
+                            Text("Submit")
+                        }
+
+                    }
+                } else {
+                    VStack {
+                        List {
+                            ForEach(gameVM.availablePeers, id: \.self) { peer in
+                                HStack {
+                                    Text(peer.name)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.red)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    selectRoom(currentPeer: peer)
+                                }
+                            }
+                        }
+
+                        Text("Create Room")
+                            .font(.headline)
                             .onTapGesture {
-                                selectRoom(currentPeer: peer)
+                                createRoom()
                             }
                     }
+                    Text("Pick Room")
                 }
-
-                Text("Create Room")
-                    .font(.headline)
-                    .onTapGesture {
-                        createRoom()
-                    }
             }
             .background(
                 NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
@@ -59,12 +77,13 @@ extension LobbyView {
         gameManager.startAdvertising()
         navigateToRoom = true
     }
-
+    
     private func selectRoom(currentPeer: Peer) {
-        //TODO: Handle isStarted game joining here
+        // Allow the player to join the room
         gameVM.gameManager?.gameData.id = currentPeer.partyId
         gameVM.gameManager?.stopBrowsing()
         gameVM.gameManager?.startBrowsing()
         navigateToRoom = true
     }
+    
 }
