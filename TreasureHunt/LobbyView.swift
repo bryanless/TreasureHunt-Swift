@@ -15,49 +15,66 @@ struct LobbyView: View {
     @State private var navigateToRoom = false
     var body: some View {
         NavigationStack {
-            VStack {
-                if gameVM.currentPeer?.peerName == "" {
-                    VStack {
-                        TextField("Enter Name here!", text: $setName)
-                        Button {
-//                            gameVM.gameManager?.setName = setName
-                            gameVM.gameManager?.currentPeer.peerName = setName
-                        } label: {
-                            Text("Submit")
-                        }
-
-                    }
-                } else {
-                    VStack {
-                        List {
-                            ForEach(gameVM.availablePeers, id: \.self) { peer in
-                                HStack {
-                                    Text(peer.name)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.red)
+                VStack {
+                    if gameVM.currentPeer?.peerName == "" {
+                        ZStack{
+                            Image("background-main-menu")
+                                .resizable()
+                                .scaledToFill()
+                                .edgesIgnoringSafeArea(.all)
+                            Image("username-board")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 450)
+                                .edgesIgnoringSafeArea(.all)
+                                .offset(y:16)
+                            VStack {
+                                TextField("Enter Name here!", text: $setName)
+                                    .frame(width: 360)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                
+                                Button {
+                                    //                            gameVM.gameManager?.setName = setName
+                                    gameVM.gameManager?.currentPeer.peerName = setName
+                                } label: {
+                                    Text("Submit")
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
+                                
+                            }
+                        }
+                    } else {
+                        VStack {
+                            List {
+                                ForEach(gameVM.availablePeers, id: \.self) { peer in
+                                    HStack {
+                                        Text(peer.name)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.red)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        selectRoom(currentPeer: peer)
+                                    }
+                                }
+                            }
+
+                            Text("Create Room")
+                                .font(.headline)
                                 .onTapGesture {
-                                    selectRoom(currentPeer: peer)
+                                    createRoom()
                                 }
-                            }
                         }
-
-                        Text("Create Room")
-                            .font(.headline)
-                            .onTapGesture {
-                                createRoom()
-                            }
+                        Text("Pick Room")
                     }
-                    Text("Pick Room")
+                    
                 }
-            }
-            .background(
-                NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
-                    EmptyView()
-                })
-            )
+                .background(
+                    NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
+                        EmptyView()
+                    })
+                )
+            
         }
     }
 }
