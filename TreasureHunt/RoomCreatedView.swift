@@ -12,56 +12,71 @@ struct RoomCreatedView: View {
     @Environment(\.dismiss) var dismiss
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
-        VStack {
-            Button(action: {
-                revokeRoomSession()
-                dismiss.callAsFunction()
-            }, label: {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    Text("Back")
-                }
-                .padding(.leading, 15)
-            })
-            .frame(maxWidth: .infinity, alignment: .leading)
+        ZStack{
+            Image("background-main-menu")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
             VStack {
-                Text("Current Players")
-                List {
-                    ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
-                        HStack {
-                            Text(player.peerName)
-                            Spacer()
-                            Image(systemName: "crown")
-                                .opacity(player.isHost ? 1 : 0)
-                            Image(systemName: player.isReady ? "checkmark" : "xmark")
-                                .foregroundColor(player.isReady ? .green : .red)
+                Button(action: {
+                    revokeRoomSession()
+                    dismiss.callAsFunction()
+                }, label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text("Back")
+                    }
+                    .padding(.leading, 15)
+                })
+                .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    Text("Current Players")
+//                    List {
+                    ScrollView{
+                        ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
+                            ZStack {
+                                Image("board")
+                                    .resizable()
+                                    .scaledToFit()
+                                HStack {
+                                    Spacer()
+                                    Text(player.peerName)
+                                    Spacer()
+                                    Image(systemName: "crown")
+                                        .opacity(player.isHost ? 1 : 0)
+                                    Image(systemName: player.isReady ? "checkmark" : "xmark")
+                                        .foregroundColor(player.isReady ? .green : .red)
+                                    Spacer()
+                                }.offset(y: -2)
+                            }.frame(width: 400, alignment: .leading)
                         }
+                        readyButton
                     }
                 }
-                readyButton
-            }
-            if gameVM.countdownStart {
-                VStack {
-                    Text("Countdown in \(gameVM.readyCountdown)")
+                if gameVM.countdownStart {
+                    VStack {
+                        Text("Countdown in \(gameVM.readyCountdown)")
+                    }
+                } else {
+                    VStack {
+                        Text("Waiting for all players to ready up!")
+                    }
                 }
-            } else {
-                VStack {
-                    Text("Waiting for all players to ready up!")
-                }
             }
+            .navigationBarBackButtonHidden()
+            .onReceive(timer, perform: { _ in
+                if gameVM.countdownStart {
+                    gameVM.readyCountdown -= 1
+                }
+                
+                if gameVM.readyCountdown == 0 {
+                    gameVM.startGame()
+                }
+            })
         }
-        .navigationBarBackButtonHidden()
-        .onReceive(timer, perform: { _ in
-            if gameVM.countdownStart {
-                gameVM.readyCountdown -= 1
-            }
-            
-            if gameVM.readyCountdown == 0 {
-                gameVM.startGame()
-            }
-        })
+        
     }
 }
 
