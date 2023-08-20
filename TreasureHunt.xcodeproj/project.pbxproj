@@ -45,6 +45,7 @@
 		93B72C3D2A8323250063DBCE /* TreasureAREntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B72C3C2A8323250063DBCE /* TreasureAREntity.swift */; };
 		93C2C7ED2A7A082400A008A1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C7EC2A7A082400A008A1 /* LocationManager.swift */; };
 		93C2C8062A7C8F1F00A008A1 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */; };
+		93CA123B2A91E8E900F4EE37 /* simd+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CA123A2A91E8E900F4EE37 /* simd+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		93B72C3C2A8323250063DBCE /* TreasureAREntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureAREntity.swift; sourceTree = "<group>"; };
 		93C2C7EC2A7A082400A008A1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		93CA123A2A91E8E900F4EE37 /* simd+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 				93A94DB32A88990E0022A882 /* LobbyView.swift */,
 				93A94DB52A88B2590022A882 /* RoomCreatedView.swift */,
 				93A94DD72A8A26220022A882 /* MultipeerManager.swift */,
+				93CA123A2A91E8E900F4EE37 /* simd+Helpers.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */,
 				931EBD9A2A79E3F200C7F88D /* Experience.rcproject in Sources */,
 				937C95162A8B12CA00A04098 /* Entity+Ext.swift in Sources */,
+				93CA123B2A91E8E900F4EE37 /* simd+Helpers.swift in Sources */,
 				9302994E2A82666B00EF5662 /* GameData.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegreesExt.swift in Sources */,
 				9302993D2A80844900EF5662 /* SoundManager.swift in Sources */,
