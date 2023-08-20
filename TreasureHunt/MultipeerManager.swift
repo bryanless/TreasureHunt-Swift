@@ -141,13 +141,8 @@ extension GameManager: MCSessionDelegate {
             peerJoinedHandler(peerID)
         } else if state == .notConnected {
             DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                for (index, player) in self.gameData.joinedPlayers.enumerated() {
-                    if player.displayName == peerID.displayName {
-                        self.gameData.joinedPlayers.remove(at: index)
-                        break
-                    }
-                }
+                guard let self, self.gameData.joinedPlayers.contains(where: { $0.displayName == peerID.displayName }), let index = self.gameData.joinedPlayers.firstIndex(where: { $0.displayName == peerID.displayName })  else { return }
+                self.gameData.joinedPlayers.remove(at: index)
             }
             peerLeftHandler(peerID)
             startBrowsing()
@@ -191,19 +186,13 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            for peer in self.availablePeers {
-                if peer.peerId == peerID {
-                    return
-                }
+            guard let self = self, let info else { return }
+            if !self.availablePeers.contains(where: { $0.peerId == peerID }) {
+                self.availablePeers.append(Peer(name: info["name"]!, partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
             }
-            guard let info else { return }
-            self.availablePeers.append(Peer(name: info["name"]!, partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
         }
-        
-        guard let info else { return }
-        
-        if gameData.id == UUID(uuidString: info["partyID"] ?? "")! {
+
+        if let info, gameData.id == UUID(uuidString: info["partyID"] ?? "") {
             browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
         }
     }

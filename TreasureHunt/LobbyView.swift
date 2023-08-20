@@ -15,27 +15,31 @@ struct LobbyView: View {
     @State private var navigateToRoom = false
     var body: some View {
         NavigationStack {
-                VStack {
-                    if gameVM.currentPeer?.peerName == "" {
-                        ZStack {
-                            Image("background-main-menu")
-                                .resizable()
-                                .scaledToFill()
-                                .edgesIgnoringSafeArea(.all)
-                            Image("username-board")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 720)
-                                .edgesIgnoringSafeArea(.all)
-                                .offset(y: -4)
-                            Button {
-                                //                            gameVM.gameManager?.setName = setName
-                                gameVM.gameManager?.currentPeer.peerName = setName
-                            } label: {
-                                Image("username-enter")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 360)
+            VStack {
+                if gameVM.currentPeer?.peerName == "" {
+                    VStack {
+                        TextField("Enter Name here!", text: $setName)
+                        Button {
+                            gameVM.gameManager?.currentPeer.peerName = setName
+                        } label: {
+                            Text("Submit")
+                        }
+
+                    }
+                } else {
+                    VStack {
+                        List {
+                            ForEach(gameVM.availablePeers, id: \.self) { peer in
+                                HStack {
+                                    Text(peer.name)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.red)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    selectRoom(currentPeer: peer)
+                                }
                             }
 //                            VStack {
                                 
