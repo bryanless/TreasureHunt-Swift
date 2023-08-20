@@ -17,23 +17,27 @@ struct RoomCreatedView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
+            Button(action: {
+                revokeRoomSession()
+                dismiss.callAsFunction()
+            }, label: {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    Text("Back")
+                }
+                .padding(.leading, 15)
+            })
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Image("current-players-board")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 480)
+                .edgesIgnoringSafeArea(.all)
             VStack {
-                Button(action: {
-                    revokeRoomSession()
-                    dismiss.callAsFunction()
-                }, label: {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        Text("Back")
-                    }
-                    .padding(.leading, 15)
-                })
-                .frame(maxWidth: .infinity, alignment: .leading)
+                
                 VStack {
-                    Text("Current Players")
-//                    List {
                     ScrollView{
                         ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
                             ZStack {
@@ -53,7 +57,7 @@ struct RoomCreatedView: View {
                             }.frame(width: 400, alignment: .leading)
                         }
                         readyButton
-                    }
+                    }.offset(y: 128)
                 }
                 if gameVM.countdownStart {
                     VStack {
@@ -93,8 +97,19 @@ extension RoomCreatedView {
         } label: {
             ForEach(gameVM.gameData!.joinedPlayers) { player in
                 if player.displayName == gameVM.currentPeer?.displayName {
-                    Text(player.isReady ? "Cancel" : "Ready")
-                        .animation(nil, value: player.isReady)
+                    if (!player.isReady){
+                        Image("ready-board")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 360)
+                    }else{
+                        Image("cancel-board")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 360)
+                    }
+//                    Text(player.isReady ? "Cancel" : "Ready")
+//                        .animation(nil, value: player.isReady)
                 }
             }
         }
