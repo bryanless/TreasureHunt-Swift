@@ -33,7 +33,7 @@ struct RoomCreatedView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack {
                     Text("Current Players")
-//                    List {
+                    //                    List {
                     ScrollView{
                         ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
                             ZStack {
@@ -83,12 +83,11 @@ struct RoomCreatedView: View {
 extension RoomCreatedView {
     private var readyButton: some View {
         Button {
-            guard let gameManager = gameVM.gameManager else { return }
-            for (index, player) in gameVM.gameData!.joinedPlayers.enumerated() {
-                if player.displayName == gameVM.currentPeer?.displayName {
-                    gameVM.gameManager?.gameData.joinedPlayers[index].isReady.toggle()
-                    gameManager.sendToPeersGameData(data: gameManager.gameData)
-                }
+            guard let gameManager = gameVM.gameManager, let gameData = gameVM.gameData else { return }
+            if gameData.joinedPlayers.contains(where: { $0.displayName == gameVM.currentPeer?.displayName }) {
+                guard let index = gameData.joinedPlayers.firstIndex(where: { $0.displayName == gameVM.currentPeer?.displayName }) else { return }
+                gameVM.gameManager?.gameData.joinedPlayers[index].isReady.toggle()
+                gameManager.sendToPeersGameData(data: gameManager.gameData)
             }
         } label: {
             ForEach(gameVM.gameData!.joinedPlayers) { player in

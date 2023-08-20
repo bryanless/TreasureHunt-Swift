@@ -141,7 +141,9 @@ extension GameManager: MCSessionDelegate {
             peerJoinedHandler(peerID)
         } else if state == .notConnected {
             DispatchQueue.main.async { [weak self] in
-                guard let self, self.gameData.joinedPlayers.contains(where: { $0.displayName == peerID.displayName }), let index = self.gameData.joinedPlayers.firstIndex(where: { $0.displayName == peerID.displayName })  else { return }
+                guard let self,
+                      self.gameData.joinedPlayers.contains(where: { $0.displayName == peerID.displayName }),
+                      let index = self.gameData.joinedPlayers.firstIndex(where: { $0.displayName == peerID.displayName })  else { return }
                 self.gameData.joinedPlayers.remove(at: index)
             }
             peerLeftHandler(peerID)
@@ -191,7 +193,7 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
                 self.availablePeers.append(Peer(name: info["name"]!, partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
             }
         }
-
+        
         if let info, gameData.id == UUID(uuidString: info["partyID"] ?? "") {
             browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
         }
