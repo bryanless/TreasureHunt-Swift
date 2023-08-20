@@ -5,6 +5,7 @@
 //  Created by Bryan on 08/08/23.
 //
 
+import ARKit
 import Foundation
 import RealityKit
 import UIKit
@@ -20,14 +21,19 @@ extension GameARView {
     @objc func onTreasureTap(_ gesture: UITapGestureRecognizer) {
         let touchLocation = gesture.location(in: self)
 
-        guard let hitEntity = self.entity(at: touchLocation) else {
-            return
-        }
+        // Return if no entity is tapped
+        guard let hitEntity = self.entity(at: touchLocation) else { return }
 
-        // Only entity named "treasure" can be removed
-        guard hitEntity.anchor?.findEntity(named: "treasure")?.name == "treasure" else { return }
-        //TODO: Animation
-        self.scene.removeAnchor(hitEntity.anchor!)
+        // Ignore entity other than the one named "treasure"
+        guard let entityName = hitEntity.anchor?.findEntity(named: "treasure")?.name,
+              entityName == "treasure" else { return }
+
+        // Get entity's ARAnchor
+        guard let arAnchor = self.session.currentFrame?.anchors.first(where: { $0.name == entityName }) else { return }
+
+        // Remove treasure
+        // TODO: Animation
+        self.session.remove(anchor: arAnchor)
 
         self.onTreasureTap()
     }

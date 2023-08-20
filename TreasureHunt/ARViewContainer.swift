@@ -20,16 +20,6 @@ struct ARViewContainer: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: GameARView, context: Context) {
-//        // TODO: Remove !
-//        if !gameViewModel.shouldSpawnTreasure {
-//            let treasureAnchor = TreasureAREntity().getAnchor()
-//            uiView.scene.addAnchor(treasureAnchor)
-//            DispatchQueue.main.async {
-//                // TODO: Change true to false
-//                gameViewModel.shouldSpawnTreasure = true
-//            }
-//        }
-
         guard let metalDetector = uiView.scene.anchors.first?.children.first else { return }
 
         if metalDetector.transform.rotation.real < 0.6268
@@ -90,11 +80,11 @@ extension ARViewContainer {
                     print("Established joint experience with peer")
                 } else {
                     if let anchorName = anchor.name, anchorName == "treasure" {
-                        debugPrint("anchor: \(String(describing: anchor.name))")
                         TreasureAREntity().load { result in
                             switch result {
                             case .success(let treasure):
                                 let treasureAnchor = AnchorEntity(anchor: anchor)
+                                treasureAnchor.name = anchorName
                                 treasureAnchor.addChild(treasure)
                                 self.parent.gameViewModel.arView?.scene.addAnchor(treasureAnchor)
                             case .failure(let error):
@@ -130,19 +120,14 @@ extension ARViewContainer {
             }
         }
 
+        // TODO Might not be used, remove this
         func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
             for anchor in anchors {
-                debugPrint("anchor in anchors: \(anchor)")
                 if let participantAnchor = anchor as? ARParticipantAnchor {
                     print("Established joint experience with peer")
                 } else {
                     if let anchorName = anchor.name, anchorName == "treasure" {
-//                        debugPrint("anchor: \(String(describing: anchor.name))")
-//                        let treasure = TreasureAREntity(anchor: anchor, anchorName: anchorName)
-//                        let treasureAnchor = AnchorEntity(anchor: anchor)
-//                        treasureAnchor.addChild(treasure)
                         debugPrint("anchor: remove \(anchorName)")
-                        parent.gameViewModel.arView?.session.remove(anchor: anchor)
                     }
                 }
             }
