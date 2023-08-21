@@ -43,20 +43,18 @@ class GameViewModel: ObservableObject {
     @Published var readyCountdown: Int = 5
 
     init() {
-        setupARConfiguration()
         gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
         addSubscribers()
         multiPeerSubscribers()
     }
 
     func reset() {
-        setupARConfiguration()
         gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
         addSubscribers()
         multiPeerSubscribers()
     }
     
-    private func setupARConfiguration() {
+    func setupARConfiguration() {
         arView = GameARView(onTreasureTap: increaseFoundTreasure)
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal]
