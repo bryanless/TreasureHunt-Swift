@@ -46,11 +46,9 @@ extension ARViewContainer {
         }
 
       func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        // TODO: Remove !
-        if !parent.gameViewModel.shouldSpawnTreasure {
+        if parent.gameViewModel.shouldSpawnTreasure {
             DispatchQueue.main.async {
-                // TODO: Change true to false
-                self.parent.gameViewModel.shouldSpawnTreasure = true
+                self.parent.gameViewModel.shouldSpawnTreasure = false
             }
 
             let spawningDistance: Float = 1
