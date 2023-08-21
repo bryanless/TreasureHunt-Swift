@@ -38,8 +38,6 @@ struct RoomCreatedView: View {
                                     Text(player.peerName)
                                         .font(.custom("FingerPaint-Regular", size: 16))
                                     Spacer()
-                                    Image(systemName: "crown")
-                                        .opacity(player.isHost ? 1 : 0)
                                     Image(systemName: player.isReady ? "checkmark" : "xmark")
                                         .foregroundColor(player.isReady ? .green : .red)
                                     Spacer()

@@ -10,9 +10,15 @@ import SwiftUI
 struct EndGameView: View {
     @EnvironmentObject var gameVM: GameViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        Button("DONE") {
-            gameVM.resetGame()
+        VStack {
+            Text(showResultState() ?? "None")
+            Text("Treasures Found")
+            if let treasuresFound = gameVM.gameData?.treasuresFound {
+                Text("\(treasuresFound)")
+            }
+            Button("DONE") {
+                gameVM.resetGame()
+            }
         }
     }
 }
@@ -20,5 +26,23 @@ struct EndGameView: View {
 struct EndGameView_Previews: PreviewProvider {
     static var previews: some View {
         EndGameView()
+    }
+}
+
+extension EndGameView {
+    private func showResultState() -> String? {
+        guard let gameData = gameVM.gameData else { return nil }
+        switch gameData.treasuresFound {
+        case 7:
+            return "Superb"
+        case 5-6:
+            return "Impressive"
+        case 3-4:
+            return "Cool"
+        case 0-2:
+            return "Better Luck Next Time"
+        default:
+            return "None"
+        }
     }
 }

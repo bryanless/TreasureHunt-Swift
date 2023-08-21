@@ -81,11 +81,6 @@ extension GameViewModel {
                 }
             }
         }
-        //        debugPrint(treasures[0].location.coordinate)
-        //        debugPrint(treasures[1].location.coordinate)
-        //        debugPrint(treasures[2].location.coordinate)
-        //        debugPrint(treasures[3].location.coordinate)
-        //        debugPrint(treasures[4].location.coordinate)
         return treasures
     }
     
@@ -109,8 +104,6 @@ extension GameViewModel {
         
         treasureDistance = treasures.filter { !$0.hasSpawned }.min(by: { $0.distance < $1.distance })?.distance
         playSoundBasedOnDistance(distance: treasureDistance)
-        //debugPrint(currentLocation.coordinate.latitude)
-        //debugPrint(self.treasures[0].location.coordinate.latitude)
     }
     
     func mapToTreasures(initialLocation: CLLocation?) -> [Treasure] {
@@ -120,7 +113,7 @@ extension GameViewModel {
         let treasures = generateTreasureLocationWithinRegion(
             initialLocation: initialLocation,
             region: gameArea,
-            treasureAmount: 1,
+            treasureAmount: 7,
             distanceFromInitial: 15,
             distanceBetweenTreasures: 20)
         return treasures

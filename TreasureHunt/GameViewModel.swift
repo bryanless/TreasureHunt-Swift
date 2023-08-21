@@ -104,8 +104,6 @@ class GameViewModel: ObservableObject {
                     self?.gameData = gameData
                     self?.gameState = gameData.gameState
                 }
-
-                print("GAMEDATATEST: \(gameData.joinedPlayers)")
             }
             .store(in: &cancellables)
 
