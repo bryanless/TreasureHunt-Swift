@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RoomCreatedView: View {
     @EnvironmentObject var gameVM: GameViewModel
+    @Binding var navigateToRoom: Bool
     @Environment(\.dismiss) var dismiss
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
@@ -60,7 +61,11 @@ extension RoomCreatedView {
             HStack{
                 Button(action: {
                     revokeRoomSession()
-                    dismiss.callAsFunction()
+                    if gameVM.isHost {
+                        navigateToRoom.toggle()
+                    } else {
+                        dismiss.callAsFunction()
+                    }
                 }, label: {
                     HStack {
                         Image(systemName: "chevron.left")

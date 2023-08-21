@@ -24,7 +24,7 @@ struct LobbyView: View {
         }
         .navigationBarBackButtonHidden()
         .background(
-            NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
+            NavigationLink(destination: RoomCreatedView( navigateToRoom: $navigateToRoom), isActive: $navigateToRoom, label: {
                 EmptyView()
             })
         )
