@@ -26,6 +26,7 @@ extension GameViewModel {
         gameManager?.endGame()
         stopTimer()
         locationManager.stopLocation()
+        metalDetectorState = .none
     }
 
     func resetGame() {

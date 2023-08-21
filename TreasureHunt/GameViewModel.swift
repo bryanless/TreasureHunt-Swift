@@ -33,7 +33,7 @@ class GameViewModel: ObservableObject {
     @Published var shouldSpawnTreasure: Bool = false
     @Published var messageText: String = ""
     @Published var sessionIDObservation: NSKeyValueObservation?
-    @Published var metalDetectorState: MetalDetectorState?
+    @Published var metalDetectorState: MetalDetectorState = .none
 
     @Published var currentPeer: Player?
     @Published var isHost: Bool = false
@@ -93,7 +93,6 @@ class GameViewModel: ObservableObject {
         $metalDetectorState
             .removeDuplicates()
             .sink { returnedState in
-                guard let returnedState else { return }
                 returnedState.playSound()
             }
             .store(in: &cancellables)

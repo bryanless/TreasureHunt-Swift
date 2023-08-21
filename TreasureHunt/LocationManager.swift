@@ -43,7 +43,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         self.lastLocation = lastLocation
         horizontalAccuracy = currentLocation.horizontalAccuracy
 
-        if currentLocation.distance(from: lastLocation) >= currentLocation.horizontalAccuracy * 0.5 {
+        if currentLocation.distance(from: lastLocation) >= currentLocation.horizontalAccuracy * 0.66 {
             self.location = currentLocation
         }
     }

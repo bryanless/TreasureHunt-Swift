@@ -12,8 +12,7 @@
 		7DEE19542A84818400E804B1 /* far.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE19532A84818400E804B1 /* far.mp3 */; };
 		9302993D2A80844900EF5662 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302993C2A80844900EF5662 /* SoundManager.swift */; };
 		9302993F2A8086A500EF5662 /* MetalDetectorStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */; };
-		930299452A808FEB00EF5662 /* near.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299422A808FEB00EF5662 /* near.mp3 */; };
-		930299462A808FEB00EF5662 /* close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299432A808FEB00EF5662 /* close.mp3 */; };
+		930299452A808FEB00EF5662 /* close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 930299422A808FEB00EF5662 /* close.mp3 */; };
 		9302994A2A82011F00EF5662 /* GameViewModel+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930299492A82011F00EF5662 /* GameViewModel+Location.swift */; };
 		9302994C2A82015D00EF5662 /* GameViewModel+Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */; };
 		9302994E2A82666B00EF5662 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302994D2A82666B00EF5662 /* GameData.swift */; };
@@ -54,8 +53,7 @@
 		7DEE19532A84818400E804B1 /* far.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = far.mp3; sourceTree = "<group>"; };
 		9302993C2A80844900EF5662 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalDetectorStateEnum.swift; sourceTree = "<group>"; };
-		930299422A808FEB00EF5662 /* near.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = near.mp3; sourceTree = "<group>"; };
-		930299432A808FEB00EF5662 /* close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = close.mp3; sourceTree = "<group>"; };
+		930299422A808FEB00EF5662 /* close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = close.mp3; sourceTree = "<group>"; };
 		930299492A82011F00EF5662 /* GameViewModel+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Location.swift"; sourceTree = "<group>"; };
 		9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+Game.swift"; sourceTree = "<group>"; };
 		9302994D2A82666B00EF5662 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
@@ -119,8 +117,7 @@
 				7DEE19532A84818400E804B1 /* far.mp3 */,
 				93A94DAD2A85F5670022A882 /* clock_tick_sfx.mp3 */,
 				93B72C302A81E0C40063DBCE /* treasure_discovery_sfx.mp3 */,
-				930299422A808FEB00EF5662 /* near.mp3 */,
-				930299432A808FEB00EF5662 /* close.mp3 */,
+				930299422A808FEB00EF5662 /* close.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -275,8 +272,7 @@
 			files = (
 				7DEE19542A84818400E804B1 /* far.mp3 in Resources */,
 				931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */,
-				930299462A808FEB00EF5662 /* close.mp3 in Resources */,
-				930299452A808FEB00EF5662 /* near.mp3 in Resources */,
+				930299452A808FEB00EF5662 /* close.mp3 in Resources */,
 				7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */,
 				931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */,
 				93B72C322A81E0C40063DBCE /* treasure_discovery_sfx.mp3 in Resources */,
@@ -472,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = DQPBPU9766;
+				DEVELOPMENT_TEAM = A43BFTSZWQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TreasureHunt/Info.plist;
@@ -508,7 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = DQPBPU9766;
+				DEVELOPMENT_TEAM = A43BFTSZWQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TreasureHunt/Info.plist;

@@ -57,7 +57,7 @@ extension ContentView {
                     Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")")
                     Text("Location Latitude: \(location.coordinate.latitude)")
                     Text(LocationManager.instance.horizontalAccuracy?.description ?? "0")
-                    Text(gameVM.metalDetectorState?.rawValue ?? "")
+                    Text(gameVM.metalDetectorState.rawValue)
                         .fontWeight(.bold)
                         .foregroundColor(.red)
                     Text("Treasure Distance: \(treasureDistance.description)")
