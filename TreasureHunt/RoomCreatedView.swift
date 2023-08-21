@@ -32,9 +32,11 @@ struct RoomCreatedView: View {
                                 Image("board")
                                     .resizable()
                                     .scaledToFit()
+                                    .frame(width: 440)
                                 HStack {
                                     Spacer()
                                     Text(player.peerName)
+                                        .font(.custom("FingerPaint-Regular", size: 16))
                                     Spacer()
                                     Image(systemName: "crown")
                                         .opacity(player.isHost ? 1 : 0)
@@ -42,18 +44,20 @@ struct RoomCreatedView: View {
                                         .foregroundColor(player.isReady ? .green : .red)
                                     Spacer()
                                 }.offset(y: -2)
-                            }.frame(width: 400, alignment: .leading)
+                            }.frame(width: 440, alignment: .leading)
                         }
                         readyButton
                     }.offset(y: 128)
                 }
                 if gameVM.countdownStart {
                     VStack {
-                        Text("Countdown in \(gameVM.readyCountdown)")
+                        Text("Game Starts in \(gameVM.readyCountdown)!")
+                            .font(.custom("FingerPaint-Regular", size: 16))
                     }
                 } else {
                     VStack {
                         Text("Waiting for all players to ready up!")
+                            .font(.custom("FingerPaint-Regular", size: 16))
                     }
                 }
             }

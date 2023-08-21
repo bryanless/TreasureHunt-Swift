@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D2210232A9300CB000AF30F /* FingerPaint-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D2210222A9300CB000AF30F /* FingerPaint-Regular.ttf */; };
 		7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */; };
 		7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */; };
 		7DEE19542A84818400E804B1 /* far.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE19532A84818400E804B1 /* far.mp3 */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D2210222A9300CB000AF30F /* FingerPaint-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FingerPaint-Regular.ttf"; sourceTree = "<group>"; };
 		7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_drummer_idle.usdz; sourceTree = "<group>"; };
 		7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = metal_detector.usdz; sourceTree = "<group>"; };
 		7DEE19532A84818400E804B1 /* far.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = far.mp3; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D2210212A93009F000AF30F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7D2210222A9300CB000AF30F /* FingerPaint-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		7DAC07172A7A009E00D9EF5D /* ARModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +153,7 @@
 		931EBD942A79E3F200C7F88D /* TreasureHunt */ = {
 			isa = PBXGroup;
 			children = (
+				7D2210212A93009F000AF30F /* Fonts */,
 				93A94DAF2A8634B50022A882 /* Info.plist */,
 				930299402A808FDA00EF5662 /* Sounds */,
 				93A9F7BB2A7C9E2D00823CF5 /* Models */,
@@ -279,6 +290,7 @@
 				93B72C322A81E0C40063DBCE /* treasure_discovery_sfx.mp3 in Resources */,
 				931EBD9C2A79E3F300C7F88D /* Assets.xcassets in Resources */,
 				93786FCD2A89CF2C00603DAC /* treasure.usdz in Resources */,
+				7D2210232A9300CB000AF30F /* FingerPaint-Regular.ttf in Resources */,
 				7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */,
 				93A94DAE2A85F5670022A882 /* clock_tick_sfx.mp3 in Resources */,
 			);

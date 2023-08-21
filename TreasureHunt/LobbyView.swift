@@ -15,19 +15,36 @@ struct LobbyView: View {
     @State private var navigateToRoom = false
     var body: some View {
         NavigationStack {
-                VStack {
-                    if gameVM.currentPeer?.peerName == "" {
-                        ZStack {
-                            Image("background-main-menu")
-                                .resizable()
-                                .scaledToFill()
-                                .edgesIgnoringSafeArea(.all)
+            VStack {
+                if gameVM.currentPeer?.peerName == "" {
+                    ZStack {
+                        Image("background-main-menu")
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                        VStack{
                             Image("username-board")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 720)
+                                .frame(width: 480)
                                 .edgesIgnoringSafeArea(.all)
                                 .offset(y: -4)
+                            ZStack{
+                                Image("username-textfield")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 480)
+                                HStack{
+                                    Spacer()
+                                    TextField("Enter Name here!", text: $setName)
+                                        .frame(width: 320)
+                                        .font(.custom("FingerPaint-Regular", size: 24))
+                                    Spacer()
+                                }
+//                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    
+                            }
+                            Spacer()
                             Button {
                                 //                            gameVM.gameManager?.setName = setName
                                 gameVM.gameManager?.currentPeer.peerName = setName
@@ -37,60 +54,50 @@ struct LobbyView: View {
                                     .scaledToFit()
                                     .frame(width: 360)
                             }
-//                            VStack {
-                                
-//                                Spacer()
-                                TextField("Enter Name here!", text: $setName)
-                                    .frame(width: 360)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                                Spacer()
-                                
-                                
-//                            }
                         }
-                    } else {
-                        ZStack {
-                            Image("background-main-menu")
-                                .resizable()
-                                .scaledToFill()
-                                .edgesIgnoringSafeArea(.all)
-//                            List {
-                            Image("lobby-title")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 480)
-                                .edgesIgnoringSafeArea(.all)
-                            ScrollView {
-                                ForEach(gameVM.availablePeers, id: \.self) { peer in
-                                    ZStack {
-                                        Image("board")
-                                            .resizable()
-                                            .scaledToFit()
-                                        Text(peer.name)
-                                            .fontWeight(.bold)
-                                            .offset(y: -2)
-                                    }
-                                    .onTapGesture {
-                                        selectRoom(currentPeer: peer)
-                                    }
-                                    .frame(width: 352, alignment: .leading)
-
-                                }
-                                VStack {
-                                    Button {
-                                        createRoom()
-                                    } label: {
-                                        Image("create-room-board")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 360)
-                                    }
-                                }
-                            }.offset(y: 64)
-                            
-                        }
-                        
                     }
+                } else {
+                    ZStack {
+                        Image("background-main-menu")
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                        //                            List {
+                        Image("lobby-title")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 480)
+                            .edgesIgnoringSafeArea(.all)
+                        ScrollView {
+                            ForEach(gameVM.availablePeers, id: \.self) { peer in
+                                ZStack {
+                                    Image("board")
+                                        .resizable()
+                                        .scaledToFit()
+                                    Text(peer.name)
+                                        .font(.custom("FingerPaint-Regular", size: 16))
+                                        .offset(y: -2)
+                                }
+                                .onTapGesture {
+                                    selectRoom(currentPeer: peer)
+                                }
+                                .frame(width: 352, alignment: .leading)
+
+                            }
+                            VStack {
+                                Button {
+                                    createRoom()
+                                } label: {
+                                    Image("create-room-board")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 360)
+                                }
+                            }
+                        }.offset(y: 64)
+
+                    }
+
                 }
                 .background(
                     NavigationLink(destination: RoomCreatedView(), isActive: $navigateToRoom, label: {
