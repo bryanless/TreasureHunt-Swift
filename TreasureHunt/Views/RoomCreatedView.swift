@@ -12,7 +12,7 @@ struct RoomCreatedView: View {
     @Environment(\.dismiss) var dismiss
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
-        ZStack{
+        ZStack {
             Image("background-main-menu")
                 .resizable()
                 .scaledToFill()
@@ -24,29 +24,7 @@ struct RoomCreatedView: View {
                 .frame(width: 480)
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                
-                VStack {
-                    ScrollView{
-                        ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
-                            ZStack {
-                                Image("board")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 440)
-                                HStack {
-                                    Spacer()
-                                    Text(player.peerName)
-                                        .font(.custom("FingerPaint-Regular", size: 16))
-                                    Spacer()
-                                    Image(systemName: player.isReady ? "checkmark" : "xmark")
-                                        .foregroundColor(player.isReady ? .green : .red)
-                                    Spacer()
-                                }.offset(y: -2)
-                            }.frame(width: 440, alignment: .leading)
-                        }
-                        readyButton
-                    }.offset(y: 128)
-                }
+                joinedPlayersList
                 if gameVM.countdownStart {
                     VStack {
                         Text("Game Starts in \(gameVM.readyCountdown)!")
@@ -69,30 +47,60 @@ struct RoomCreatedView: View {
                     gameVM.startGame()
                 }
             })
-            VStack{
-                HStack{
-                    Button(action: {
-                        revokeRoomSession()
-                        dismiss.callAsFunction()
-                    }, label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                            Text("Back")
-                        }
-                    })
-                    Spacer()
-                }
-                .frame(width: 360)
-                Spacer()
-            }
+            backButton
         }
         
     }
 }
 
 extension RoomCreatedView {
+
+    private var backButton: some View {
+        VStack{
+            HStack{
+                Button(action: {
+                    revokeRoomSession()
+                    dismiss.callAsFunction()
+                }, label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text("Back")
+                    }
+                })
+                Spacer()
+            }
+            .frame(width: 360)
+            Spacer()
+        }
+    }
+
+    private var joinedPlayersList: some View {
+        VStack {
+            ScrollView{
+                ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
+                    ZStack {
+                        Image("board")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 440)
+                        HStack {
+                            Spacer()
+                            Text(player.peerName)
+                                .font(.custom("FingerPaint-Regular", size: 16))
+                            Spacer()
+                            Image(systemName: player.isReady ? "checkmark" : "xmark")
+                                .foregroundColor(player.isReady ? .green : .red)
+                            Spacer()
+                        }.offset(y: -2)
+                    }.frame(width: 440, alignment: .leading)
+                }
+                readyButton
+            }.offset(y: 128)
+        }
+    }
+
     private var readyButton: some View {
         Button {
             guard let gameManager = gameVM.gameManager else { return }
@@ -116,8 +124,8 @@ extension RoomCreatedView {
                             .scaledToFit()
                             .frame(width: 360)
                     }
-//                    Text(player.isReady ? "Cancel" : "Ready")
-//                        .animation(nil, value: player.isReady)
+                    //                    Text(player.isReady ? "Cancel" : "Ready")
+                    //                        .animation(nil, value: player.isReady)
                 }
             }
         }
