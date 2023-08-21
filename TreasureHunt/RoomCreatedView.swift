@@ -17,19 +17,7 @@ struct RoomCreatedView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            Button(action: {
-                revokeRoomSession()
-                dismiss.callAsFunction()
-            }, label: {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    Text("Back")
-                }
-                .padding(.leading, 15)
-            })
-            .frame(maxWidth: .infinity, alignment: .leading)
+            
             Image("current-players-board")
                 .resizable()
                 .scaledToFit()
@@ -79,6 +67,24 @@ struct RoomCreatedView: View {
                     gameVM.startGame()
                 }
             })
+            VStack{
+                HStack{
+                    Button(action: {
+                        revokeRoomSession()
+                        dismiss.callAsFunction()
+                    }, label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Text("Back")
+                        }
+                    })
+                    Spacer()
+                }
+                .frame(width: 360)
+                Spacer()
+            }
         }
         
     }
