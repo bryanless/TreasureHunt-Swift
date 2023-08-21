@@ -35,9 +35,9 @@ extension EndGameView {
         switch gameData.treasuresFound {
         case 5:
             return "Superb"
-        case 3-4:
+        case 3...4:
             return "Cool"
-        case 0-2:
+        case 0...2:
             return "Better Luck Next Time"
         default:
             return "None"
