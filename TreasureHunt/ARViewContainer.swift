@@ -20,16 +20,6 @@ struct ARViewContainer: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: GameARView, context: Context) {
-        // TODO: Remove !
-        if !gameViewModel.shouldSpawnTreasure {
-            let treasureAnchor = TreasureAREntity().getAnchor()
-            uiView.scene.addAnchor(treasureAnchor)
-            DispatchQueue.main.async {
-                // TODO: Change true to false
-                gameViewModel.shouldSpawnTreasure = true
-            }
-        }
-
         guard let metalDetector = uiView.scene.anchors.first?.children.first else { return }
 
         if metalDetector.transform.rotation.real < 0.6268
@@ -55,12 +45,54 @@ extension ARViewContainer {
             self.parent = parent
         }
 
+      func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        // TODO: Remove !
+        if !parent.gameViewModel.shouldSpawnTreasure {
+            DispatchQueue.main.async {
+                // TODO: Change true to false
+                self.parent.gameViewModel.shouldSpawnTreasure = true
+            }
+
+            let spawningDistance: Float = 1
+
+            let cameraTransform = frame.camera.transform
+
+            // Calculate the new entity's position in front of the camera
+            let cameraPosition = cameraTransform.translation
+
+            // Calculate the forward direction based on the camera's rotation
+            let forwardDirection = -cameraTransform.columns.2.xyz
+
+            // Calculate the new position by adding the forward direction multiplied by the spawning distance
+            let newPosition = cameraPosition + forwardDirection * spawningDistance
+
+            // Create an ARAnchor using the new position
+            let anchor = ARAnchor(name: "treasure", transform: simd_float4x4(translation: newPosition))
+
+            session.add(anchor: anchor)
+        }
+      }
+
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
             // TODO: Remove count, use participantAnchor instead
             for anchor in anchors {
                 if let participantAnchor = anchor as? ARParticipantAnchor {
                     print("Established joint experience with peer")
                 } else {
+                    if let anchorName = anchor.name, anchorName == "treasure" {
+                        TreasureAREntity().load { result in
+                            switch result {
+                            case .success(let treasure):
+                                let treasureAnchor = AnchorEntity(anchor: anchor)
+                                treasureAnchor.name = anchorName
+                                treasureAnchor.addChild(treasure)
+                                self.parent.gameViewModel.arView?.scene.addAnchor(treasureAnchor)
+                            case .failure(let error):
+                                debugPrint(error.localizedDescription)
+                            }
+                        }
+                    }
+
                     if self.cameraAnchor.children.isEmpty {
                         Entity.loadEntityAsync(
                             fileName: "metal_detector",
@@ -88,16 +120,15 @@ extension ARViewContainer {
             }
         }
 
+        // TODO Might not be used, remove this
         func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
             for anchor in anchors {
-                debugPrint("anchor in anchors: \(anchor)")
                 if let participantAnchor = anchor as? ARParticipantAnchor {
                     print("Established joint experience with peer")
                 } else {
-//                    guard anchor.
-//                    if anchor.name == "treasure" {
-//                        parent.gameViewModel.arView?.scene.removeAnchor(anchor)
-//                    }
+                    if let anchorName = anchor.name, anchorName == "treasure" {
+                        debugPrint("anchor: remove \(anchorName)")
+                    }
                 }
             }
         }
