@@ -108,7 +108,7 @@ extension RoomCreatedView {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 360)
-                    }else{
+                    } else {
                         Image("cancel-board")
                             .resizable()
                             .scaledToFit()
@@ -121,7 +121,7 @@ extension RoomCreatedView {
         }
     }
     private func revokeRoomSession() {
-        if ((gameVM.gameManager?.isHost) == true) {
+        if (gameVM.gameManager?.isHost == true) {
             gameVM.gameManager?.stopAdvertising()
             gameVM.gameManager?.isHost = false
         }

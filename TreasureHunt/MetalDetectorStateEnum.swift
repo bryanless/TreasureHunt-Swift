@@ -19,13 +19,10 @@ enum MetalDetectorState: String {
         switch self {
         case .notDetected:
             soundManager.playSound(sound: .far, numberOfLoops: -1 )
-            break
         case .far:
             soundManager.playSound(sound: .far, numberOfLoops: -1)
-            break
         case .close:
             soundManager.playSound(sound: .close, numberOfLoops: -1)
-            break
         }
     }
 }
