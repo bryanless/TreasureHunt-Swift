@@ -21,7 +21,7 @@ struct RoomCreatedView: View {
             Image("current-players-board")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 480)
+                .frame(width: Phone.screenSize * 1.2)
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 
@@ -32,7 +32,7 @@ struct RoomCreatedView: View {
                                 Image("board")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 440)
+                                    .frame(width: Phone.screenSize * 1.1)
                                 HStack {
                                     Spacer()
                                     Text(player.peerName)
@@ -109,12 +109,12 @@ extension RoomCreatedView {
                         Image("ready-board")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 360)
+                            .frame(width: Phone.screenSize * 1.2)
                     } else {
                         Image("cancel-board")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 360)
+                            .frame(width: Phone.screenSize * 1.2)
                     }
 //                    Text(player.isReady ? "Cancel" : "Ready")
 //                        .animation(nil, value: player.isReady)

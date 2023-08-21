@@ -26,18 +26,18 @@ struct LobbyView: View {
                             Image("username-board")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 480)
+                                .frame(width: Phone.screenSize * 1.2)
                                 .edgesIgnoringSafeArea(.all)
                                 .offset(y: -4)
                             ZStack{
                                 Image("username-textfield")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 480)
+                                    .frame(width: Phone.screenSize * 1.2)
                                 HStack{
                                     Spacer()
                                     TextField("Enter Name here!", text: $setName)
-                                        .frame(width: 320)
+                                        .frame(width: Phone.screenSize * 0.7)
                                         .font(.custom("FingerPaint-Regular", size: 24))
                                     Spacer()
                                 }
@@ -49,7 +49,7 @@ struct LobbyView: View {
                                 Image("username-enter")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 360)
+                                    .frame(width: Phone.screenSize * 1.2)
                             }
                         }
                     }
@@ -63,7 +63,7 @@ struct LobbyView: View {
                         Image("lobby-title")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 480)
+                            .frame(width: Phone.screenSize * 1.2)
                             .edgesIgnoringSafeArea(.all)
                         ScrollView {
                             ForEach(gameVM.availablePeers, id: \.self) { peer in
@@ -71,6 +71,7 @@ struct LobbyView: View {
                                     Image("board")
                                         .resizable()
                                         .scaledToFit()
+                                        .frame(width: Phone.screenSize * 1)
                                     Text(peer.name)
                                         .font(.custom("FingerPaint-Regular", size: 16))
                                         .offset(y: -2)
@@ -88,7 +89,7 @@ struct LobbyView: View {
                                     Image("create-room-board")
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(width: 360)
+                                        .frame(width: Phone.screenSize * 1.2)
                                 }
                             }
                         }.offset(y: 64)
