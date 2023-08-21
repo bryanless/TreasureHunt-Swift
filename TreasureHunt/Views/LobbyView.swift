@@ -41,12 +41,9 @@ struct LobbyView: View {
                                         .font(.custom("FingerPaint-Regular", size: 24))
                                     Spacer()
                                 }
-//                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    
                             }
                             Spacer()
                             Button {
-                                //                            gameVM.gameManager?.setName = setName
                                 gameVM.gameManager?.currentPeer.peerName = setName
                             } label: {
                                 Image("username-enter")

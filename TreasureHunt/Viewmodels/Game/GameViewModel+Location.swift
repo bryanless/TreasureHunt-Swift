@@ -13,14 +13,14 @@ extension GameViewModel {
         return CLCircularRegion(center: coordinate, radius: 100, identifier: "RegionMap")
     }
     
-    func checkLocationWithinCircularRegion(coordinate: CLLocationCoordinate2D) -> String? {
+    func checkLocationWithinCircularRegion(coordinate: CLLocationCoordinate2D) -> Bool? {
         guard let currentLocation else { return nil }
         let region = getGameArea(coordinate: coordinate)
         if region.contains(currentLocation.coordinate) {
             // MARK: If within radius, do logic here
-            return "Location is within radius"
+            return true
         } else {
-            return "Location is not within radius"
+            return false
         }
     }
     
@@ -50,7 +50,7 @@ extension GameViewModel {
         return CLLocation(latitude: randomLatitude, longitude: region.center.longitude)
     }
     
-    private func generateTreasureLocationWithinRegion(
+    private func generateTreasureLocationsWithinRegion(
         initialLocation: CLLocation,
         region: CLCircularRegion,
         treasureAmount: Int,
@@ -58,8 +58,8 @@ extension GameViewModel {
         distanceBetweenTreasures: CLLocationDistance
     ) -> [Treasure] {
         var treasures: [Treasure] = []
-        
-        while treasures.count <= treasureAmount {
+
+        while treasures.count < treasureAmount {
             let randomLocation = randomCoordinateWithinRegion(
                 region,
                 distanceBetweenCoordinate: distanceBetweenTreasures)
@@ -67,22 +67,26 @@ extension GameViewModel {
                 coordinate: randomLocation.coordinate,
                 region: region)
             let distanceFromInitialLocation = randomLocation.distance(from: initialLocation)
-            
+
             if isWithinRegion && distanceFromInitialLocation >= distanceFromInitial {
                 let isValidLocation = treasures.allSatisfy {
-                    $0.location.distance(from: randomLocation) >= distanceBetweenTreasures }
+                    $0.location.distance(from: randomLocation) >= distanceBetweenTreasures
+                } && randomLocation.distance(from: initialLocation) >= distanceFromInitial
                 if isValidLocation {
                     let distance = initialLocation.distance(from: randomLocation)
                     let treasure = Treasure(
-                        id: "treasure_\(treasures.count - 1)",
+                        id: "treasure_\(treasures.count)",
                         location: randomLocation,
                         distance: distance)
                     treasures.append(treasure)
                 }
             }
         }
+        print(treasures.count)
         return treasures
     }
+
+
     
     func calculateDistances(
         currentLocation: CLLocation,
@@ -110,12 +114,12 @@ extension GameViewModel {
         guard let initialLocation else { return [] }
         let gameArea = getGameArea(coordinate: initialLocation.coordinate)
         // Generate random treasure locations
-        let treasures = generateTreasureLocationWithinRegion(
+        let treasures = generateTreasureLocationsWithinRegion(
             initialLocation: initialLocation,
             region: gameArea,
-            treasureAmount: 5,
+            treasureAmount: 3,
             distanceFromInitial: 15,
-            distanceBetweenTreasures: 8)
+            distanceBetweenTreasures: 12)
         return treasures
     }
     

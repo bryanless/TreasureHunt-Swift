@@ -24,14 +24,12 @@ class GameViewModel: ObservableObject {
     @Published var timeRemaining: DateComponents?
     @Published var gameManager: GameManager?
 
-    //    @Published var treasuresFound: Int?
     @Published var gameState: GameState?
-    // TODO: Reset Data
     @Published var gameData: GameData?
     @Published var currentLocation: CLLocation?
     @Published var treasureDistance: CLLocationDistance?
     @Published var shouldSpawnTreasure: Bool = false
-    @Published var messageText: String = ""
+    @Published var messageText: Bool?
     @Published var sessionIDObservation: NSKeyValueObservation?
     @Published var metalDetectorState: MetalDetectorState = .none
 
@@ -62,8 +60,6 @@ class GameViewModel: ObservableObject {
         arView?.session.run(config)
         sessionIDObservation = arView?.session.observe(\.identifier, options: [.new]) { [weak self] object, change in
             print("SessionID changed to: \(change.newValue!)")
-            // Tell all other peers about your ARSession's changed ID, so
-            // that they can keep track of which ARAnchors are yours.
             guard let multipeerSession = self?.gameManager else { return }
             self?.sendARSessionIDTo(peers: multipeerSession.availablePeers.map({ peer in
                 return peer.peerId!
@@ -77,7 +73,7 @@ class GameViewModel: ObservableObject {
             .sink { [weak self] currentLoc, initialLoc in
                 guard let self, let currentLoc, let initialLoc else { return }
                 self.currentLocation = currentLoc
-                self.messageText = self.checkLocationWithinCircularRegion(coordinate: initialLoc.coordinate) ?? "None"
+                self.messageText = self.checkLocationWithinCircularRegion(coordinate: initialLoc.coordinate) ?? false
                 self.calculateDistances(currentLocation: currentLoc, treasures: self.treasures)
             }
             .store(in: &cancellables)
@@ -99,7 +95,6 @@ class GameViewModel: ObservableObject {
         
         gameManager?.$gameData
             .sink { [weak self] gameData in
-                //                self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
                 DispatchQueue.main.async {
                     self?.gameData = gameData
                     self?.gameState = gameData.gameState

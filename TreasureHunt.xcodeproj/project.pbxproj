@@ -67,7 +67,7 @@
 		931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 		931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDegreesExt.swift; sourceTree = "<group>"; };
-		932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionManager.swift; path = TreasureHunt/MotionManager.swift; sourceTree = SOURCE_ROOT; };
+		932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionManager.swift; path = TreasureHunt/Utilities/MotionManager.swift; sourceTree = SOURCE_ROOT; };
 		93786FCC2A89CF2C00603DAC /* treasure.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = treasure.usdz; sourceTree = "<group>"; };
 		937C95152A8B12CA00A04098 /* Entity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Ext.swift"; sourceTree = "<group>"; };
 		93A94DA52A847D1D0022A882 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -152,37 +152,21 @@
 		931EBD942A79E3F200C7F88D /* TreasureHunt */ = {
 			isa = PBXGroup;
 			children = (
+				93A94DE42A9326880022A882 /* ARView */,
+				93A94DE22A9322430022A882 /* Viewmodels */,
+				93A94DE12A9322240022A882 /* Views */,
+				93A94DDF2A9321E50022A882 /* Extensions */,
+				93A94DDE2A9321CC0022A882 /* Utilities */,
 				7D2210212A93009F000AF30F /* Fonts */,
 				93A94DAF2A8634B50022A882 /* Info.plist */,
 				930299402A808FDA00EF5662 /* Sounds */,
 				93A9F7BB2A7C9E2D00823CF5 /* Models */,
 				7DAC07172A7A009E00D9EF5D /* ARModels */,
 				93B72C3B2A8323080063DBCE /* AREntities */,
-				931EBD952A79E3F200C7F88D /* AppDelegate.swift */,
-				931EBD972A79E3F200C7F88D /* ContentView.swift */,
 				931EBD992A79E3F200C7F88D /* Experience.rcproject */,
 				931EBD9B2A79E3F300C7F88D /* Assets.xcassets */,
+				931EBD952A79E3F200C7F88D /* AppDelegate.swift */,
 				931EBD9D2A79E3F300C7F88D /* Preview Content */,
-				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
-				932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */,
-				931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */,
-				93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */,
-				9302993C2A80844900EF5662 /* SoundManager.swift */,
-				9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */,
-				930299492A82011F00EF5662 /* GameViewModel+Location.swift */,
-				9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */,
-				93B72C352A81ECED0063DBCE /* ARViewContainer.swift */,
-				93B72C372A81ED510063DBCE /* GameARView.swift */,
-				93B72C332A81E7540063DBCE /* GameARView+Gestures.swift */,
-				93A94DA52A847D1D0022A882 /* MainMenuView.swift */,
-				93A94DA72A8480310022A882 /* EndGameView.swift */,
-				93A94DA92A8490D70022A882 /* DateComponentsExt.swift */,
-				937C95152A8B12CA00A04098 /* Entity+Ext.swift */,
-				93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */,
-				93A94DB32A88990E0022A882 /* LobbyView.swift */,
-				93A94DB52A88B2590022A882 /* RoomCreatedView.swift */,
-				93A94DD72A8A26220022A882 /* MultipeerManager.swift */,
-				93CA123A2A91E8E900F4EE37 /* simd+Helpers.swift */,
 			);
 			path = TreasureHunt;
 			sourceTree = "<group>";
@@ -201,6 +185,78 @@
 				931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		93A94DDE2A9321CC0022A882 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				93A94DE02A93220C0022A882 /* Enums */,
+				93A94DD72A8A26220022A882 /* MultipeerManager.swift */,
+				9302993C2A80844900EF5662 /* SoundManager.swift */,
+				932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */,
+				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		93A94DDF2A9321E50022A882 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				931EBDC42A7A151100C7F88D /* CLLocationDegreesExt.swift */,
+				93A94DA92A8490D70022A882 /* DateComponentsExt.swift */,
+				937C95152A8B12CA00A04098 /* Entity+Ext.swift */,
+				93CA123A2A91E8E900F4EE37 /* simd+Helpers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		93A94DE02A93220C0022A882 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				9302993E2A8086A500EF5662 /* MetalDetectorStateEnum.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		93A94DE12A9322240022A882 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				931EBD972A79E3F200C7F88D /* ContentView.swift */,
+				93A94DA72A8480310022A882 /* EndGameView.swift */,
+				93A94DB32A88990E0022A882 /* LobbyView.swift */,
+				93A94DA52A847D1D0022A882 /* MainMenuView.swift */,
+				93A94DB52A88B2590022A882 /* RoomCreatedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		93A94DE22A9322430022A882 /* Viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				93A94DE32A9322500022A882 /* Game */,
+			);
+			path = Viewmodels;
+			sourceTree = "<group>";
+		};
+		93A94DE32A9322500022A882 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				9302994B2A82015D00EF5662 /* GameViewModel+Game.swift */,
+				93C2C8052A7C8F1F00A008A1 /* GameViewModel.swift */,
+				930299492A82011F00EF5662 /* GameViewModel+Location.swift */,
+				93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		93A94DE42A9326880022A882 /* ARView */ = {
+			isa = PBXGroup;
+			children = (
+				93B72C372A81ED510063DBCE /* GameARView.swift */,
+				93B72C332A81E7540063DBCE /* GameARView+Gestures.swift */,
+				93B72C352A81ECED0063DBCE /* ARViewContainer.swift */,
+			);
+			path = ARView;
 			sourceTree = "<group>";
 		};
 		93A9F7BB2A7C9E2D00823CF5 /* Models */ = {
