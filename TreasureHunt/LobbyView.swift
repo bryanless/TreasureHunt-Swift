@@ -22,31 +22,39 @@ struct LobbyView: View {
                             .resizable()
                             .scaledToFill()
                             .edgesIgnoringSafeArea(.all)
-                        Image("username-board")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 720)
-                            .edgesIgnoringSafeArea(.all)
-                            .offset(y: -4)
-                        Button {
-                            //                            gameVM.gameManager?.setName = setName
-                            gameVM.gameManager?.currentPeer.peerName = setName
-                        } label: {
-                            Image("username-enter")
+                        VStack{
+                            Image("username-board")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 360)
+                                .frame(width: 480)
+                                .edgesIgnoringSafeArea(.all)
+                                .offset(y: -4)
+                            ZStack{
+                                Image("username-textfield")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 480)
+                                HStack{
+                                    Spacer()
+                                    TextField("Enter Name here!", text: $setName)
+                                        .frame(width: 320)
+                                        .font(.custom("FingerPaint-Regular", size: 24))
+                                    Spacer()
+                                }
+//                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    
+                            }
+                            Spacer()
+                            Button {
+                                //                            gameVM.gameManager?.setName = setName
+                                gameVM.gameManager?.currentPeer.peerName = setName
+                            } label: {
+                                Image("username-enter")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 360)
+                            }
                         }
-                        //                            VStack {
-
-                        //                                Spacer()
-                        TextField("Enter Name here!", text: $setName)
-                            .frame(width: 360)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        //                                Spacer()
-
-
-                        //                            }
                     }
                 } else {
                     ZStack {
@@ -67,7 +75,7 @@ struct LobbyView: View {
                                         .resizable()
                                         .scaledToFit()
                                     Text(peer.name)
-                                        .fontWeight(.bold)
+                                        .font(.custom("FingerPaint-Regular", size: 16))
                                         .offset(y: -2)
                                 }
                                 .onTapGesture {
