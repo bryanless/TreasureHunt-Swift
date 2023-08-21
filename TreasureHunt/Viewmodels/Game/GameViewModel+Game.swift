@@ -16,7 +16,7 @@ extension GameViewModel {
     func startGame() {
         gameManager?.startGame()
         setupARConfiguration()
-        futureDate = Calendar.current.date(byAdding: .minute, value: 10, to: .now) ?? .now
+        futureDate = Calendar.current.date(byAdding: .second, value: 1, to: .now) ?? .now
         startTimer()
         locationManager.startUpdatingLocation()
     }
