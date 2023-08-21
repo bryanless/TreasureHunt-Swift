@@ -76,7 +76,7 @@
 		93A94DA92A8490D70022A882 /* DateComponents+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+Ext.swift"; sourceTree = "<group>"; };
 		93A94DAB2A85DACB0022A882 /* GameViewModel+ARMultipeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewModel+ARMultipeer.swift"; sourceTree = "<group>"; };
 		93A94DAD2A85F5670022A882 /* clock_tick_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clock_tick_sfx.mp3; sourceTree = "<group>"; };
-		93A94DAF2A8634B50022A882 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		93A94DAF2A8634B50022A882 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93A94DB32A88990E0022A882 /* LobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyView.swift; sourceTree = "<group>"; };
 		93A94DB52A88B2590022A882 /* RoomCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreatedView.swift; sourceTree = "<group>"; };
 		93A94DB92A89C73B0022A882 /* Peer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
@@ -160,12 +160,12 @@
 				93A94DDF2A9321E50022A882 /* Extensions */,
 				93A94DDE2A9321CC0022A882 /* Utilities */,
 				7D2210212A93009F000AF30F /* Fonts */,
-				93A94DAF2A8634B50022A882 /* Info.plist */,
 				930299402A808FDA00EF5662 /* Sounds */,
 				93A9F7BB2A7C9E2D00823CF5 /* Models */,
 				7DAC07172A7A009E00D9EF5D /* ARModels */,
 				93B72C3B2A8323080063DBCE /* AREntities */,
 				931EBD992A79E3F200C7F88D /* Experience.rcproject */,
+				93A94DAF2A8634B50022A882 /* Info.plist */,
 				931EBD9B2A79E3F300C7F88D /* Assets.xcassets */,
 				931EBD952A79E3F200C7F88D /* AppDelegate.swift */,
 				931EBD9D2A79E3F300C7F88D /* Preview Content */,
