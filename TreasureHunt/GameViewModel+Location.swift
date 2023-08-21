@@ -113,9 +113,9 @@ extension GameViewModel {
         let treasures = generateTreasureLocationWithinRegion(
             initialLocation: initialLocation,
             region: gameArea,
-            treasureAmount: 7,
+            treasureAmount: 5,
             distanceFromInitial: 15,
-            distanceBetweenTreasures: 20)
+            distanceBetweenTreasures: 10)
         return treasures
     }
     

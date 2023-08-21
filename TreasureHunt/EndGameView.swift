@@ -33,10 +33,8 @@ extension EndGameView {
     private func showResultState() -> String? {
         guard let gameData = gameVM.gameData else { return nil }
         switch gameData.treasuresFound {
-        case 7:
+        case 5:
             return "Superb"
-        case 5-6:
-            return "Impressive"
         case 3-4:
             return "Cool"
         case 0-2:
