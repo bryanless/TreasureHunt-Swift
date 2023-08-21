@@ -72,7 +72,6 @@ extension ARViewContainer {
       }
 
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-            // TODO: Remove count, use participantAnchor instead
             for anchor in anchors {
                 if let participantAnchor = anchor as? ARParticipantAnchor {
                     print("Established joint experience with peer")
