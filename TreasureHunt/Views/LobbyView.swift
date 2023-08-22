@@ -146,6 +146,7 @@ extension LobbyView {
                 Spacer()
                 Button {
                     gameVM.gameManager?.currentPeer.peerName = setName
+                    UIApplication.shared.endEditing()
                 } label: {
                     Image("username-enter")
                         .resizable()
