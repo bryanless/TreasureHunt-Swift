@@ -31,10 +31,6 @@ struct EndGameView: View {
                     Text("\(treasuresFound) Treasures Found!")
                         .font(.custom("FingerPaint-Regular", size: 16))
                 }
-//                Text("Treasures Found")
-//                if let treasuresFound = gameVM.gameData?.treasuresFound {
-//                    Text("\(treasuresFound)")
-//                }
                 Spacer()
                 Button {
                     gameVM.resetGame()

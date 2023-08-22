@@ -19,115 +19,9 @@ struct LobbyView: View {
         NavigationStack {
             VStack {
                 if gameVM.currentPeer?.peerName == "" {
-                    ZStack {
-                        Image("background-main-menu")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all)
-                        VStack{
-                            Image("username-board")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: Phone.screenSize * 1.2)
-                                .edgesIgnoringSafeArea(.all)
-                            Spacer()
-                        }
-                        VStack{
-                            Spacer()
-                            ZStack{
-                                Image("username-textfield")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: Phone.screenSize * 1.2)
-                                HStack{
-                                    Spacer()
-                                    TextField("Enter Name here!", text: $setName)
-                                        .frame(width: Phone.screenSize * 0.7)
-                                        .font(.custom("FingerPaint-Regular", size: 24))
-                                    Spacer()
-                                }
-                            }
-                            Spacer()
-                            Button {
-                                gameVM.gameManager?.currentPeer.peerName = setName
-                            } label: {
-                                Image("username-enter")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: Phone.screenSize * 1.2)
-                            }
-                        }
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Button{
-                                    dismiss()
-                                } label: {
-                                    Image("back-button")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: Phone.screenSize * 0.15)
-                                }
-                                Spacer()
-                            }.frame(width: Phone.screenSize * 0.95)
-                            Spacer()
-                        }.frame(width: Phone.screenSize * 0.95)
-                    }
+                    enterNameScreen
                 } else {
-                    ZStack {
-                        Image("background-main-menu")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all)
-                        //                            List {
-                        Image("lobby-title")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: Phone.screenSize * 1.2)
-                            .edgesIgnoringSafeArea(.all)
-                        ScrollView {
-                            ForEach(gameVM.availablePeers, id: \.self) { peer in
-                                ZStack {
-                                    Image("board")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: Phone.screenSize * 1)
-                                    Text(peer.name)
-                                        .font(.custom("FingerPaint-Regular", size: 16))
-                                        .offset(y: -2)
-                                }
-                                .onTapGesture {
-                                    selectRoom(currentPeer: peer)
-                                }
-                                .frame(width: 352, alignment: .leading)
-
-                            }
-                            VStack {
-                                Button {
-                                    createRoom()
-                                } label: {
-                                    Image("create-room-board")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: Phone.screenSize * 1.2)
-                                }
-                            }
-                        }.offset(y: 104)
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Button{
-                                    dismiss()
-                                } label: {
-                                    Image("back-button")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: Phone.screenSize * 0.15)
-                                }
-                                Spacer()
-                            }.frame(width: Phone.screenSize * 0.95)
-                            Spacer()
-                        }.frame(width: Phone.screenSize * 0.95)
-                    }
-
+                    lobbyScreen
                 }
             }
         }
@@ -154,42 +48,40 @@ extension LobbyView {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-
+            //                            List {
             Image("lobby-title")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 480)
+                .frame(width: Phone.screenSize * 1.2)
                 .edgesIgnoringSafeArea(.all)
-
             ScrollView {
-                VStack {
-                    ForEach(gameVM.availablePeers, id: \.self) { peer in
-                        ZStack {
-                            Image("board")
-                                .resizable()
-                                .scaledToFit()
-                            Text(peer.name)
-                                .font(.custom("FingerPaint-Regular", size: 16))
-                                .offset(y: -2)
-                        }
-                        .onTapGesture {
-                            selectRoom(currentPeer: peer)
-                        }
-                        .frame(width: 352, alignment: .leading)
+                ForEach(gameVM.availablePeers, id: \.self) { peer in
+                    ZStack {
+                        Image("board")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: Phone.screenSize * 1)
+                        Text(peer.name)
+                            .font(.custom("FingerPaint-Regular", size: 16))
+                            .offset(y: -2)
                     }
+                    .onTapGesture {
+                        selectRoom(currentPeer: peer)
+                    }
+                    .frame(width: 352, alignment: .leading)
 
+                }
+                VStack {
                     Button {
                         createRoom()
                     } label: {
                         Image("create-room-board")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 360)
+                            .frame(width: Phone.screenSize * 1.2)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .offset(y: 120)
-            }
+            }.offset(y: 104)
 
             VStack {
                 Spacer()
@@ -203,6 +95,21 @@ extension LobbyView {
                         }
                     }
             }
+
+            VStack(alignment: .leading) {
+                HStack {
+                    Button{
+                        dismiss()
+                    } label: {
+                        Image("back-button")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: Phone.screenSize * 0.15)
+                    }
+                    Spacer()
+                }.frame(width: Phone.screenSize * 0.95)
+                Spacer()
+            }.frame(width: Phone.screenSize * 0.95)
         }
         .transition(AnyTransition.opacity.animation(.easeInOut))
     }
@@ -217,35 +124,49 @@ extension LobbyView {
                 Image("username-board")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 480)
+                    .frame(width: Phone.screenSize * 1.2)
                     .edgesIgnoringSafeArea(.all)
-                    .offset(y: -4)
+                Spacer()
+            }
+            VStack{
+                Spacer()
                 ZStack{
                     Image("username-textfield")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 480)
+                        .frame(width: Phone.screenSize * 1.2)
                     HStack{
                         Spacer()
                         TextField("Enter Name here!", text: $setName)
-                            .frame(width: 320)
+                            .frame(width: Phone.screenSize * 0.7)
                             .font(.custom("FingerPaint-Regular", size: 24))
                         Spacer()
                     }
                 }
                 Spacer()
                 Button {
-                    withAnimation {
-                        gameVM.gameManager?.currentPeer.peerName = setName
-                        UIApplication.shared.endEditing()
-                    }
+                    gameVM.gameManager?.currentPeer.peerName = setName
                 } label: {
                     Image("username-enter")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 360)
+                        .frame(width: Phone.screenSize * 1.2)
                 }
             }
+            VStack(alignment: .leading) {
+                HStack {
+                    Button{
+                        dismiss()
+                    } label: {
+                        Image("back-button")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: Phone.screenSize * 0.15)
+                    }
+                    Spacer()
+                }.frame(width: Phone.screenSize * 0.95)
+                Spacer()
+            }.frame(width: Phone.screenSize * 0.95)
         }
         .transition(AnyTransition.opacity.animation(.easeInOut))
     }
