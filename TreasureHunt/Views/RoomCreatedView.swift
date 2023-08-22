@@ -80,10 +80,12 @@ extension RoomCreatedView {
                                 Text(player.peerName)
                                     .font(.custom("FingerPaint-Regular", size: 16))
                                 Spacer()
-                                Image(systemName: player.isReady ? "checkmark" : "xmark")
-                                    .foregroundColor(player.isReady ? .green : .red)
+                                Image(player.isReady ? "check-board" : "cross-board")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32)
                                 Spacer()
-                            }.offset(y: -2)
+                            }.offset(y: -3)
                         }.frame(width: 440, alignment: .leading)
                     }
                     readyButton
