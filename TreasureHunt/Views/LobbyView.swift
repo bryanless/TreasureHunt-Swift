@@ -82,24 +82,22 @@ extension LobbyView {
                     }
                 }
             }.offset(y: 104)
-
-            VStack {
-                Spacer()
-
-                Text("Change Name")
-                    .font(.custom("FingerPaint-Regular", size: 16))
-                    .padding(.bottom, 20)
-                    .onTapGesture {
-                        withAnimation {
-                            gameVM.gameManager?.currentPeer.peerName = ""
-                        }
-                    }
-            }
+            
+//            VStack {
+//                Button {
+//
+//                } label: {
+//                    Image("change-name-board")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: Phone.screenSize * 1.2)
+//                }
+//            }
 
             VStack(alignment: .leading) {
                 HStack {
                     Button{
-                        dismiss()
+                        gameVM.gameManager?.currentPeer.peerName = ""
                     } label: {
                         Image("back-button")
                             .resizable()
