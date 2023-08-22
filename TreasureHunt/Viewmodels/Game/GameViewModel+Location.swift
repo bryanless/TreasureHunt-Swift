@@ -103,7 +103,8 @@ extension GameViewModel {
                 shouldSpawnTreasure = true
             }
             
-            self.treasures[index] = updatedTreasure
+            self.gameManager?.gameData.treasures[index] = updatedTreasure
+            gameManager?.sendToPeersGameData(data: gameManager!.gameData)
         }
         
         treasureDistance = treasures.filter { !$0.hasSpawned }.min(by: { $0.distance < $1.distance })?.distance

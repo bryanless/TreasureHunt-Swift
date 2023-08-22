@@ -18,7 +18,6 @@ class GameViewModel: ObservableObject {
     var timerSubscription: AnyCancellable?
     var futureDate: Date?
     var peerSessionIDs = [MCPeerID: String]()
-    var treasures: [Treasure] = []
     
     @Published var arView: GameARView?
     @Published var timeRemaining: DateComponents?
@@ -26,8 +25,11 @@ class GameViewModel: ObservableObject {
 
     @Published var gameState: GameState?
     @Published var gameData: GameData?
+
     @Published var currentLocation: CLLocation?
     @Published var treasureDistance: CLLocationDistance?
+
+    
     @Published var shouldSpawnTreasure: Bool = false
     @Published var messageText: Bool?
     @Published var sessionIDObservation: NSKeyValueObservation?
@@ -68,24 +70,25 @@ class GameViewModel: ObservableObject {
     }
     
     private func addSubscribers() {
+
+        locationManager.$initialLocation
+            .removeDuplicates()
+            .map(mapToTreasures)
+            .sink { [weak self] returnedTreasures in
+                self?.gameManager?.gameData.treasures = returnedTreasures
+            }
+            .store(in: &cancellables)
+
         locationManager.$location
             .combineLatest(locationManager.$initialLocation)
             .sink { [weak self] currentLoc, initialLoc in
                 guard let self, let currentLoc, let initialLoc else { return }
                 self.currentLocation = currentLoc
                 self.messageText = self.checkLocationWithinCircularRegion(coordinate: initialLoc.coordinate) ?? false
-                self.calculateDistances(currentLocation: currentLoc, treasures: self.treasures)
+                self.calculateDistances(currentLocation: currentLoc, treasures: (self.gameManager?.gameData.treasures)!)
             }
             .store(in: &cancellables)
-        
-        locationManager.$initialLocation
-            .removeDuplicates()
-            .map(mapToTreasures)
-            .sink { [weak self] returnedTreasures in
-                self?.treasures = returnedTreasures
-            }
-            .store(in: &cancellables)
-        
+
         $metalDetectorState
             .removeDuplicates()
             .sink { returnedState in
@@ -117,10 +120,12 @@ class GameViewModel: ObservableObject {
             .store(in: &cancellables)
         
         $gameState
-            .combineLatest($timeRemaining)
-            .sink { [weak self] state, time in
+            .combineLatest($timeRemaining, $gameData)
+            .sink { [weak self] state, time, gameData in
                 guard let second = time?.second, let nano = time?.nanosecond else { return }
                 if state == .start && second == 0 && nano < 0 {
+                    self?.endGame()
+                } else if state == .start && gameData?.treasuresFound == 3 {
                     self?.endGame()
                 }
             }
