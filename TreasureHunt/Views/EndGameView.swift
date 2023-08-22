@@ -10,14 +10,36 @@ import SwiftUI
 struct EndGameView: View {
     @EnvironmentObject var gameVM: GameViewModel
     var body: some View {
-        VStack {
-            Text(showResultState() ?? "None")
-            Text("Treasures Found")
-            if let treasuresFound = gameVM.gameData?.treasuresFound {
-                Text("\(treasuresFound)")
-            }
-            Button("DONE") {
-                gameVM.resetGame()
+        ZStack{
+            Image("background-main-menu")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Image("end-game-title")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: Phone.screenSize * 1.1)
+                    .edgesIgnoringSafeArea(.all)
+                Spacer()
+                Image(showResultState() ?? "-")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: Phone.screenSize * 1)
+                    .offset(y: -24)
+//                Text("Treasures Found")
+//                if let treasuresFound = gameVM.gameData?.treasuresFound {
+//                    Text("\(treasuresFound)")
+//                }
+                Spacer()
+                Button {
+                    gameVM.resetGame()
+                } label: {
+                    Image("back-to-main-menu-board")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: Phone.screenSize * 1.2)
+                }
             }
         }
     }
@@ -34,11 +56,11 @@ extension EndGameView {
         guard let gameData = gameVM.gameData else { return nil }
         switch gameData.treasuresFound {
         case 3:
-            return "Superb"
+            return "best-score"
         case 1...2:
-            return "There Are Still More Treasure"
-        case 0...2:
-            return "Better Luck Next Time"
+            return "okay-score"
+        case 0:
+            return "least-score"
         default:
             return "None"
         }

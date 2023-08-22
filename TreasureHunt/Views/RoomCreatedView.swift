@@ -22,10 +22,32 @@ struct RoomCreatedView: View {
             Image("current-players-board")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 480)
+                .frame(width: Phone.screenSize * 1.2)
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                joinedPlayersList
+                
+                VStack {
+                    ScrollView{
+                        ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
+                            ZStack {
+                                Image("board")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: Phone.screenSize * 1.1)
+                                HStack {
+                                    Spacer()
+                                    Text(player.peerName)
+                                        .font(.custom("FingerPaint-Regular", size: 16))
+                                    Spacer()
+                                    Image(systemName: player.isReady ? "checkmark" : "xmark")
+                                        .foregroundColor(player.isReady ? .green : .red)
+                                    Spacer()
+                                }.offset(y: -2)
+                            }.frame(width: 440, alignment: .leading)
+                        }
+                        readyButton
+                    }.offset(y: 128)
+                }
                 if gameVM.countdownStart {
                     VStack {
                         Text("Game Starts in \(gameVM.readyCountdown)!")
@@ -122,12 +144,12 @@ extension RoomCreatedView {
                         Image("ready-board")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 360)
+                            .frame(width: Phone.screenSize * 1.2)
                     } else {
                         Image("cancel-board")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 360)
+                            .frame(width: Phone.screenSize * 1.2)
                     }
                     //                    Text(player.isReady ? "Cancel" : "Ready")
                     //                        .animation(nil, value: player.isReady)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D2210232A9300CB000AF30F /* FingerPaint-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D2210222A9300CB000AF30F /* FingerPaint-Regular.ttf */; };
+		7D2210292A937A19000AF30F /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2210282A937A19000AF30F /* Phone.swift */; };
 		7DAC07192A7A00AB00D9EF5D /* toy_drummer_idle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */; };
 		7DAC071B2A7A06F100D9EF5D /* metal_detector.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */; };
 		7DEE19542A84818400E804B1 /* far.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7DEE19532A84818400E804B1 /* far.mp3 */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		7D2210222A9300CB000AF30F /* FingerPaint-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FingerPaint-Regular.ttf"; sourceTree = "<group>"; };
+		7D2210282A937A19000AF30F /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
 		7DAC07182A7A00AB00D9EF5D /* toy_drummer_idle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_drummer_idle.usdz; sourceTree = "<group>"; };
 		7DAC071A2A7A06F100D9EF5D /* metal_detector.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = metal_detector.usdz; sourceTree = "<group>"; };
 		7DEE19532A84818400E804B1 /* far.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = far.mp3; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				9302994D2A82666B00EF5662 /* GameData.swift */,
 				93A94DB92A89C73B0022A882 /* Peer.swift */,
 				93A94DDC2A8B6BC60022A882 /* Player.swift */,
+				7D2210282A937A19000AF30F /* Phone.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				93C2C8062A7C8F1F00A008A1 /* GameViewModel.swift in Sources */,
 				932DF1A52A7CB5EB0063AE0F /* MotionManager.swift in Sources */,
 				93A94DB62A88B2590022A882 /* RoomCreatedView.swift in Sources */,
+				7D2210292A937A19000AF30F /* Phone.swift in Sources */,
 				93A9F7BD2A7C9E4A00823CF5 /* Treasure.swift in Sources */,
 				93B72C382A81ED510063DBCE /* GameARView.swift in Sources */,
 				93A94DE62A9376FC0022A882 /* UIApplication+Ext.swift in Sources */,
@@ -540,7 +544,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = DQPBPU9766;
+				DEVELOPMENT_TEAM = Y545JRBLJ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TreasureHunt/Info.plist;
@@ -576,7 +580,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TreasureHunt/Preview Content\"";
-				DEVELOPMENT_TEAM = DQPBPU9766;
+				DEVELOPMENT_TEAM = Y545JRBLJ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TreasureHunt/Info.plist;
