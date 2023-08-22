@@ -64,7 +64,7 @@ extension ContentView {
 //                        .fontWeight(.bold)
 //                        .foregroundColor(.blue)
 //                    gameVM.messageText
-                    Text(gameVM.messageText ?? false ? "" : "You Are Outside Playing Radius")
+                    Text(gameVM.messageText ?? false ? "" : "You Are Outside \nThe Playing Radius")
                             .font(.custom("FingerPaint-Regular", size: 24))
                             .foregroundColor(.red)
 //                    Text(gameVM.messageText ?? false ? "Location is Within Radius" : "You Are Outside Playing Radius")
