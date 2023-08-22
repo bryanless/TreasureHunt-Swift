@@ -27,6 +27,10 @@ struct EndGameView: View {
                     .scaledToFit()
                     .frame(width: Phone.screenSize * 1)
                     .offset(y: -24)
+                if let treasuresFound = gameVM.gameData?.treasuresFound{
+                    Text("\(treasuresFound) Treasures Found!")
+                        .font(.custom("FingerPaint-Regular", size: 16))
+                }
 //                Text("Treasures Found")
 //                if let treasuresFound = gameVM.gameData?.treasuresFound {
 //                    Text("\(treasuresFound)")

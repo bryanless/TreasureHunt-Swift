@@ -14,6 +14,7 @@ struct LobbyView: View {
     @State private var setName: String = ""
     @State private var navigateToRoom = false
     private var screenSize = UIScreen.main
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationStack {
             VStack {
@@ -29,7 +30,10 @@ struct LobbyView: View {
                                 .scaledToFit()
                                 .frame(width: Phone.screenSize * 1.2)
                                 .edgesIgnoringSafeArea(.all)
-                                .offset(y: -4)
+                            Spacer()
+                        }
+                        VStack{
+                            Spacer()
                             ZStack{
                                 Image("username-textfield")
                                     .resizable()
@@ -53,6 +57,20 @@ struct LobbyView: View {
                                     .frame(width: Phone.screenSize * 1.2)
                             }
                         }
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Button{
+                                    dismiss()
+                                } label: {
+                                    Image("back-button")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: Phone.screenSize * 0.15)
+                                }
+                                Spacer()
+                            }.frame(width: Phone.screenSize * 0.95)
+                            Spacer()
+                        }.frame(width: Phone.screenSize * 0.95)
                     }
                 } else {
                     ZStack {
@@ -93,8 +111,21 @@ struct LobbyView: View {
                                         .frame(width: Phone.screenSize * 1.2)
                                 }
                             }
-                        }.offset(y: 64)
-
+                        }.offset(y: 104)
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Button{
+                                    dismiss()
+                                } label: {
+                                    Image("back-button")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: Phone.screenSize * 0.15)
+                                }
+                                Spacer()
+                            }.frame(width: Phone.screenSize * 0.95)
+                            Spacer()
+                        }.frame(width: Phone.screenSize * 0.95)
                     }
 
                 }

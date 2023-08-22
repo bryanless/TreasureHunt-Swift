@@ -25,7 +25,6 @@ struct RoomCreatedView: View {
                 .frame(width: Phone.screenSize * 1.2)
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                
                 VStack {
                     ScrollView{
                         ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
@@ -70,7 +69,25 @@ struct RoomCreatedView: View {
                     gameVM.startGame()
                 }
             })
-            backButton
+            VStack(alignment: .leading) {
+                HStack {
+                    Button {
+                        revokeRoomSession()
+                        if gameVM.isHost {
+                            navigateToRoom.toggle()
+                        } else {
+                            dismiss.callAsFunction()
+                        }
+                    } label: {
+                        Image("back-button")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: Phone.screenSize * 0.15)
+                    }
+                    Spacer()
+                }.frame(width: Phone.screenSize * 0.9)
+                Spacer()
+            }.frame(width: Phone.screenSize * 0.9)
         }
         
     }
