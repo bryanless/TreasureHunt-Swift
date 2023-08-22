@@ -47,12 +47,11 @@ extension ContentView {
     }
     private var gameOverlay: some View {
         ZStack(alignment: .top) {
+            Image("board-game")
+                .resizable()
+                .scaledToFit()
             if let location = gameVM.currentLocation,
-               let treasureDistance = gameVM.treasureDistance,
-               let time = gameVM.timeRemaining {
-                Image("board-game")
-                    .resizable()
-                    .scaledToFit()
+               let treasureDistance = gameVM.treasureDistance {
                 VStack {
                     Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")")
                     Text("Location Latitude: \(location.coordinate.latitude)")
@@ -65,7 +64,7 @@ extension ContentView {
                         .foregroundColor(.blue)
                     Text(gameVM.messageText ?? false ? "Location is Within Radius" : "None")
                         .opacity((gameVM.messageText ?? false) ? 1 : 0)
-                    Text(time.shortTimer)
+                    Text(gameVM.timeRemaining?.shortTimer ?? "00:00")
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
@@ -73,12 +72,18 @@ extension ContentView {
                     Spacer()
                 }
                 .padding(.top, 88)
+                .onAppear {
+                    gameVM.startTimer()
+                }
             } else {
-                //TODO: LoadingView()
-//                LoadingView()
-//                Text("Current location accuracy is \(LocationManager.instance.horizontalAccuracy ?? 0), which is higher than 20, please wait")
-//                    .multilineTextAlignment(.center)
+                VStack {
+                    Text("Hiding the treasures...")
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+                .padding(.top, 88)
             }
+            Spacer()
         }
         .foregroundColor(.white)
         .ignoresSafeArea(edges: .top)

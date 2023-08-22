@@ -16,8 +16,6 @@ extension GameViewModel {
     func startGame() {
         gameManager?.startGame()
         setupARConfiguration()
-        futureDate = Calendar.current.date(byAdding: .second, value: 1, to: .now) ?? .now
-        startTimer()
         locationManager.startUpdatingLocation()
     }
 
@@ -42,7 +40,8 @@ extension GameViewModel {
         timeRemaining = remaining
     }
 
-    private func startTimer() {
+    func startTimer() {
+        futureDate = Calendar.current.date(byAdding: .minute, value: 1, to: .now) ?? .now
         SoundManager.instance.playTimerSound()
         self.updateTimer()
         timerSubscription = Timer.publish(every: 1, on: .main, in: .common)
