@@ -117,10 +117,12 @@ class GameViewModel: ObservableObject {
             .store(in: &cancellables)
         
         $gameState
-            .combineLatest($timeRemaining)
-            .sink { [weak self] state, time in
+            .combineLatest($timeRemaining, $gameData)
+            .sink { [weak self] state, time, data in
                 guard let second = time?.second, let nano = time?.nanosecond else { return }
                 if state == .start && second == 0 && nano < 0 {
+                    self?.endGame()
+                } else if state == .start && data?.treasuresFound == 3 {
                     self?.endGame()
                 }
             }
