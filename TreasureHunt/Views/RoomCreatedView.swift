@@ -69,7 +69,7 @@ extension RoomCreatedView {
         VStack {
             VStack {
                 ScrollView{
-                    ForEach((gameVM.gameManager?.gameData.joinedPlayers)!, id: \.self) { player in
+                    ForEach((gameVM.gameManager?.gameData.joinedPlayers)!) { player in
                         ZStack {
                             Image("board")
                                 .resizable()

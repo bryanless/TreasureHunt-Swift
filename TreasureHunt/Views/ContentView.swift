@@ -10,7 +10,7 @@ import RealityKit
 
 struct ContentView: View {
     @StateObject var gameVM: GameViewModel = GameViewModel()
-    
+
     var body: some View {
         VStack {
             switch gameVM.gameState {
@@ -38,7 +38,7 @@ struct ContentView_Previews: PreviewProvider {
 #endif
 
 extension ContentView {
-    
+
     private var startGame: some View {
         ZStack(alignment: .bottom) {
             ARViewContainer().edgesIgnoringSafeArea(.all)
@@ -54,7 +54,7 @@ extension ContentView {
             if let location = gameVM.currentLocation,
                let treasureDistance = gameVM.treasureDistance, (((gameVM.gameData?.joinedPlayers.allSatisfy({ player in
                    return player.isGameLoaded
-               }))) != nil) {
+               }))) != false) {
                 VStack {
                     //                    Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")")
                     //                    Text("Location Latitude: \(location.coordinate.latitude)")

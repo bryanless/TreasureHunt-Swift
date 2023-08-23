@@ -8,7 +8,7 @@
 import Foundation
 import MultipeerConnectivity
 
-struct GameData: Codable, Identifiable, Equatable, Hashable {
+struct GameData: Codable, Identifiable, Equatable {
     static func == (lhs: GameData, rhs: GameData) -> Bool {
         return lhs.treasuresFound == rhs.treasuresFound && lhs.gameState == rhs.gameState && lhs.treasureAmount == rhs.treasureAmount && lhs.joinedPlayers == rhs.joinedPlayers
     }
@@ -18,7 +18,6 @@ struct GameData: Codable, Identifiable, Equatable, Hashable {
     var gameState: GameState
     let treasureAmount: Int
     var joinedPlayers: [Player] = []
-    var isGameStarted: Bool = false
 
     init(treasuresFound: Int, gameState: GameState, treasureAmount: Int) {
         self.treasuresFound = treasuresFound

@@ -63,8 +63,6 @@ class GameManager: NSObject {
     
     func startGame() {
         gameData.gameState = .start
-        gameData.isGameStarted = true
-        print("From start game", gameData.isGameStarted)
         sendToPeersGameData(data: gameData)
     }
     
@@ -75,11 +73,6 @@ class GameManager: NSObject {
     
     func resetGame() {
         gameData.gameState = .notStart
-        sendToPeersGameData(data: gameData)
-    }
-    
-    func testStartGame() {
-        gameData.isGameStarted = true
         sendToPeersGameData(data: gameData)
     }
     

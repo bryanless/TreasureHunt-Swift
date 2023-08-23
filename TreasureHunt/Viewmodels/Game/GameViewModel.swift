@@ -18,7 +18,7 @@ class GameViewModel: ObservableObject {
     var timerSubscription: AnyCancellable?
     var futureDate: Date?
     var peerSessionIDs = [MCPeerID: String]()
-    var treasures: [Treasure] = []
+    @Published var treasures: [Treasure] = []
     
     @Published var arView: GameARView?
     @Published var timeRemaining: DateComponents?
@@ -28,6 +28,7 @@ class GameViewModel: ObservableObject {
     @Published var gameState: GameState?
     @Published var gameData: GameData?
     @Published var currentLocation: CLLocation?
+    @Published var initialLocation: CLLocation?
     @Published var treasureDistance: CLLocationDistance?
     @Published var shouldSpawnTreasure: Bool = false
     @Published var messageText: Bool?
@@ -74,6 +75,7 @@ class GameViewModel: ObservableObject {
             .sink { [weak self] currentLoc, initialLoc in
                 guard let self, let currentLoc, let initialLoc else { return }
                 self.currentLocation = currentLoc
+                self.initialLocation = initialLoc
                 self.messageText = self.checkLocationWithinCircularRegion(coordinate: initialLoc.coordinate) ?? false
                 self.calculateDistances(currentLocation: currentLoc, treasures: self.treasures)
             }
@@ -111,11 +113,11 @@ class GameViewModel: ObservableObject {
             .store(in: &cancellables)
 
         $gameData
-            .combineLatest($currentPeer)
-            .sink { [weak self] gameData, currentPeer in
+            .combineLatest($currentPeer, $treasures)
+            .sink { [weak self] gameData, currentPeer, treasure in
                 guard let gameData, let currentPeer else { return }
                 self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
-                self?.changeStateGameLoaded(gameData: gameData, currentPeer: currentPeer)
+                self?.changeStateGameLoaded(gameData: gameData, currentPeer: currentPeer, treasures: treasure)
             }
             .store(in: &cancellables)
         

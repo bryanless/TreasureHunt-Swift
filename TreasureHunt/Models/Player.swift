@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Player: Codable, Equatable, Hashable, Identifiable {
+struct Player: Codable, Equatable, Identifiable {
     let id: UUID
     let displayName: String
     var peerName: String = ""

@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>FingerPaint-Regular.ttf</string>
-	</array>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_TreasureHunt._tcp</string>
 		<string>_TreasureHunt._udp</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FingerPaint-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
