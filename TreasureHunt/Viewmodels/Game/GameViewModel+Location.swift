@@ -118,7 +118,7 @@ extension GameViewModel {
             initialLocation: initialLocation,
             region: gameArea,
             treasureAmount: 3,
-            distanceFromInitial: 15,
+            distanceFromInitial: 30,
             distanceBetweenTreasures: 12)
         return treasures
     }
