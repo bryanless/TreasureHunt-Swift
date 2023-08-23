@@ -13,4 +13,5 @@ struct Player: Codable, Equatable, Hashable, Identifiable {
     var peerName: String = ""
     var isReady: Bool = false
     var isHost: Bool = false
+    var isGameLoaded: Bool = false
 }

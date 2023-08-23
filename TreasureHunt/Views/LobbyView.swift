@@ -83,17 +83,6 @@ extension LobbyView {
                 }
             }.offset(y: 104)
             
-//            VStack {
-//                Button {
-//
-//                } label: {
-//                    Image("change-name-board")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: Phone.screenSize * 1.2)
-//                }
-//            }
-
             VStack(alignment: .leading) {
                 HStack {
                     Button{

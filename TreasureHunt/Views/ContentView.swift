@@ -10,7 +10,7 @@ import RealityKit
 
 struct ContentView: View {
     @StateObject var gameVM: GameViewModel = GameViewModel()
-
+    
     var body: some View {
         VStack {
             switch gameVM.gameState {
@@ -38,7 +38,7 @@ struct ContentView_Previews: PreviewProvider {
 #endif
 
 extension ContentView {
-
+    
     private var startGame: some View {
         ZStack(alignment: .bottom) {
             ARViewContainer().edgesIgnoringSafeArea(.all)
@@ -52,23 +52,25 @@ extension ContentView {
                 .scaledToFit()
                 .opacity(0.8)
             if let location = gameVM.currentLocation,
-               let treasureDistance = gameVM.treasureDistance {
+               let treasureDistance = gameVM.treasureDistance, (((gameVM.gameData?.joinedPlayers.allSatisfy({ player in
+                   return player.isGameLoaded
+               }))) != nil) {
                 VStack {
-//                    Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")")
-//                    Text("Location Latitude: \(location.coordinate.latitude)")
-//                    Text(LocationManager.instance.horizontalAccuracy?.description ?? "0")
-//                    Text(gameVM.metalDetectorState.rawValue)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.red)
-//                    Text("Treasure Distance: \(treasureDistance.description)")
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.blue)
-//                    gameVM.messageText
+                    //                    Text("Last location: \(LocationManager.instance.lastLocation?.coordinate.latitude.description ?? "")")
+                    //                    Text("Location Latitude: \(location.coordinate.latitude)")
+                    //                    Text(LocationManager.instance.horizontalAccuracy?.description ?? "0")
+                    //                    Text(gameVM.metalDetectorState.rawValue)
+                    //                        .fontWeight(.bold)
+                    //                        .foregroundColor(.red)
+                    //                    Text("Treasure Distance: \(treasureDistance.description)")
+                    //                        .fontWeight(.bold)
+                    //                        .foregroundColor(.blue)
+                    //                    gameVM.messageText
                     Text(gameVM.messageText ?? false ? "" : "You Are Outside \nThe Playing Radius")
-                            .font(.custom("FingerPaint-Regular", size: 24))
-                            .foregroundColor(.red)
-//                    Text(gameVM.messageText ?? false ? "Location is Within Radius" : "You Are Outside Playing Radius")
-//                        .opacity((gameVM.messageText ?? false) ? 1 : 0)
+                        .font(.custom("FingerPaint-Regular", size: 24))
+                        .foregroundColor(.red)
+                    //                    Text(gameVM.messageText ?? false ? "Location is Within Radius" : "You Are Outside Playing Radius")
+                    //                        .opacity((gameVM.messageText ?? false) ? 1 : 0)
                     HStack{
                         Text("Time Remaining: ")
                             .font(.custom("FingerPaint-Regular", size: 24))
@@ -80,9 +82,9 @@ extension ContentView {
                     Text("\(gameVM.gameData?.treasuresFound.description ?? "0")/3 treasures found!")
                         .font(.custom("FingerPaint-Regular", size: 24))
                         .foregroundColor(.green)
-//                    Text("treasures found!")
-//                        .font(.custom("FingerPaint-Regular", size: 24))
-//                        .foregroundColor(.black)
+                    //                    Text("treasures found!")
+                    //                        .font(.custom("FingerPaint-Regular", size: 24))
+                    //                        .foregroundColor(.black)
                     Spacer()
                 }
                 .padding(.top, 88)

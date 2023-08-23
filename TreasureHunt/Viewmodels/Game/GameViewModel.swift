@@ -24,6 +24,7 @@ class GameViewModel: ObservableObject {
     @Published var timeRemaining: DateComponents?
     @Published var gameManager: GameManager?
 
+    @Published var isStarted: Bool = false
     @Published var gameState: GameState?
     @Published var gameData: GameData?
     @Published var currentLocation: CLLocation?
@@ -113,12 +114,13 @@ class GameViewModel: ObservableObject {
             .sink { [weak self] gameData, currentPeer in
                 guard let gameData, let currentPeer else { return }
                 self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
+                self?.changeStateGameLoaded(gameData: gameData, currentPeer: currentPeer)
             }
             .store(in: &cancellables)
         
         $gameState
-            .combineLatest($timeRemaining, $gameData)
-            .sink { [weak self] state, time, data in
+            .combineLatest($timeRemaining, $currentPeer, $gameData)
+            .sink { [weak self] state, time, peer, data in
                 guard let second = time?.second, let nano = time?.nanosecond else { return }
                 if state == .start && second == 0 && nano < 0 {
                     self?.endGame()
