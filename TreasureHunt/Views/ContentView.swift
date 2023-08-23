@@ -93,9 +93,11 @@ extension ContentView {
                 }
             } else {
                 VStack {
-                    Text("Hiding the treasures...")
-                        .font(.custom("FingerPaint-Regular", size: 28))
+                    Text("Waiting for other players..")
+                        .font(.custom("FingerPaint-Regular", size: 24))
                         .foregroundColor(.black)
+                        .padding(.horizontal, 32)
+                        .multilineTextAlignment(.center)
                     Spacer()
                 }
                 .padding(.top, 88)
