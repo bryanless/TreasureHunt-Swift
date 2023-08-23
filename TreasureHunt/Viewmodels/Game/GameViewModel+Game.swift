@@ -15,8 +15,8 @@ extension GameViewModel {
 
     func startGame() {
         gameManager?.startGame()
-        setupARConfiguration()
         locationManager.startUpdatingLocation()
+        setupARConfiguration()
     }
 
     func endGame() {
@@ -25,6 +25,7 @@ extension GameViewModel {
         stopTimer()
         locationManager.stopLocation()
         metalDetectorState = .none
+        gameManager?.reset()
     }
 
     func resetGame() {

@@ -54,6 +54,14 @@ class GameManager: NSObject {
         stopBrowsing()
         session.disconnect()
     }
+
+    func reset() {
+        advertiser.delegate = nil
+        browser.delegate = nil
+        stopAdvertising()
+        stopBrowsing()
+        session.disconnect()
+    }
     
     func increaseFound() {
         //TODO: ADD FUNCTIONALITY TO INCREASE SCORE WHEN USER FINDS TREASURE
