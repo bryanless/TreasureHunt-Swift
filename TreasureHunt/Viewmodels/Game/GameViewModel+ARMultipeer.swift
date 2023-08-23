@@ -103,16 +103,13 @@ extension GameViewModel {
 
     func changeStateGameLoaded(gameData: GameData, currentPeer: Player, treasuresCount: Int) {
         if gameData.joinedPlayers.count > 0 && treasuresCount > 0 {
-            print("Entered here")
             guard let gameManager, let index = gameData.joinedPlayers.firstIndex(where: { $0.displayName == currentPeer.displayName }) else { return }
 
-            if !gameData.joinedPlayers.allSatisfy({ player in
-                player.isGameLoaded
-            }) {
+            if (!gameManager.gameData.joinedPlayers[index].isGameLoaded) {
                 gameManager.gameData.joinedPlayers[index].isGameLoaded = true
                 gameManager.sendToPeersGameData(data: gameManager.gameData)
+                print("joined Players", gameManager.gameData.joinedPlayers)
             }
-            print("joined Players", gameManager.gameData.joinedPlayers)
         }
     }
 }
