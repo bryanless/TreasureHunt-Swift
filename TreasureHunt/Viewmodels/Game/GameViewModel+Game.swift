@@ -41,7 +41,7 @@ extension GameViewModel {
     }
 
     func startTimer() {
-        futureDate = Calendar.current.date(byAdding: .minute, value: 1, to: .now) ?? .now
+        futureDate = Calendar.current.date(byAdding: .minute, value: 2, to: .now) ?? .now
         SoundManager.instance.playTimerSound()
         self.updateTimer()
         timerSubscription = Timer.publish(every: 1, on: .main, in: .common)

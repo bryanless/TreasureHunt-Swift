@@ -16,7 +16,7 @@ struct ARViewContainer: UIViewRepresentable {
     let cameraAnchor = AnchorEntity(.camera)
 
     func makeUIView(context: Context) -> GameARView {
-        gameViewModel.arView?.session.delegate = context.coordinator
+        gameViewModel.arView.session.delegate = context.coordinator
 
         Entity.loadEntityAsync(
             fileName: "metal_detector",
@@ -34,7 +34,8 @@ struct ARViewContainer: UIViewRepresentable {
                 // Add Metal Detector Right On Camera
                 self.cameraAnchor.addChild(metalDetector)
                 // Add Camera Anchor to the Scene after adding child
-                self.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
+                
+                self.gameViewModel.arView.scene.addAnchor(self.cameraAnchor)
             case .failure(let error):
                 debugPrint(error.localizedDescription)
             }
@@ -106,7 +107,7 @@ extension ARViewContainer {
                                 let treasureAnchor = AnchorEntity(anchor: anchor)
                                 treasureAnchor.name = anchorName
                                 treasureAnchor.addChild(treasure)
-                                self.parent.gameViewModel.arView?.scene.addAnchor(treasureAnchor)
+                                self.parent.gameViewModel.arView.scene.addAnchor(treasureAnchor)
                             case .failure(let error):
                                 debugPrint(error.localizedDescription)
                             }
@@ -135,7 +136,7 @@ extension ARViewContainer {
                 guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
                 else { fatalError("Unexpectedly failed to encode collaboration data.") }
                 // Use reliable mode if the data is critical, and unreliable mode if the data is optional.
-                multipeerSession.sendToPeersARData(data: encodedData)
+                //multipeerSession.sendToPeersARData(data: encodedData)
             } else {
                 print("Deferred sending collaboration to later because there are no peers.")
             }

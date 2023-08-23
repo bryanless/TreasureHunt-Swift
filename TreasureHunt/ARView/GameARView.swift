@@ -19,6 +19,10 @@ class GameARView: ARView, ARSessionDelegate {
         fatalError("init(coder: ) has not been implemented")
     }
 
+    convenience required init() {
+        self.init(frame: UIScreen.main.bounds)
+    }
+
     convenience init(onTreasureTap: @escaping () -> Void) {
         self.init(frame: UIScreen.main.bounds)
         self.onTreasureTap = onTreasureTap

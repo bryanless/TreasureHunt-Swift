@@ -13,16 +13,16 @@ import MultipeerConnectivity
 extension GameViewModel {
     func sendARSessionIDTo(peers: [MCPeerID]) {
         guard let multipeerSession = gameManager else { return }
-        let idString = arView?.session.identifier.uuidString ?? ""
+        let idString = arView.session.identifier.uuidString
         let command = "SessionID:" + idString
         if let commandData = command.data(using: .utf8) {
-            multipeerSession.sendToPeersARData(data: commandData)
+           // multipeerSession.sendToPeersARData(data: commandData)
         }
     }
     
     func receivedData(_ data: Data, from peer: MCPeerID) {
         if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data) {
-            arView?.session.update(with: collaborationData)
+            arView.session.update(with: collaborationData)
             return
         }
         // ...
@@ -72,11 +72,11 @@ extension GameViewModel {
     }
     
     private func removeAllAnchorsOriginatingFromARSessionWithID(_ identifier: String) {
-        guard let frame = arView?.session.currentFrame else { return }
+        guard let frame = arView.session.currentFrame else { return }
         for anchor in frame.anchors {
             guard let anchorSessionID = anchor.sessionIdentifier else { continue }
             if anchorSessionID.uuidString == identifier {
-                arView?.session.remove(anchor: anchor)
+                arView.session.remove(anchor: anchor)
             }
         }
     }

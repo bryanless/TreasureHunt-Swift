@@ -20,7 +20,7 @@ class GameViewModel: ObservableObject {
     var peerSessionIDs = [MCPeerID: String]()
     @Published var treasures: [Treasure] = []
     
-    @Published var arView: GameARView?
+    @Published var arView: GameARView = GameARView()
     @Published var timeRemaining: DateComponents?
     @Published var gameManager: GameManager?
 
@@ -58,9 +58,9 @@ class GameViewModel: ObservableObject {
         arView = GameARView(onTreasureTap: increaseFoundTreasure)
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal]
-        config.isCollaborationEnabled = true
-        arView?.session.run(config)
-        sessionIDObservation = arView?.session.observe(\.identifier, options: [.new]) { [weak self] object, change in
+//        config.isCollaborationEnabled = true
+        arView.session.run(config)
+        sessionIDObservation = arView.session.observe(\.identifier, options: [.new]) { [weak self] object, change in
             print("SessionID changed to: \(change.newValue!)")
             guard let multipeerSession = self?.gameManager else { return }
             self?.sendARSessionIDTo(peers: multipeerSession.availablePeers.map({ peer in
