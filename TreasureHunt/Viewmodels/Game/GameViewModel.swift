@@ -117,7 +117,7 @@ class GameViewModel: ObservableObject {
             .sink { [weak self] gameData, currentPeer, treasure in
                 guard let gameData, let currentPeer else { return }
                 self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
-                self?.changeStateGameLoaded(gameData: gameData, currentPeer: currentPeer, treasures: treasure)
+                self?.changeStateGameLoaded(gameData: gameData, currentPeer: currentPeer, treasuresCount: treasure.count)
             }
             .store(in: &cancellables)
         
