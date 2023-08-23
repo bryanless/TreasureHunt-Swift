@@ -13,8 +13,33 @@ struct ARViewContainer: UIViewRepresentable {
     @EnvironmentObject var gameViewModel: GameViewModel
     @StateObject var motion = MotionManager()
 
+    let cameraAnchor = AnchorEntity(.camera)
+
     func makeUIView(context: Context) -> GameARView {
         gameViewModel.arView?.session.delegate = context.coordinator
+
+        Entity.loadEntityAsync(
+            fileName: "metal_detector",
+            fileExtension: "usdz"
+        ) { result in
+            switch result {
+            case .success(let metalDetector):
+                metalDetector.name = "metalDetector"
+                // Add Metal Detector Right On Camera
+                self.cameraAnchor.addChild(metalDetector)
+                // Add Camera Anchor to the Scene after adding child
+                self.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
+                // Move Metal Detector Downwards and Front
+                metalDetector.transform.translation = [0, -1.75, -3.15]
+                // Rotation downwards in X for 90 degrees
+                metalDetector.transform.rotation *= simd_quatf(angle: 1.5708, axis: SIMD3<Float>(0, 1, 0))
+                // Rotation downwards in z for 50 degrees
+                metalDetector.transform.rotation *= simd_quatf(angle: 0.959931, axis: SIMD3<Float>(0, 0, 1))
+
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
 
         return gameViewModel.arView ?? GameARView(onTreasureTap: {})
     }
@@ -38,7 +63,6 @@ struct ARViewContainer: UIViewRepresentable {
 extension ARViewContainer {
     class Coordinator: NSObject, ARSessionDelegate {
         var parent: ARViewContainer
-        let cameraAnchor = AnchorEntity(.camera)
         var count = 0
 
         init(parent: ARViewContainer) {
@@ -84,30 +108,6 @@ extension ARViewContainer {
                                 treasureAnchor.name = anchorName
                                 treasureAnchor.addChild(treasure)
                                 self.parent.gameViewModel.arView?.scene.addAnchor(treasureAnchor)
-                            case .failure(let error):
-                                debugPrint(error.localizedDescription)
-                            }
-                        }
-                    }
-
-                    if self.cameraAnchor.children.isEmpty {
-                        Entity.loadEntityAsync(
-                            fileName: "metal_detector",
-                            fileExtension: "usdz"
-                        ) { result in
-                            switch result {
-                            case .success(let metalDetector):
-                                metalDetector.name = "metalDetector"
-                                // Add Metal Detector Right On Camera
-                                self.cameraAnchor.addChild(metalDetector)
-                                // Add Camera Anchor to the Scene after adding child
-                                self.parent.gameViewModel.arView?.scene.addAnchor(self.cameraAnchor)
-                                // Move Metal Detector Downwards and Front
-                                metalDetector.transform.translation = [0, -1.75, -3.15]
-                                // Rotation downwards in X for 90 degrees
-                                metalDetector.transform.rotation *= simd_quatf(angle: 1.5708, axis: SIMD3<Float>(0, 1, 0))
-                                // Rotation downwards in z for 50 degrees
-                                metalDetector.transform.rotation *= simd_quatf(angle: 0.959931, axis: SIMD3<Float>(0, 0, 1))
                             case .failure(let error):
                                 debugPrint(error.localizedDescription)
                             }

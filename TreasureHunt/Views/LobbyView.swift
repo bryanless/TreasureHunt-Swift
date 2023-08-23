@@ -60,7 +60,7 @@ extension LobbyView {
                         Image("board")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: Phone.screenSize * 1)
+                            .frame(width: Phone.screenSize * 1.1)
                         Text(peer.name)
                             .font(.custom("FingerPaint-Regular", size: 16))
                             .offset(y: -2)
@@ -68,7 +68,7 @@ extension LobbyView {
                     .onTapGesture {
                         selectRoom(currentPeer: peer)
                     }
-                    .frame(width: 352, alignment: .leading)
+                    .frame(width: Phone.screenSize * 1.1, alignment: .leading)
 
                 }
                 VStack {
