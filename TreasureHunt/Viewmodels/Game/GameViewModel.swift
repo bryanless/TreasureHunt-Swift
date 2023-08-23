@@ -84,6 +84,7 @@ class GameViewModel: ObservableObject {
             .map(mapToTreasures)
             .sink { [weak self] returnedTreasures in
                 self?.treasures = returnedTreasures
+                print("TreasureCount", returnedTreasures.count)
             }
             .store(in: &cancellables)
         
