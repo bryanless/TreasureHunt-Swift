@@ -1,8 +1,17 @@
+////
+////  ARViewRepresentable.swift
+////  TreasureHunt
+////
+////  Created by Bryan on 08/08/23.
+////
 //
-//  ARViewRepresentable.swift
-//  TreasureHunt
+//import RealityKit
+//import ARKit
+//import SwiftUI
 //
-//  Created by Bryan on 08/08/23.
+//struct ARViewContainer: UIViewRepresentable {
+//    @EnvironmentObject var gameViewModel: GameViewModel
+//    @StateObject var motion = MotionManager()
 //
 
 import RealityKit

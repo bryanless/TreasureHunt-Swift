@@ -41,9 +41,9 @@ class GameManager: NSObject {
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         super.init()
+        session.delegate = self
         advertiser.delegate = self
         browser.delegate = self
-        session.delegate = self
         startBrowsing()
     }
     
@@ -80,8 +80,8 @@ class GameManager: NSObject {
     }
     
     func resetGame() {
-        gameData.gameState = .notStart
-        sendToPeersGameData(data: gameData)
+//        gameData.gameState = .notStart
+        sendToPeersGameData(data: GameData.dataInstance())
     }
     
     func startAdvertising() {
@@ -136,16 +136,18 @@ extension GameManager: MCSessionDelegate {
         
         if state == .connected {
             if isHost {
-                sendToPeersGameData(data: self.gameData)
+                sendToPeersGameData(data: gameData)
             }
             stopBrowsing()
             peerJoinedHandler(peerID)
         } else if state == .notConnected {
             DispatchQueue.main.async { [weak self] in
+
                 guard let self,
                       self.gameData.joinedPlayers.contains(where: { $0.displayName == peerID.displayName }),
-                      let index = self.gameData.joinedPlayers.firstIndex(where: { $0.displayName == peerID.displayName })  else { return }
+                      let index = self.gameData.joinedPlayers.firstIndex(where: { $0.displayName == peerID.displayName }) else { return }
                 self.gameData.joinedPlayers.remove(at: index)
+                sendToPeersGameData(data: self.gameData)
             }
             peerLeftHandler(peerID)
             startBrowsing()
@@ -189,9 +191,11 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self, let info else { return }
+            guard let self, let info else { return }
             if !self.availablePeers.contains(where: { $0.peerId == peerID }) {
                 self.availablePeers.append(Peer(name: info["name"]!, partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
+            } else {
+                return
             }
         }
         

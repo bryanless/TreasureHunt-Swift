@@ -44,14 +44,14 @@ class GameViewModel: ObservableObject {
 
     init() {
         gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
-        addSubscribers()
         multiPeerSubscribers()
+        addSubscribers()
     }
 
     func reset() {
         gameManager = GameManager(receivedDataHandler: receivedData, peerJoinedHandler: peerJoined(_:), peerLeftHandler: peerLeft(_:), peerDiscoveredHandler: peerDiscovered(_:))
-        addSubscribers()
         multiPeerSubscribers()
+        addSubscribers()
     }
     
     func setupARConfiguration() {
@@ -116,6 +116,7 @@ class GameViewModel: ObservableObject {
             .combineLatest($currentPeer, $treasures)
             .sink { [weak self] gameData, currentPeer, treasure in
                 guard let gameData, let currentPeer else { return }
+                print("From GameData", gameData)
                 self?.handlePartyState(gameData: gameData, currentPeer: currentPeer)
                 self?.changeStateGameLoaded(gameData: gameData, currentPeer: currentPeer, treasuresCount: treasure.count)
             }

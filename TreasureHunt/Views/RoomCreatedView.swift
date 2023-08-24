@@ -25,19 +25,20 @@ struct RoomCreatedView: View {
                 .frame(width: Phone.screenSize * 1.2)
                 .edgesIgnoringSafeArea(.all)
             mainSection
-                .navigationBarBackButtonHidden()
-                .onReceive(timer, perform: { _ in
-                    if gameVM.countdownStart {
-                        gameVM.readyCountdown -= 1
-                    }
-                    
-                    if gameVM.readyCountdown == 0 {
-                        gameVM.startGame()
-                    }
-                })
             backButton
         }
-        
+        .navigationBarBackButtonHidden()
+        .onReceive(timer, perform: { _ in
+            print("CountdownStart", gameVM.readyCountdown)
+            if gameVM.countdownStart {
+                gameVM.readyCountdown -= 1
+            }
+
+            if gameVM.readyCountdown == 0 {
+                gameVM.startGame()
+                gameVM.countdownStart = false
+            }
+        })
     }
 }
 
@@ -69,7 +70,7 @@ extension RoomCreatedView {
         VStack {
             VStack {
                 ScrollView{
-                    ForEach((gameVM.gameManager?.gameData.joinedPlayers)!) { player in
+                    ForEach((gameVM.gameData?.joinedPlayers)!) { player in
                         ZStack {
                             Image("board")
                                 .resizable()
@@ -139,6 +140,5 @@ extension RoomCreatedView {
         }
         gameVM.gameManager?.gameData = GameData.dataInstance()
         gameVM.gameManager?.session.disconnect()
-        gameVM.gameManager?.startBrowsing()
     }
 }

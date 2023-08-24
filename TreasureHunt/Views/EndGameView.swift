@@ -33,7 +33,9 @@ struct EndGameView: View {
                 }
                 Spacer()
                 Button {
+                    revokeRoomSession()
                     gameVM.resetGame()
+                    
                 } label: {
                     Image("back-to-main-menu-board")
                         .resizable()
@@ -64,5 +66,14 @@ extension EndGameView {
         default:
             return "None"
         }
+    }
+    
+    private func revokeRoomSession() {
+        if (gameVM.gameManager?.isHost == true) {
+            gameVM.gameManager?.stopAdvertising()
+            gameVM.gameManager?.isHost = false
+        }
+        gameVM.gameManager?.gameData = GameData.dataInstance()
+        gameVM.gameManager?.session.disconnect()
     }
 }
