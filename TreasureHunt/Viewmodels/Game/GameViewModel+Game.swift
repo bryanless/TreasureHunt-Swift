@@ -12,26 +12,26 @@ extension GameViewModel {
     func increaseFoundTreasure() {
         gameManager?.increaseFound()
     }
-
+    
     func startGame() {
         gameManager?.startGame()
         locationManager.startUpdatingLocation()
         setupARConfiguration()
     }
-
+    
     func endGame() {
         // TODO: End Multipeer Session
         gameManager?.endGame()
         stopTimer()
         locationManager.stopLocation()
         metalDetectorState = .none
-//        gameManager?.reset()
+        //        gameManager?.reset()
     }
-
+    
     func resetGame() {
         gameManager?.resetGame()
     }
-
+    
     private func updateTimer() {
         guard let futureDate else { return }
         let remaining = Calendar.current.dateComponents(
@@ -40,9 +40,9 @@ extension GameViewModel {
             to: futureDate)
         timeRemaining = remaining
     }
-
+    
     func startTimer() {
-        futureDate = Calendar.current.date(byAdding: .second, value: 10, to: .now) ?? .now
+        futureDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) ?? .now
         SoundManager.instance.playTimerSound()
         self.updateTimer()
         timerSubscription = Timer.publish(every: 1, on: .main, in: .common)
@@ -51,7 +51,7 @@ extension GameViewModel {
                 self?.updateTimer()
             }
     }
-
+    
     private func stopTimer() {
         SoundManager.instance.stopTimerSound()
         timeRemaining = nil

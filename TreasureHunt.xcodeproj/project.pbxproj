@@ -25,6 +25,7 @@
 		931EBD9F2A79E3F300C7F88D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */; };
 		931EBDA72A79E49600C7F88D /* SampleCode.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */; };
 		931EBDC52A7A151100C7F88D /* CLLocationDegrees+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EBDC42A7A151100C7F88D /* CLLocationDegrees+Ext.swift */; };
+		93269D232A97884200BB40EF /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93269D222A97884200BB40EF /* HapticManager.swift */; };
 		932DF1A52A7CB5EB0063AE0F /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */; };
 		93786FCD2A89CF2C00603DAC /* treasure.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 93786FCC2A89CF2C00603DAC /* treasure.usdz */; };
 		937C95162A8B12CA00A04098 /* Entity+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937C95152A8B12CA00A04098 /* Entity+Ext.swift */; };
@@ -70,6 +71,7 @@
 		931EBD9E2A79E3F300C7F88D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		931EBDA62A79E49600C7F88D /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 		931EBDC42A7A151100C7F88D /* CLLocationDegrees+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationDegrees+Ext.swift"; sourceTree = "<group>"; };
+		93269D222A97884200BB40EF /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionManager.swift; path = TreasureHunt/Utilities/MotionManager.swift; sourceTree = SOURCE_ROOT; };
 		93786FCC2A89CF2C00603DAC /* treasure.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = treasure.usdz; sourceTree = "<group>"; };
 		937C95152A8B12CA00A04098 /* Entity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Ext.swift"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				9302993C2A80844900EF5662 /* SoundManager.swift */,
 				932DF1A42A7CB5EB0063AE0F /* MotionManager.swift */,
 				93C2C7EC2A7A082400A008A1 /* LocationManager.swift */,
+				93269D222A97884200BB40EF /* HapticManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				9302994E2A82666B00EF5662 /* GameData.swift in Sources */,
 				931EBDC52A7A151100C7F88D /* CLLocationDegrees+Ext.swift in Sources */,
 				9302993D2A80844900EF5662 /* SoundManager.swift in Sources */,
+				93269D232A97884200BB40EF /* HapticManager.swift in Sources */,
 				93A94DBA2A89C73B0022A882 /* Peer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

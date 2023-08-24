@@ -41,7 +41,7 @@ extension ContentView {
 
     private var startGame: some View {
         ZStack(alignment: .bottom) {
-            //ARViewContainer().edgesIgnoringSafeArea(.all)
+            ARViewContainer().edgesIgnoringSafeArea(.all)
             gameOverlay
         }
     }
