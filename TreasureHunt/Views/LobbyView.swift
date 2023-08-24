@@ -143,7 +143,7 @@ extension LobbyView {
             }
             VStack(alignment: .leading) {
                 HStack {
-                    Button{
+                    Button {
                         dismiss()
                     } label: {
                         Image("back-button")

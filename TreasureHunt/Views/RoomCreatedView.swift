@@ -33,7 +33,7 @@ struct RoomCreatedView: View {
             if gameVM.countdownStart {
                 gameVM.readyCountdown -= 1
             }
-
+            
             if gameVM.readyCountdown == 0 {
                 gameVM.startGame()
                 gameVM.countdownStart = false
@@ -48,12 +48,8 @@ extension RoomCreatedView {
         VStack(alignment: .leading) {
             HStack {
                 Button {
+                    dismiss.callAsFunction()
                     revokeRoomSession()
-                    if gameVM.isHost {
-                        navigateToRoom.toggle()
-                    } else {
-                        dismiss.callAsFunction()
-                    }
                 } label: {
                     Image("back-button")
                         .resizable()
@@ -70,24 +66,26 @@ extension RoomCreatedView {
         VStack {
             VStack {
                 ScrollView{
-                    ForEach((gameVM.gameData?.joinedPlayers)!) { player in
-                        ZStack {
-                            Image("board")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: Phone.screenSize * 1.1)
-                            HStack {
-                                Spacer()
-                                Text(player.peerName)
-                                    .font(.custom("FingerPaint-Regular", size: 16))
-                                Spacer()
-                                Image(player.isReady ? "check-board" : "cross-board")
+                    if let gameData = gameVM.gameData {
+                        ForEach(gameData.joinedPlayers) { player in
+                            ZStack {
+                                Image("board")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 32)
-                                Spacer()
-                            }.offset(y: -3)
-                        }.frame(width: 440, alignment: .leading)
+                                    .frame(width: Phone.screenSize * 1.1)
+                                HStack {
+                                    Spacer()
+                                    Text(player.peerName)
+                                        .font(.custom("FingerPaint-Regular", size: 16))
+                                    Spacer()
+                                    Image(player.isReady ? "check-board" : "cross-board")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32)
+                                    Spacer()
+                                }.offset(y: -3)
+                            }.frame(width: 440, alignment: .leading)
+                        }
                     }
                     readyButton
                 }.offset(y: 128)
@@ -108,26 +106,30 @@ extension RoomCreatedView {
     
     private var readyButton: some View {
         Button {
-            guard let gameManager = gameVM.gameManager else { return }
-            for (index, player) in gameVM.gameData!.joinedPlayers.enumerated() {
+            guard let gameManager = gameVM.gameManager, let gameData = gameVM.gameData else { return }
+            for (index, player) in gameData.joinedPlayers.enumerated() {
                 if player.displayName == gameVM.currentPeer?.displayName {
                     gameVM.gameManager?.gameData.joinedPlayers[index].isReady.toggle()
                     gameManager.sendToPeersGameData(data: gameManager.gameData)
                 }
             }
         } label: {
-            ForEach(gameVM.gameData!.joinedPlayers) { player in
-                if player.displayName == gameVM.currentPeer?.displayName {
-                    if (!player.isReady){
-                        Image("ready-board")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: Phone.screenSize * 1.2)
-                    } else {
-                        Image("cancel-board")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: Phone.screenSize * 1.2)
+            VStack {
+                if let gameData = gameVM.gameData {
+                    ForEach(gameData.joinedPlayers) { player in
+                        if player.displayName == gameVM.currentPeer?.displayName {
+                            if (!player.isReady){
+                                Image("ready-board")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: Phone.screenSize * 1.2)
+                            } else {
+                                Image("cancel-board")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: Phone.screenSize * 1.2)
+                            }
+                        }
                     }
                 }
             }

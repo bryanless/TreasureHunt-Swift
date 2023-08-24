@@ -80,7 +80,7 @@ class GameManager: NSObject {
     }
     
     func resetGame() {
-//        gameData.gameState = .notStart
+        gameData.gameState = .notStart
         sendToPeersGameData(data: GameData.dataInstance())
     }
     
@@ -193,13 +193,14 @@ extension GameManager: MCNearbyServiceBrowserDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self, let info else { return }
             if !self.availablePeers.contains(where: { $0.peerId == peerID }) {
-                self.availablePeers.append(Peer(name: info["name"]!, partyId: UUID(uuidString: info["partyID"] ?? "")!, peerId: peerID))
+                guard let infoName = info["name"], let infoID = info["partyID"], let uuid = UUID(uuidString: infoID) else { return }
+                self.availablePeers.append(Peer(name: infoName, partyId: uuid, peerId: peerID))
             } else {
                 return
             }
         }
         
-        if let info, gameData.id == UUID(uuidString: info["partyID"] ?? "") {
+        if let info, let infoID = info["partyID"], gameData.id == UUID(uuidString: infoID) {
             browser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
         }
     }

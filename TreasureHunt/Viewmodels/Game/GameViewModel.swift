@@ -61,7 +61,6 @@ class GameViewModel: ObservableObject {
 //        config.isCollaborationEnabled = true
         arView.session.run(config)
         sessionIDObservation = arView.session.observe(\.identifier, options: [.new]) { [weak self] object, change in
-            print("SessionID changed to: \(change.newValue!)")
             guard let multipeerSession = self?.gameManager else { return }
             self?.sendARSessionIDTo(peers: multipeerSession.availablePeers.map({ peer in
                 return peer.peerId!

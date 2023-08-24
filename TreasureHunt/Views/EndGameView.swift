@@ -33,8 +33,8 @@ struct EndGameView: View {
                 }
                 Spacer()
                 Button {
-                    revokeRoomSession()
                     gameVM.resetGame()
+                    revokeRoomSession()
                     
                 } label: {
                     Image("back-to-main-menu-board")

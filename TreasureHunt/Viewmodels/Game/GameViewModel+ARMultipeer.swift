@@ -85,7 +85,7 @@ extension GameViewModel {
         print("HandPartyState")
         if ((gameData.joinedPlayers.count)) > 0 {
             guard let gameManager else { return }
-            if !(gameManager.gameData.joinedPlayers.contains(where: { $0.peerName == currentPeer.peerName })) {
+            if !(gameData.joinedPlayers.contains(where: { $0.peerName == currentPeer.peerName })) {
                 print("inisde here")
                 gameManager.gameData.joinedPlayers.append(currentPeer)
                 gameManager.sendToPeersGameData(data: gameManager.gameData)
@@ -108,7 +108,7 @@ extension GameViewModel {
         if gameData.joinedPlayers.count > 0 && treasuresCount > 0 {
             guard let gameManager, let index = gameManager.gameData.joinedPlayers.firstIndex(where: { $0.displayName == currentPeer.displayName }) else { return }
 
-            if (!gameData.joinedPlayers[index].isGameLoaded) {
+            if (!gameManager.gameData.joinedPlayers[index].isGameLoaded) {
                 gameManager.gameData.joinedPlayers[index].isGameLoaded = true
                 gameManager.sendToPeersGameData(data: gameManager.gameData)
             }

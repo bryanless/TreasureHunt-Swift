@@ -41,7 +41,7 @@ extension ContentView {
 
     private var startGame: some View {
         ZStack(alignment: .bottom) {
-            //RViewContainer().edgesIgnoringSafeArea(.all)
+            //ARViewContainer().edgesIgnoringSafeArea(.all)
             gameOverlay
         }
     }
@@ -82,9 +82,6 @@ extension ContentView {
                     Text("\(gameVM.gameData?.treasuresFound.description ?? "0")/3 treasures found!")
                         .font(.custom("FingerPaint-Regular", size: 24))
                         .foregroundColor(.green)
-                    //                    Text("treasures found!")
-                    //                        .font(.custom("FingerPaint-Regular", size: 24))
-                    //                        .foregroundColor(.black)
                     Spacer()
                 }
                 .padding(.top, 88)

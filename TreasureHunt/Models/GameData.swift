@@ -18,6 +18,7 @@ struct GameData: Codable, Identifiable, Equatable {
     var gameState: GameState
     let treasureAmount: Int
     var joinedPlayers: [Player] = []
+    var isCountdownStart: Bool = false
 
     init(treasuresFound: Int, gameState: GameState, treasureAmount: Int) {
         self.treasuresFound = treasuresFound
