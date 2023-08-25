@@ -97,7 +97,7 @@ extension GameViewModel {
             let distance = currentLocation.distance(from: treasure.location)
             var updatedTreasure = treasure.updateState(distance: distance)
             
-            if distance < 10 && !updatedTreasure.hasSpawned {
+            if distance < 18 && !updatedTreasure.hasSpawned {
                 // TODO: SPAWN TREASURE HERE, UPDATE TREASURE HAS SPAWNED STATE
                 updatedTreasure.hasSpawned = true
                 shouldSpawnTreasure = true
